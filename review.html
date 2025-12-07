@@ -13,11 +13,12 @@ td, th { border: 1px solid #999; padding: 6px; }
 canvas { width: 100% !important; height: auto !important; }
 </style>
 
-<!-- PDF.js CDN -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.2.67/pdf.min.js"></script>
+<!-- PDF.js (working UMD version) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js"></script>
 <script>
 pdfjsLib.GlobalWorkerOptions.workerSrc =
-  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.2.67/pdf.worker.min.js";
+  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
 </script>
 
 </head>
@@ -48,7 +49,7 @@ function previewFile(file) {
         preview.appendChild(img);
     }
 
-    // PDF (always works using PDF.js)
+    // PDF
     else if (file.type === "application/pdf") {
         renderPDF(URL.createObjectURL(file));
     }
@@ -120,28 +121,20 @@ async function previewFromURL() {
         const res = await fetch(url);
         const type = res.headers.get("Content-Type");
 
-        // Image
         if (type.startsWith("image/")) {
             preview.innerHTML = `<img src="${url}">`;
         }
-
-        // PDF
         else if (type === "application/pdf") {
             renderPDF(url);
         }
-
-        // CSV
         else if (type.includes("text/csv")) {
             const text = await res.text();
             displayCSV(text);
         }
-
-        // TXT
         else if (type.includes("text/plain")) {
             const text = await res.text();
             preview.textContent = text;
         }
-
         else preview.textContent = "Unsupported file type or CORS blocked.";
     }
     catch (e) {
