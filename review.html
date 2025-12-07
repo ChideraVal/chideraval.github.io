@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>File Previewer</title>
+
+<style>
+body { font-family: Arial; padding: 20px; max-width: 900px; margin: auto; }
+#preview { border: 1px solid #ccc; padding: 15px; margin-top: 15px; min-height: 200px; }
+img { max-width: 100%; }
+table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+td, th { border: 1px solid #999; padding: 6px; }
+canvas { width: 100% !important; height: auto !important; }
+</style>
+
+<!-- PDF.js CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.2.67/pdf.min.js"></script>
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.2.67/pdf.worker.min.js";
+</script>
+
+</head>
+<body>
+
+<h2>File Previewer</h2>
+
+<input type="file" id="fileInput"><br><br>
+<input type="text" id="urlInput" placeholder="Enter file URL" style="width:300px;">
+<button onclick="previewFromURL()">Preview URL</button>
+
+<div id="preview">Preview will appear here…</div>
+
+<script>
+const preview = document.getElementById("preview");
+
+document.getElementById("fileInput").addEventListener("change", e => {
+    if (e.target.files[0]) previewFile(e.target.files[0]);
+});
+
+function previewFile(file) {
+    preview.innerHTML = "";
+
+    // Image
+    if (file.type.startsWith("image/")) {
+        const img = document.createElement("img");
+        img.src = URL.createObjectURL(file);
+        preview.appendChild(img);
+    }
+
+    // PDF (always works using PDF.js)
+    else if (file.type === "application/pdf") {
+        renderPDF(URL.createObjectURL(file));
+    }
+
+    // TXT
+    else if (file.type === "text/plain" || file.name.endsWith(".txt")) {
+        const r = new FileReader();
+        r.onload = e => preview.textContent = e.target.result;
+        r.readAsText(file);
+    }
+
+    // CSV
+    else if (file.name.endsWith(".csv")) {
+        const r = new FileReader();
+        r.onload = e => displayCSV(e.target.result);
+        r.readAsText(file);
+    }
+
+    else preview.textContent = "Unsupported file type.";
+}
+
+function displayCSV(text) {
+    preview.innerHTML = "";
+    const table = document.createElement("table");
+
+    text.split("\n").forEach(row => {
+        const tr = document.createElement("tr");
+        row.split(",").forEach(cell => {
+            const td = document.createElement("td");
+            td.textContent = cell;
+            tr.appendChild(td);
+        });
+        table.appendChild(tr);
+    });
+
+    preview.appendChild(table);
+}
+
+function renderPDF(pdfURL) {
+    preview.innerHTML = "Rendering PDF…";
+
+    pdfjsLib.getDocument(pdfURL).promise.then(pdf => {
+        preview.innerHTML = "";
+        for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+            pdf.getPage(pageNum).then(page => {
+                const viewport = page.getViewport({ scale: 1.5 });
+                const canvas = document.createElement("canvas");
+                const ctx = canvas.getContext("2d");
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                page.render({ canvasContext: ctx, viewport }).promise.then(() => {
+                    preview.appendChild(canvas);
+                });
+            });
+        }
+    }).catch(err => {
+        preview.textContent = "Failed to load PDF: " + err.message;
+    });
+}
+
+async function previewFromURL() {
+    const url = document.getElementById("urlInput").value;
+    if (!url) return alert("Enter a URL");
+
+    preview.innerHTML = "Loading…";
+
+    try {
+        const res = await fetch(url);
+        const type = res.headers.get("Content-Type");
+
+        // Image
+        if (type.startsWith("image/")) {
+            preview.innerHTML = `<img src="${url}">`;
+        }
+
+        // PDF
+        else if (type === "application/pdf") {
+            renderPDF(url);
+        }
+
+        // CSV
+        else if (type.includes("text/csv")) {
+            const text = await res.text();
+            displayCSV(text);
+        }
+
+        // TXT
+        else if (type.includes("text/plain")) {
+            const text = await res.text();
+            preview.textContent = text;
+        }
+
+        else preview.textContent = "Unsupported file type or CORS blocked.";
+    }
+    catch (e) {
+        preview.textContent = "Error loading file: " + e.message;
+    }
+}
+</script>
+
+</body>
+</html>
