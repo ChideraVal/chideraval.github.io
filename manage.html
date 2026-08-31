@@ -1,0 +1,4172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Askee — Host Dashboard</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+
+  <style>
+
+    :root {
+
+      --background: #f7f5ff;
+
+      --text: #17152b;
+
+      --muted: #747084;
+
+      --light-muted: #9a96a9;
+
+      --purple: #6d4aff;
+
+      --purple-dark: #5738e6;
+
+      --pink: #ff62ad;
+
+      --yellow: #ffd75c;
+
+      --green: #43b889;
+
+      --red: #d44f79;
+
+      --white: rgba(255, 255, 255, 0.72);
+
+      --border: rgba(35, 27, 75, 0.08);
+
+      --shadow:
+        0 25px 70px rgba(73, 50, 150, 0.15);
+
+    }
+
+
+    /* ========================================
+       RESET
+    ======================================== */
+
+    * {
+
+      box-sizing: border-box;
+
+      margin: 0;
+
+      padding: 0;
+
+    }
+
+
+    /* ========================================
+       BODY
+    ======================================== */
+
+    body {
+
+      min-height: 100vh;
+
+      overflow-x: hidden;
+
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      color:
+        var(--text);
+
+      background:
+
+        radial-gradient(
+          circle at 12% 8%,
+          rgba(255, 174, 216, 0.48),
+          transparent 28rem
+        ),
+
+        radial-gradient(
+          circle at 90% 10%,
+          rgba(177, 160, 255, 0.48),
+          transparent 30rem
+        ),
+
+        radial-gradient(
+          circle at 50% 100%,
+          rgba(255, 220, 120, 0.25),
+          transparent 34rem
+        ),
+
+        var(--background);
+
+    }
+
+
+    /* ========================================
+       BACKGROUND GRID
+    ======================================== */
+
+    body::before {
+
+      content: "";
+
+      position: fixed;
+
+      inset: 0;
+
+      pointer-events: none;
+
+      opacity: 0.22;
+
+      background-image:
+
+        linear-gradient(
+          rgba(255,255,255,0.5) 1px,
+          transparent 1px
+        ),
+
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,0.5) 1px,
+          transparent 1px
+        );
+
+      background-size:
+        42px 42px;
+
+      mask-image:
+        linear-gradient(
+          to bottom,
+          black,
+          transparent 75%
+        );
+
+    }
+
+
+    /* ========================================
+       PAGE
+    ======================================== */
+
+    .page {
+
+      width:
+        min(
+          1120px,
+          calc(100% - 40px)
+        );
+
+      min-height:
+        100vh;
+
+      margin:
+        0 auto;
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      position:
+        relative;
+
+    }
+
+
+    /* ========================================
+       NAVIGATION
+    ======================================== */
+
+    nav {
+
+      height:
+        88px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+    }
+
+
+    .logo {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        10px;
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size:
+        1.35rem;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        -0.06em;
+
+    }
+
+
+    .logo-mark {
+
+      width:
+        36px;
+
+      height:
+        36px;
+
+      display:
+        grid;
+
+      place-items:
+        center;
+
+      color:
+        white;
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size:
+        16px;
+
+      font-weight:
+        800;
+
+      border-radius:
+        12px
+        12px
+        12px
+        4px;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          #9b70ff
+        );
+
+      box-shadow:
+        0 9px 23px
+        rgba(109, 74, 255, 0.28);
+
+    }
+
+
+    .stage-badge {
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      gap:
+        8px;
+
+      padding:
+        8px
+        12px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius:
+        999px;
+
+      color:
+        #716c82;
+
+      background:
+        rgba(255,255,255,0.56);
+
+      font-size:
+        0.75rem;
+
+      font-weight:
+        700;
+
+    }
+
+
+    .stage-dot {
+
+      width:
+        7px;
+
+      height:
+        7px;
+
+      border-radius:
+        50%;
+
+      background:
+        var(--purple);
+
+      box-shadow:
+        0 0 0 4px
+        rgba(109,74,255,0.1);
+
+    }
+
+
+    /* ========================================
+       MAIN
+    ======================================== */
+
+    main {
+
+      flex:
+        1;
+
+      display:
+        flex;
+
+      justify-content:
+        center;
+
+      padding:
+        34px
+        0
+        65px;
+
+    }
+
+
+    .content {
+
+      width:
+        100%;
+
+      max-width:
+        700px;
+
+      position:
+        relative;
+
+    }
+
+
+    /* ========================================
+       INITIAL LOADING
+    ======================================== */
+
+    .page-loading {
+
+      min-height:
+        340px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+    }
+
+
+    .page-loading[hidden] {
+
+      display:
+        none !important;
+
+    }
+
+
+    .page-loading-spinner {
+
+      width:
+        34px;
+
+      height:
+        34px;
+
+      border:
+        3px solid
+        rgba(109,74,255,0.14);
+
+      border-top-color:
+        var(--purple);
+
+      border-radius:
+        50%;
+
+      animation:
+        spin .75s linear infinite;
+
+    }
+
+
+    /* ========================================
+       ROOM CONTENT
+    ======================================== */
+
+    #roomContent[hidden] {
+
+      display:
+        none !important;
+
+    }
+
+
+    /* ========================================
+       HEADING
+    ======================================== */
+
+    .heading {
+
+      text-align:
+        center;
+
+      margin-bottom:
+        28px;
+
+    }
+
+
+    h1 {
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size:
+        clamp(
+          2.7rem,
+          5.5vw,
+          4.1rem
+        );
+
+      line-height:
+        1;
+
+      letter-spacing:
+        -0.075em;
+
+    }
+
+
+    h1 .accent {
+
+      position:
+        relative;
+
+      color:
+        var(--purple);
+
+    }
+
+
+    h1 .accent::after {
+
+      content:
+        "";
+
+      position:
+        absolute;
+
+      left:
+        3%;
+
+      right:
+        -2%;
+
+      bottom:
+        -7px;
+
+      height:
+        9px;
+
+      border-radius:
+        50%;
+
+      background:
+        var(--yellow);
+
+      transform:
+        rotate(-2deg);
+
+      z-index:
+        -1;
+
+    }
+
+
+    .heading-text {
+
+      margin-top:
+        15px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        0.94rem;
+
+    }
+
+
+    /* ========================================
+       ROOM INFORMATION CARD
+    ======================================== */
+
+    .room-card {
+
+      padding:
+        25px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.9);
+
+      border-radius:
+        23px;
+
+      background:
+        var(--white);
+
+      backdrop-filter:
+        blur(18px);
+
+      -webkit-backdrop-filter:
+        blur(18px);
+
+      box-shadow:
+        0 13px 35px
+        rgba(73,50,150,0.08);
+
+    }
+
+
+    .room-card-header {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      padding-bottom:
+        18px;
+
+      border-bottom:
+        1px solid
+        rgba(35,27,75,0.06);
+
+    }
+
+
+    .room-card-title {
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size:
+        0.78rem;
+
+      font-weight:
+        800;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        0.08em;
+
+    }
+
+
+    .active-status {
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      gap:
+        7px;
+
+      padding:
+        6px
+        9px;
+
+      border-radius:
+        999px;
+
+      color:
+        var(--green);
+
+      background:
+        rgba(67,184,137,0.09);
+
+      font-size:
+        0.65rem;
+
+      font-weight:
+        800;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        0.05em;
+
+    }
+
+
+    .active-status.expired {
+
+      color:
+        var(--red);
+
+      background:
+        rgba(212,79,121,0.09);
+
+    }
+
+
+    .active-status.expired
+    .active-dot {
+
+      background:
+        var(--red);
+
+    }
+
+
+    .active-dot {
+
+      width:
+        6px;
+
+      height:
+        6px;
+
+      border-radius:
+        50%;
+
+      background:
+        var(--green);
+
+    }
+
+
+    /* ========================================
+       INFORMATION GRID
+    ======================================== */
+
+    .info-grid {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1fr
+        1fr;
+
+      gap:
+        1px;
+
+      margin-top:
+        4px;
+
+      background:
+        rgba(35,27,75,0.06);
+
+      border-radius:
+        15px;
+
+      overflow:
+        hidden;
+
+    }
+
+
+    .info-item {
+
+      padding:
+        17px
+        15px;
+
+      background:
+        rgba(255,255,255,0.35);
+
+    }
+
+
+    .info-label {
+
+      color:
+        var(--light-muted);
+
+      font-size:
+        0.63rem;
+
+      font-weight:
+        700;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        0.07em;
+
+    }
+
+
+    .info-value {
+
+      margin-top:
+        5px;
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size:
+        1.12rem;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        -0.04em;
+
+    }
+
+
+    .info-value.stage {
+
+      color:
+        var(--purple);
+
+    }
+
+
+    .info-value.expiry {
+
+      color:
+        #5f5a6e;
+
+      font-size:
+        1rem;
+
+    }
+
+
+    /* ========================================
+       ROOM LINK SECTION
+       Styled like the room-created page
+    ======================================== */
+
+    .room-link-section {
+
+      margin-top:
+        27px;
+
+    }
+
+
+    .section-label {
+
+      margin:
+        0
+        0
+        11px
+        2px;
+
+      color:
+        #9793a5;
+
+      font-size:
+        0.74rem;
+
+      font-weight:
+        700;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        0.09em;
+
+    }
+
+
+    .link-card {
+
+      width:
+        100%;
+
+      padding:
+        9px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        8px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.9);
+
+      border-radius:
+        19px;
+
+      background:
+        rgba(255,255,255,0.72);
+
+      backdrop-filter:
+        blur(18px);
+
+      -webkit-backdrop-filter:
+        blur(18px);
+
+      box-shadow:
+        0 15px 40px
+        rgba(73,50,150,0.09);
+
+    }
+
+
+    .link-icon {
+
+      flex:
+        0 0 auto;
+
+      width:
+        46px;
+
+      height:
+        46px;
+
+      display:
+        grid;
+
+      place-items:
+        center;
+
+      border-radius:
+        13px;
+
+      color:
+        var(--purple);
+
+      background:
+        rgba(109,74,255,0.08);
+
+      font-size:
+        19px;
+
+    }
+
+
+    .link-text {
+
+      min-width:
+        0;
+
+      flex:
+        1;
+
+      padding:
+        0
+        5px;
+
+      text-align:
+        left;
+
+      overflow:
+        hidden;
+
+    }
+
+
+    .link-label {
+
+      margin-bottom:
+        3px;
+
+      color:
+        #9a96a9;
+
+      font-size:
+        0.65rem;
+
+      font-weight:
+        700;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        0.08em;
+
+    }
+
+
+    .room-link {
+
+      display:
+        block;
+
+      overflow:
+        hidden;
+
+      white-space:
+        nowrap;
+
+      text-overflow:
+        ellipsis;
+
+      color:
+        #38334f;
+
+      font-size:
+        0.89rem;
+
+      font-weight:
+        600;
+
+    }
+
+
+    .copy-button {
+
+      flex:
+        0 0 auto;
+
+      min-width:
+        92px;
+
+      height:
+        46px;
+
+      padding:
+        0
+        16px;
+
+      border:
+        none;
+
+      border-radius:
+        13px;
+
+      color:
+        white;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          #805eff
+        );
+
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      font-size:
+        0.84rem;
+
+      font-weight:
+        700;
+
+      cursor:
+        pointer;
+
+      box-shadow:
+        0 9px 20px
+        rgba(109,74,255,0.2);
+
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+
+    }
+
+
+    .copy-button:hover {
+
+      transform:
+        translateY(-2px);
+
+      box-shadow:
+        0 12px 25px
+        rgba(109,74,255,0.27);
+
+    }
+
+
+    .copy-button.copied {
+
+      background:
+        linear-gradient(
+          135deg,
+          #43b889,
+          #52c99b
+        );
+
+    }
+
+
+    /* ========================================
+       MAIN ACTION
+    ======================================== */
+
+    .next-section {
+
+      margin-top:
+        23px;
+
+    }
+
+
+    .next-button {
+
+      width:
+        100%;
+
+      min-height:
+        60px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      gap:
+        9px;
+
+      border:
+        none;
+
+      border-radius:
+        17px;
+
+      color:
+        white;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          #8a67ff
+        );
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size:
+        0.86rem;
+
+      font-weight:
+        800;
+
+      letter-spacing:
+        -0.01em;
+
+      cursor:
+        pointer;
+
+      box-shadow:
+        0 13px 28px
+        rgba(109,74,255,0.23);
+
+      transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        opacity .18s ease;
+
+    }
+
+
+    .next-button:hover:not(:disabled) {
+
+      transform:
+        translateY(-2px);
+
+      box-shadow:
+        0 17px 33px
+        rgba(109,74,255,0.29);
+
+    }
+
+
+    .next-button:active:not(:disabled) {
+
+      transform:
+        translateY(0);
+
+    }
+
+
+    .next-button:disabled {
+
+      opacity:
+        0.45;
+
+      cursor:
+        not-allowed;
+
+      box-shadow:
+        none;
+
+    }
+
+
+    .arrow {
+
+      font-size:
+        1.05rem;
+
+      transition:
+        transform .18s ease;
+
+    }
+
+
+    .next-button:hover:not(:disabled)
+    .arrow {
+
+      transform:
+        translateX(3px);
+
+    }
+
+
+    /* ========================================
+       DELETE
+    ======================================== */
+
+    .delete-section {
+
+      display:
+        flex;
+
+      justify-content:
+        center;
+
+      margin-top:
+        23px;
+
+    }
+
+
+    .delete-button {
+
+      padding:
+        8px
+        12px;
+
+      border:
+        none;
+
+      color:
+        #a19cac;
+
+      background:
+        transparent;
+
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      font-size:
+        0.72rem;
+
+      font-weight:
+        700;
+
+      cursor:
+        pointer;
+
+      transition:
+        color .18s ease;
+
+    }
+
+
+    .delete-button:hover {
+
+      color:
+        #d44f79;
+
+    }
+
+
+    .delete-button:disabled {
+
+      opacity:
+        0.45;
+
+      cursor:
+        not-allowed;
+
+    }
+
+
+    /* ========================================
+       DELETE MODAL
+    ======================================== */
+
+    .modal-overlay {
+
+      position:
+        fixed;
+
+      inset:
+        0;
+
+      z-index:
+        100;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      padding:
+        20px;
+
+      background:
+        rgba(27,20,52,0.32);
+
+      backdrop-filter:
+        blur(7px);
+
+      -webkit-backdrop-filter:
+        blur(7px);
+
+      opacity:
+        0;
+
+      visibility:
+        hidden;
+
+      transition:
+        opacity .2s ease,
+        visibility .2s ease;
+
+    }
+
+
+    .modal-overlay.show {
+
+      opacity:
+        1;
+
+      visibility:
+        visible;
+
+    }
+
+
+    .modal {
+
+      width:
+        100%;
+
+      max-width:
+        390px;
+
+      padding:
+        26px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.9);
+
+      border-radius:
+        23px;
+
+      background:
+        rgba(255,255,255,0.91);
+
+      box-shadow:
+        0 30px 80px
+        rgba(40,25,90,0.2);
+
+      transform:
+        translateY(10px)
+        scale(.98);
+
+      transition:
+        transform .2s ease;
+
+    }
+
+
+    .modal-overlay.show
+    .modal {
+
+      transform:
+        translateY(0)
+        scale(1);
+
+    }
+
+
+    .modal-icon {
+
+      width:
+        43px;
+
+      height:
+        43px;
+
+      display:
+        grid;
+
+      place-items:
+        center;
+
+      margin-bottom:
+        15px;
+
+      border-radius:
+        13px;
+
+      color:
+        #d44f79;
+
+      background:
+        rgba(255,98,173,0.11);
+
+      font-size:
+        1.15rem;
+
+    }
+
+
+    .modal h2 {
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size:
+        1.25rem;
+
+      letter-spacing:
+        -0.045em;
+
+    }
+
+
+    .modal p {
+
+      margin-top:
+        8px;
+
+      color:
+        var(--muted);
+
+      font-size:
+        0.82rem;
+
+      line-height:
+        1.55;
+
+    }
+
+
+    .modal-actions {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1fr
+        1fr;
+
+      gap:
+        9px;
+
+      margin-top:
+        22px;
+
+    }
+
+
+    .modal-button {
+
+      min-height:
+        44px;
+
+      border:
+        none;
+
+      border-radius:
+        12px;
+
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      font-size:
+        0.75rem;
+
+      font-weight:
+        800;
+
+      cursor:
+        pointer;
+
+    }
+
+
+    .cancel-button {
+
+      color:
+        #625d70;
+
+      background:
+        rgba(35,27,75,0.06);
+
+    }
+
+
+    .confirm-delete {
+
+      color:
+        white;
+
+      background:
+        #d44f79;
+
+    }
+
+
+    .confirm-delete:disabled {
+
+      opacity:
+        0.5;
+
+      cursor:
+        not-allowed;
+
+    }
+
+
+    /* ========================================
+       ERROR MESSAGE
+    ======================================== */
+
+    .fatal-message {
+
+      padding:
+        42px
+        25px;
+
+      text-align:
+        center;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.9);
+
+      border-radius:
+        25px;
+
+      background:
+        var(--white);
+
+      backdrop-filter:
+        blur(20px);
+
+      -webkit-backdrop-filter:
+        blur(20px);
+
+      box-shadow:
+        var(--shadow);
+
+    }
+
+
+    .fatal-icon {
+
+      width:
+        58px;
+
+      height:
+        58px;
+
+      display:
+        grid;
+
+      place-items:
+        center;
+
+      margin:
+        0
+        auto
+        18px;
+
+      border-radius:
+        19px;
+
+      color:
+        var(--red);
+
+      background:
+        rgba(223,102,116,0.09);
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size:
+        23px;
+
+      font-weight:
+        800;
+
+    }
+
+
+    .fatal-message h2 {
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size:
+        1.25rem;
+
+      letter-spacing:
+        -0.04em;
+
+    }
+
+
+    .fatal-message p {
+
+      max-width:
+        430px;
+
+      margin:
+        10px
+        auto
+        0;
+
+      color:
+        var(--muted);
+
+      font-size:
+        0.88rem;
+
+      line-height:
+        1.6;
+
+    }
+
+
+    .retry-button {
+
+      margin-top:
+        22px;
+
+      min-height:
+        43px;
+
+      padding:
+        0
+        17px;
+
+      border:
+        none;
+
+      border-radius:
+        12px;
+
+      color:
+        white;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          #805eff
+        );
+
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      font-size:
+        0.79rem;
+
+      font-weight:
+        700;
+
+      cursor:
+        pointer;
+
+      box-shadow:
+        0 9px 20px
+        rgba(109,74,255,0.2);
+
+    }
+
+
+    /* ========================================
+       TOAST
+    ======================================== */
+
+    .toast {
+
+      position:
+        fixed;
+
+      left:
+        50%;
+
+      bottom:
+        25px;
+
+      z-index:
+        200;
+
+      max-width:
+        calc(100vw - 30px);
+
+      padding:
+        12px
+        17px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.8);
+
+      border-radius:
+        13px;
+
+      color:
+        #39344a;
+
+      background:
+        rgba(255,255,255,0.9);
+
+      box-shadow:
+        0 14px 35px
+        rgba(48,35,95,0.16);
+
+      font-size:
+        0.75rem;
+
+      font-weight:
+        700;
+
+      text-align:
+        center;
+
+      transform:
+        translate(-50%, 20px);
+
+      opacity:
+        0;
+
+      pointer-events:
+        none;
+
+      transition:
+        opacity .22s ease,
+        transform .22s ease;
+
+    }
+
+
+    .toast.show {
+
+      opacity:
+        1;
+
+      transform:
+        translate(-50%, 0);
+
+    }
+
+
+    .toast.error {
+
+      color:
+        #75424a;
+
+    }
+
+
+    /* ========================================
+       DECORATIVE SPARKS
+    ======================================== */
+
+    .spark {
+
+      position:
+        absolute;
+
+      pointer-events:
+        none;
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-weight:
+        800;
+
+      opacity:
+        .55;
+
+    }
+
+
+    .spark.one {
+
+      top:
+        -9px;
+
+      left:
+        3%;
+
+      color:
+        var(--pink);
+
+      font-size:
+        21px;
+
+      transform:
+        rotate(-14deg);
+
+      animation:
+        floatOne 4s
+        ease-in-out
+        infinite;
+
+    }
+
+
+    .spark.two {
+
+      top:
+        24px;
+
+      right:
+        2%;
+
+      color:
+        var(--purple);
+
+      font-size:
+        27px;
+
+      transform:
+        rotate(14deg);
+
+      animation:
+        floatTwo 5s
+        ease-in-out
+        infinite;
+
+    }
+
+
+    /* ========================================
+       FOOTER
+    ======================================== */
+
+    footer {
+
+      padding:
+        18px
+        0
+        27px;
+
+      display:
+        flex;
+
+      justify-content:
+        center;
+
+      color:
+        #aaa6b6;
+
+      font-size:
+        0.74rem;
+
+    }
+
+
+    /* ========================================
+       ANIMATIONS
+    ======================================== */
+
+    @keyframes floatOne {
+
+      0%, 100% {
+
+        transform:
+          translateY(0)
+          rotate(-14deg);
+
+      }
+
+      50% {
+
+        transform:
+          translateY(-7px)
+          rotate(-8deg);
+
+      }
+
+    }
+
+
+    @keyframes floatTwo {
+
+      0%, 100% {
+
+        transform:
+          translateY(0)
+          rotate(14deg);
+
+      }
+
+      50% {
+
+        transform:
+          translateY(-9px)
+          rotate(20deg);
+
+      }
+
+    }
+
+
+    @keyframes spin {
+
+      to {
+
+        transform:
+          rotate(360deg);
+
+      }
+
+    }
+
+
+    /* ========================================
+       MOBILE
+    ======================================== */
+
+    @media (max-width: 700px) {
+
+      .page {
+
+        width:
+          calc(100% - 28px);
+
+      }
+
+
+      nav {
+
+        height:
+          74px;
+
+      }
+
+
+      .stage-badge {
+
+        font-size:
+          0.7rem;
+
+        padding:
+          7px
+          10px;
+
+      }
+
+
+      main {
+
+        padding:
+          28px
+          0
+          45px;
+
+      }
+
+
+      h1 {
+
+        font-size:
+          clamp(
+            2.7rem,
+            13vw,
+            4rem
+          );
+
+      }
+
+
+      .heading-text {
+
+        font-size:
+          0.87rem;
+
+      }
+
+
+      .room-card {
+
+        padding:
+          19px;
+
+        border-radius:
+          20px;
+
+      }
+
+
+      .info-item {
+
+        padding:
+          15px
+          12px;
+
+      }
+
+
+      .info-value {
+
+        font-size:
+          1rem;
+
+      }
+
+
+      .info-value.expiry {
+
+        font-size:
+          0.88rem;
+
+      }
+
+
+      .link-card {
+
+        padding:
+          8px;
+
+      }
+
+
+      .link-icon {
+
+        width:
+          42px;
+
+        height:
+          42px;
+
+        border-radius:
+          12px;
+
+      }
+
+
+      .room-link {
+
+        font-size:
+          0.78rem;
+
+      }
+
+
+      .copy-button {
+
+        min-width:
+          74px;
+
+        padding:
+          0
+          12px;
+
+        font-size:
+          0.77rem;
+
+      }
+
+
+      .fatal-message {
+
+        padding:
+          35px
+          19px;
+
+      }
+
+
+      .spark.one {
+
+        left:
+          -3px;
+
+      }
+
+
+      .spark.two {
+
+        right:
+          -2px;
+
+      }
+
+    }
+
+
+    @media (max-width: 430px) {
+
+      .stage-badge {
+
+        display:
+          none;
+
+      }
+
+
+      .info-grid {
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+
+      .info-item {
+
+        padding:
+          13px
+          14px;
+
+      }
+
+
+      .info-value {
+
+        margin-top:
+          3px;
+
+      }
+
+    }
+
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+
+        animation:
+          none !important;
+
+        transition:
+          none !important;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="page">
+
+
+    <!-- ====================================
+         NAVIGATION
+    ===================================== -->
+
+    <nav>
+
+      <div class="logo">
+
+        <div class="logo-mark">
+          ?
+        </div>
+
+        <span>
+          askee
+        </span>
+
+      </div>
+
+
+      <div
+        class="stage-badge"
+        id="stageBadge"
+      >
+
+        <span
+          class="stage-dot"
+          id="stageDot"
+        ></span>
+
+        <span id="stageBadgeText">
+          Host dashboard
+        </span>
+
+      </div>
+
+    </nav>
+
+
+    <!-- ====================================
+         MAIN
+    ===================================== -->
+
+    <main>
+
+      <section class="content">
+
+
+        <div class="spark one">
+          ✦
+        </div>
+
+
+        <div class="spark two">
+          ✦
+        </div>
+
+
+        <!-- ====================================
+             HEADING
+        ===================================== -->
+
+        <div class="heading">
+
+          <h1>
+
+            Your
+
+            <span class="accent">
+              room.
+            </span>
+
+          </h1>
+
+
+          <p class="heading-text">
+            Manage your Askee room.
+          </p>
+
+        </div>
+
+
+        <!-- ====================================
+             LOADING
+        ===================================== -->
+
+        <div
+          class="page-loading"
+          id="pageLoading"
+        >
+
+          <div class="page-loading-spinner"></div>
+
+        </div>
+
+
+        <!-- ====================================
+             ROOM CONTENT
+        ===================================== -->
+
+        <div
+          id="roomContent"
+          hidden
+        >
+
+
+          <!-- ====================================
+               ROOM INFORMATION
+          ===================================== -->
+
+          <section class="room-card">
+
+
+            <div class="room-card-header">
+
+              <div class="room-card-title">
+                Room information
+              </div>
+
+
+              <div
+                class="active-status"
+                id="activeStatus"
+              >
+
+                <span
+                  class="active-dot"
+                  id="activeDot"
+                ></span>
+
+
+                <span id="activeStatusText">
+                  Active
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="info-grid">
+
+
+              <div class="info-item">
+
+                <div class="info-label">
+                  Questions asked
+                </div>
+
+
+                <div
+                  class="info-value"
+                  id="questionCount"
+                >
+                  0/0
+                </div>
+
+              </div>
+
+
+              <div class="info-item">
+
+                <div class="info-label">
+                  Answers given
+                </div>
+
+
+                <div
+                  class="info-value"
+                  id="answerCount"
+                >
+                  0/0
+                </div>
+
+              </div>
+
+
+              <div class="info-item">
+
+                <div class="info-label">
+                  Current stage
+                </div>
+
+
+                <div
+                  class="info-value stage"
+                  id="currentStage"
+                >
+                  —
+                </div>
+
+              </div>
+
+
+              <div class="info-item">
+
+                <div class="info-label">
+                  Room expires
+                </div>
+
+
+                <div
+                  class="info-value expiry"
+                  id="expiryTime"
+                >
+                  —
+                </div>
+
+              </div>
+
+
+            </div>
+
+          </section>
+
+
+          <!-- ====================================
+               ROOM LINK
+          ===================================== -->
+
+          <div class="room-link-section">
+
+            <div class="section-label">
+              Share with friends
+            </div>
+
+
+            <div class="link-card">
+
+              <div class="link-icon">
+                🔗
+              </div>
+
+
+              <div class="link-text">
+
+                <div class="link-label">
+                  Your room link
+                </div>
+
+
+                <span
+                  class="room-link"
+                  id="roomLink"
+                >
+                </span>
+
+              </div>
+
+
+              <button
+                class="copy-button"
+                id="copyButton"
+                type="button"
+              >
+                Copy
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- ====================================
+               NEXT STAGE
+          ===================================== -->
+
+          <div
+            class="next-section"
+            id="nextSection"
+          >
+
+            <button
+              class="next-button"
+              id="nextButton"
+              type="button"
+            >
+
+              <span id="nextButtonText">
+                Move to answering stage
+              </span>
+
+
+              <span class="arrow">
+                →
+              </span>
+
+            </button>
+
+          </div>
+
+
+          <!-- ====================================
+               DELETE
+          ===================================== -->
+
+          <div class="delete-section">
+
+            <button
+              class="delete-button"
+              id="deleteButton"
+              type="button"
+            >
+              Delete room
+            </button>
+
+          </div>
+
+
+        </div>
+
+
+        <!-- ====================================
+             FATAL ERROR
+        ===================================== -->
+
+        <div
+          id="fatalContent"
+          hidden
+        >
+
+          <div class="fatal-message">
+
+            <div class="fatal-icon">
+              !
+            </div>
+
+
+            <h2 id="fatalTitle">
+              Couldn't load this room.
+            </h2>
+
+
+            <p id="fatalText">
+              Something went wrong while loading
+              the room.
+            </p>
+
+
+            <button
+              class="retry-button"
+              id="retryButton"
+              type="button"
+            >
+              Try again
+            </button>
+
+          </div>
+
+        </div>
+
+
+      </section>
+
+    </main>
+
+
+    <footer>
+      Host controls · Askee
+    </footer>
+
+  </div>
+
+
+  <!-- ========================================
+       DELETE CONFIRMATION MODAL
+  ========================================= -->
+
+  <div
+    class="modal-overlay"
+    id="deleteModal"
+  >
+
+    <div class="modal">
+
+
+      <div class="modal-icon">
+        !
+      </div>
+
+
+      <h2>
+        Delete this room?
+      </h2>
+
+
+      <p>
+        Everyone will lose access to this room,
+        including all of its questions and answers.
+        This can't be undone.
+      </p>
+
+
+      <div class="modal-actions">
+
+
+        <button
+          class="modal-button cancel-button"
+          id="cancelDeleteButton"
+          type="button"
+        >
+          Cancel
+        </button>
+
+
+        <button
+          class="modal-button confirm-delete"
+          id="confirmDeleteButton"
+          type="button"
+        >
+          Delete room
+        </button>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================================
+       TOAST
+  ========================================= -->
+
+  <div
+    class="toast"
+    id="toast"
+  ></div>
+
+
+  <script>
+
+    /* ========================================
+       API CONFIGURATION
+    ======================================== */
+
+    const API_BASE_URL = "http://127.0.0.1:8000/api";
+
+    /* ========================================
+       GET HOST / MANAGEMENT ID
+    ======================================== */
+
+    function getManagementIdFromUrl() {
+
+      const params =
+        new URLSearchParams(
+          window.location.search
+        );
+
+
+      return params.get("room");
+
+    }
+
+
+    const managementId =
+      getManagementIdFromUrl();
+
+
+    /* ========================================
+       API URL
+    ======================================== */
+
+    const ROOM_API_URL =
+      managementId
+        ? `${API_BASE_URL}/rooms/manage/${encodeURIComponent(managementId)}/`
+        : null;
+
+
+    /* ========================================
+       STATE
+    ======================================== */
+
+    let roomId = null;
+
+    let currentStage = null;
+
+    let questionCount = 0;
+
+    let questionLimit = 0;
+
+    let answerCount = 0;
+
+    let answerLimit = 0;
+
+    let secondsRemaining = 0;
+
+    let expiryTimerInterval = null;
+
+    let loadingRequest = false;
+
+    let updatingStage = false;
+
+    let deletingRoom = false;
+
+    let toastTimeout = null;
+
+
+    /* ========================================
+       DOM ELEMENTS
+    ======================================== */
+
+    const pageLoading =
+      document.getElementById(
+        "pageLoading"
+      );
+
+
+    const roomContent =
+      document.getElementById(
+        "roomContent"
+      );
+
+
+    const fatalContent =
+      document.getElementById(
+        "fatalContent"
+      );
+
+
+    const fatalTitle =
+      document.getElementById(
+        "fatalTitle"
+      );
+
+
+    const fatalText =
+      document.getElementById(
+        "fatalText"
+      );
+
+
+    const retryButton =
+      document.getElementById(
+        "retryButton"
+      );
+
+
+    const stageBadgeText =
+      document.getElementById(
+        "stageBadgeText"
+      );
+
+
+    const stageDot =
+      document.getElementById(
+        "stageDot"
+      );
+
+
+    const activeStatus =
+      document.getElementById(
+        "activeStatus"
+      );
+
+
+    const activeDot =
+      document.getElementById(
+        "activeDot"
+      );
+
+
+    const activeStatusText =
+      document.getElementById(
+        "activeStatusText"
+      );
+
+
+    const questionCountElement =
+      document.getElementById(
+        "questionCount"
+      );
+
+
+    const answerCountElement =
+      document.getElementById(
+        "answerCount"
+      );
+
+
+    const currentStageElement =
+      document.getElementById(
+        "currentStage"
+      );
+
+
+    const expiryTimeElement =
+      document.getElementById(
+        "expiryTime"
+      );
+
+
+    const roomLinkElement =
+      document.getElementById(
+        "roomLink"
+      );
+
+
+    const copyButton =
+      document.getElementById(
+        "copyButton"
+      );
+
+
+    const nextSection =
+      document.getElementById(
+        "nextSection"
+      );
+
+
+    const nextButton =
+      document.getElementById(
+        "nextButton"
+      );
+
+
+    const nextButtonText =
+      document.getElementById(
+        "nextButtonText"
+      );
+
+
+    const deleteButton =
+      document.getElementById(
+        "deleteButton"
+      );
+
+
+    const deleteModal =
+      document.getElementById(
+        "deleteModal"
+      );
+
+
+    const cancelDeleteButton =
+      document.getElementById(
+        "cancelDeleteButton"
+      );
+
+
+    const confirmDeleteButton =
+      document.getElementById(
+        "confirmDeleteButton"
+      );
+
+
+    const toast =
+      document.getElementById(
+        "toast"
+      );
+
+
+    /* ========================================
+       FETCH JSON HELPER
+    ======================================== */
+
+    async function fetchJson(
+      url,
+      options = {}
+    ) {
+
+      const response =
+        await fetch(
+          url,
+          options
+        );
+
+
+      let data = null;
+
+
+      try {
+
+        data =
+          await response.json();
+
+      } catch (error) {
+
+        data = null;
+
+      }
+
+
+      return {
+        response,
+        data
+      };
+
+    }
+
+
+    /* ========================================
+       ERROR MESSAGE HELPER
+    ======================================== */
+
+    function getApiErrorMessage(
+      data,
+      fallback
+    ) {
+
+      if (
+        data &&
+        typeof data.detail === "string"
+      ) {
+
+        return data.detail;
+
+      }
+
+
+      if (
+        data &&
+        typeof data.message === "string"
+      ) {
+
+        return data.message;
+
+      }
+
+
+      if (
+        data &&
+        typeof data.error === "string"
+      ) {
+
+        return data.error;
+
+      }
+
+
+      return fallback;
+
+    }
+
+
+    /* ========================================
+       APPLY SERVER STATE
+    ======================================== */
+
+    function applyRoomState(
+      data
+    ) {
+
+      if (
+        data.room_id !== undefined
+      ) {
+
+        roomId =
+          String(
+            data.room_id
+          );
+
+      }
+
+
+      if (
+        data.question_count !== undefined
+      ) {
+
+        questionCount =
+          Number(
+            data.question_count
+          );
+
+      }
+
+
+      if (
+        data.question_limit !== undefined
+      ) {
+
+        questionLimit =
+          Number(
+            data.question_limit
+          );
+
+      }
+
+
+      if (
+        data.answer_count !== undefined
+      ) {
+
+        answerCount =
+          Number(
+            data.answer_count
+          );
+
+      }
+
+
+      if (
+        data.answer_limit !== undefined
+      ) {
+
+        answerLimit =
+          Number(
+            data.answer_limit
+          );
+
+      }
+
+
+      if (
+        data.stage !== undefined
+      ) {
+
+        currentStage =
+          data.stage;
+
+      }
+
+
+      if (
+        data.seconds_remaining !== undefined
+      ) {
+
+        secondsRemaining =
+          Number(
+            data.seconds_remaining
+          );
+
+      }
+
+
+      questionCount =
+        Math.max(
+          0,
+          questionCount
+        );
+
+
+      questionLimit =
+        Math.max(
+          0,
+          questionLimit
+        );
+
+
+      answerCount =
+        Math.max(
+          0,
+          answerCount
+        );
+
+
+      answerLimit =
+        Math.max(
+          0,
+          answerLimit
+        );
+
+
+      secondsRemaining =
+        Math.max(
+          0,
+          secondsRemaining
+        );
+
+
+      updateDashboard();
+
+    }
+
+
+    /* ========================================
+       UPDATE DASHBOARD
+    ======================================== */
+
+    function updateDashboard() {
+
+      questionCountElement.textContent =
+        questionCount
+        + "/"
+        + questionLimit;
+
+
+      answerCountElement.textContent =
+        answerCount
+        + "/"
+        + answerLimit;
+
+
+      currentStageElement.textContent =
+        formatStage(
+          currentStage
+        );
+
+
+      updateExpiryDisplay();
+
+      updateStageControls();
+
+      updateRoomStatus();
+
+      updateRoomLink();
+
+    }
+
+
+    /* ========================================
+       FORMAT STAGE
+    ======================================== */
+
+    function formatStage(
+      stage
+    ) {
+
+      const labels = {
+
+        asking:
+          "Asking",
+
+        answering:
+          "Answering",
+
+        board:
+          "Board",
+
+        expired:
+          "Expired"
+
+      };
+
+
+      return (
+        labels[stage]
+        || "—"
+      );
+
+    }
+
+
+    /* ========================================
+       UPDATE HEADER / STATUS
+    ======================================== */
+
+    function updateRoomStatus() {
+
+      const expired =
+        currentStage === "expired"
+        ||
+        secondsRemaining <= 0;
+
+
+      if (expired) {
+
+        activeStatus.classList.add(
+          "expired"
+        );
+
+
+        activeDot.style.background =
+          "var(--red)";
+
+
+        stageDot.style.background =
+          "var(--red)";
+
+
+        activeStatusText.textContent =
+          "Expired";
+
+
+        stageBadgeText.textContent =
+          "Room expired";
+
+        return;
+
+      }
+
+
+      activeStatus.classList.remove(
+        "expired"
+      );
+
+
+      activeDot.style.background =
+        "var(--green)";
+
+
+      stageDot.style.background =
+        "var(--purple)";
+
+
+      activeStatusText.textContent =
+        "Active";
+
+
+      stageBadgeText.textContent =
+        "Host dashboard";
+
+    }
+
+
+    /* ========================================
+       UPDATE ROOM LINK
+    ======================================== */
+
+    function updateRoomLink() {
+
+      if (!roomId) {
+
+        roomLinkElement.textContent =
+          "Unavailable";
+
+        return;
+
+      }
+
+
+      const roomLink =
+        `${window.location.origin}/ask.html?room=${encodeURIComponent(roomId)}`;
+
+
+      roomLinkElement.textContent =
+        roomLink;
+
+    }
+
+
+    /* ========================================
+       UPDATE EXPIRY DISPLAY
+    ======================================== */
+
+    function updateExpiryDisplay() {
+
+      const safeSeconds =
+        Math.max(
+          0,
+          Math.floor(
+            secondsRemaining
+          )
+        );
+
+
+      const days =
+        Math.floor(
+          safeSeconds / 86400
+        );
+
+
+      const hours =
+        Math.floor(
+          (safeSeconds % 86400) / 3600
+        );
+
+
+      const minutes =
+        Math.floor(
+          (safeSeconds % 3600) / 60
+        );
+
+
+      const seconds =
+        safeSeconds % 60;
+
+
+      if (
+        safeSeconds <= 0
+      ) {
+
+        expiryTimeElement.textContent =
+          "00:00";
+
+        return;
+
+      }
+
+
+    //   if (
+    //     days > 0
+    //   ) {
+
+    //     expiryTimeElement.textContent =
+    //       `${days}d ${String(hours).padStart(2, "0")}h`;
+
+    //     return;
+
+    //   }
+
+
+    //   if (
+    //     hours > 0
+    //   ) {
+
+    //     expiryTimeElement.textContent =
+    //       `${hours}h ${String(minutes).padStart(2, "0")}m`;
+
+    //     return;
+
+    //   }
+
+
+    //   expiryTimeElement.textContent =
+    //     `${minutes}m ${String(seconds).padStart(2, "0")}s`;
+
+    expiryTimeElement.textContent =
+          `${hours}h ${String(minutes).padStart(2, "0")}m ${String(seconds).padStart(2, "0")}s`;
+
+    return;
+
+    }
+
+
+    /* ========================================
+       UPDATE STAGE CONTROLS
+    ======================================== */
+
+    function updateStageControls() {
+
+      const expired =
+        currentStage === "expired"
+        ||
+        secondsRemaining <= 0;
+
+
+      if (
+        expired
+      ) {
+
+        nextSection.style.display =
+          "none";
+
+        deleteButton.disabled =
+          false;
+
+        return;
+
+      }
+
+
+      if (
+        currentStage === "asking"
+      ) {
+
+        nextSection.style.display =
+          "block";
+
+
+        nextButton.disabled =
+          updatingStage;
+
+
+        nextButtonText.textContent =
+          "Move to answering stage";
+
+        return;
+
+      }
+
+
+      if (
+        currentStage === "answering"
+      ) {
+
+        nextSection.style.display =
+          "block";
+
+
+        nextButton.disabled =
+          updatingStage;
+
+
+        nextButtonText.textContent =
+          "Move to board";
+
+        return;
+
+      }
+
+
+      /*
+       * Board is the final stage.
+       */
+
+      if (
+        currentStage === "board"
+      ) {
+
+        nextSection.style.display =
+          "none";
+
+        return;
+
+      }
+
+
+      nextSection.style.display =
+        "none";
+
+    }
+
+
+    /* ========================================
+       START EXPIRY TIMER
+    ======================================== */
+
+    function startExpiryTimer() {
+
+      clearInterval(
+        expiryTimerInterval
+      );
+
+
+      updateExpiryDisplay();
+
+
+      expiryTimerInterval =
+        setInterval(() => {
+
+          if (
+            secondsRemaining <= 0
+          ) {
+
+            secondsRemaining =
+              0;
+
+
+            updateExpiryDisplay();
+
+            updateRoomStatus();
+
+            updateStageControls();
+
+
+            clearInterval(
+              expiryTimerInterval
+            );
+
+
+            expiryTimerInterval =
+              null;
+
+
+            return;
+
+          }
+
+
+          secondsRemaining--;
+
+
+          updateExpiryDisplay();
+
+
+          /*
+           * This timer is only a display
+           * countdown for room expiry.
+           */
+
+          updateRoomStatus();
+
+          updateStageControls();
+
+        }, 1000);
+
+    }
+
+
+    /* ========================================
+       LOAD ROOM
+    ======================================== */
+
+    async function loadRoom() {
+
+      clearInterval(
+        expiryTimerInterval
+      );
+
+
+      expiryTimerInterval =
+        null;
+
+
+      pageLoading.hidden =
+        false;
+
+
+      roomContent.hidden =
+        true;
+
+
+      fatalContent.hidden =
+        true;
+
+
+      if (
+        !managementId
+      ) {
+
+        showFatalError(
+          "No management link was specified.",
+          "This page needs a valid host management ID.",
+          false
+        );
+
+        return;
+
+      }
+
+
+      if (
+        loadingRequest
+      ) {
+
+        return;
+
+      }
+
+
+      loadingRequest =
+        true;
+
+
+      try {
+
+        const {
+          response,
+          data
+        } =
+          await fetchJson(
+            ROOM_API_URL,
+            {
+              method:
+                "GET",
+
+              headers: {
+                "Accept":
+                  "application/json"
+              }
+            }
+          );
+
+
+        if (
+          !response.ok
+        ) {
+
+          if (
+            response.status === 404
+          ) {
+
+            showFatalError(
+              "Room not found.",
+              "This room doesn't exist or the management link is no longer valid.",
+              false
+            );
+
+          }
+
+          else {
+
+            showFatalError(
+              "Couldn't load your room.",
+              getApiErrorMessage(
+                data,
+                "Something went wrong while loading the room."
+              ),
+              true
+            );
+
+          }
+
+
+          return;
+
+        }
+
+
+        if (
+          data &&
+          data.exists === false
+        ) {
+
+          showFatalError(
+            "Room not found.",
+            "This room doesn't exist or the management link is no longer valid.",
+            false
+          );
+
+
+          return;
+
+        }
+
+
+        applyRoomState(
+          data || {}
+        );
+
+
+        pageLoading.hidden =
+          true;
+
+
+        fatalContent.hidden =
+          true;
+
+
+        roomContent.hidden =
+          false;
+
+
+        startExpiryTimer();
+
+      }
+
+      catch (error) {
+
+        console.error(
+          "Failed to load room:",
+          error
+        );
+
+
+        showFatalError(
+          "Couldn't load your room.",
+          "Please check your connection and try again.",
+          true
+        );
+
+      }
+
+      finally {
+
+        loadingRequest =
+          false;
+
+      }
+
+    }
+
+
+    /* ========================================
+       MOVE TO NEXT STAGE
+    ======================================== */
+
+    async function moveToNextStage() {
+
+      if (
+        updatingStage
+      ) {
+
+        return;
+
+      }
+
+
+      if (
+        currentStage !== "asking"
+        &&
+        currentStage !== "answering"
+      ) {
+
+        return;
+
+      }
+
+
+      updatingStage =
+        true;
+
+
+      updateStageControls();
+
+
+      try {
+
+        /*
+         * The same management endpoint
+         * handles PATCH requests.
+         *
+         * The backend decides the actual
+         * next valid stage.
+         */
+
+        const {
+          response,
+          data
+        } =
+          await fetchJson(
+            ROOM_API_URL,
+            {
+              method:
+                "PATCH",
+
+              headers: {
+                "Content-Type":
+                  "application/json",
+
+                "Accept":
+                  "application/json"
+              },
+
+              body:
+                JSON.stringify({
+                  stage: currentStage === "asking" ? "answering" : currentStage === "answering" ? "board" : currentStage === "board" ? "board" : "board"
+                })
+            }
+          );
+
+
+        /*
+         * Apply returned state before
+         * handling the result.
+         */
+
+        if (
+          data
+        ) {
+
+          applyRoomState(
+            data
+          );
+
+        }
+
+
+        if (
+          !response.ok
+        ) {
+
+          showToast(
+            getApiErrorMessage(
+              data,
+              "Couldn't change the room stage."
+            ),
+            true
+          );
+
+
+          return;
+
+        }
+
+
+        if (
+          currentStage === "answering"
+        ) {
+
+          showToast(
+            "The room is now in the answering stage."
+          );
+
+        }
+
+        else if (
+          currentStage === "board"
+        ) {
+
+          showToast(
+            "The board is now available."
+          );
+
+        }
+
+        else {
+
+          showToast(
+            "Room stage updated."
+          );
+
+        }
+
+      }
+
+      catch (error) {
+
+        console.error(
+          "Failed to update stage:",
+          error
+        );
+
+
+        showToast(
+          "Couldn't change the room stage. Check your connection and try again.",
+          true
+        );
+
+      }
+
+      finally {
+
+        updatingStage =
+          false;
+
+
+        updateDashboard();
+
+      }
+
+    }
+
+
+    /* ========================================
+       COPY ROOM LINK
+    ======================================== */
+
+    async function copyRoomLink() {
+
+      if (
+        !roomId
+      ) {
+
+        return;
+
+      }
+
+
+      const roomLink =
+        `${window.location.origin}/ask.html?room=${encodeURIComponent(roomId)}`;
+
+
+      try {
+
+        if (
+          navigator.clipboard &&
+          window.isSecureContext
+        ) {
+
+          await navigator.clipboard.writeText(
+            roomLink
+          );
+
+        }
+
+        else {
+
+          const temporary =
+            document.createElement(
+              "textarea"
+            );
+
+
+          temporary.value =
+            roomLink;
+
+
+          temporary.style.position =
+            "fixed";
+
+          temporary.style.opacity =
+            "0";
+
+
+          document.body.appendChild(
+            temporary
+          );
+
+
+          temporary.select();
+
+
+          document.execCommand(
+            "copy"
+          );
+
+
+          temporary.remove();
+
+        }
+
+
+        copyButton.textContent =
+          "Copied ✓";
+
+
+        copyButton.classList.add(
+          "copied"
+        );
+
+
+        showToast(
+          "Room link copied."
+        );
+
+
+        setTimeout(() => {
+
+          copyButton.textContent =
+            "Copy";
+
+
+          copyButton.classList.remove(
+            "copied"
+          );
+
+        }, 2200);
+
+      }
+
+      catch (error) {
+
+        console.error(
+          "Copy failed:",
+          error
+        );
+
+
+        showToast(
+          "Couldn't copy the room link.",
+          true
+        );
+
+      }
+
+    }
+
+
+    /* ========================================
+       OPEN DELETE MODAL
+    ======================================== */
+
+    function openDeleteModal() {
+
+      if (
+        deletingRoom
+      ) {
+
+        return;
+
+      }
+
+
+      deleteModal.classList.add(
+        "show"
+      );
+
+    }
+
+
+    /* ========================================
+       CLOSE DELETE MODAL
+    ======================================== */
+
+    function closeDeleteModal() {
+
+      if (
+        deletingRoom
+      ) {
+
+        return;
+
+      }
+
+
+      deleteModal.classList.remove(
+        "show"
+      );
+
+    }
+
+
+    /* ========================================
+       DELETE ROOM
+    ======================================== */
+
+    async function deleteRoom() {
+
+      if (
+        deletingRoom
+      ) {
+
+        return;
+
+      }
+
+
+      deletingRoom =
+        true;
+
+
+      confirmDeleteButton.disabled =
+        true;
+
+
+      confirmDeleteButton.textContent =
+        "Deleting...";
+
+
+      try {
+
+        const {
+          response,
+          data
+        } =
+          await fetchJson(
+            ROOM_API_URL,
+            {
+              method:
+                "DELETE",
+
+              headers: {
+                "Accept":
+                  "application/json"
+              }
+            }
+          );
+
+
+        if (
+          !response.ok
+        ) {
+
+          showToast(
+            getApiErrorMessage(
+              data,
+              "Couldn't delete the room."
+            ),
+            true
+          );
+
+
+          return;
+
+        }
+
+
+        closeDeleteModal();
+
+
+        showToast(
+          "Room deleted."
+        );
+
+
+        /*
+         * Return the host to the homepage
+         * after successful deletion.
+         */
+
+        setTimeout(() => {
+
+          window.location.href =
+            "/";
+
+        }, 900);
+
+      }
+
+      catch (error) {
+
+        console.error(
+          "Failed to delete room:",
+          error
+        );
+
+
+        showToast(
+          "Couldn't delete the room. Check your connection and try again.",
+          true
+        );
+
+      }
+
+      finally {
+
+        deletingRoom =
+          false;
+
+
+        confirmDeleteButton.disabled =
+          false;
+
+
+        confirmDeleteButton.textContent =
+          "Delete room";
+
+      }
+
+    }
+
+
+    /* ========================================
+       FATAL ERROR
+    ======================================== */
+
+    function showFatalError(
+      title,
+      message,
+      canRetry
+    ) {
+
+      clearInterval(
+        expiryTimerInterval
+      );
+
+
+      expiryTimerInterval =
+        null;
+
+
+      pageLoading.hidden =
+        true;
+
+
+      roomContent.hidden =
+        true;
+
+
+      fatalContent.hidden =
+        false;
+
+
+      fatalTitle.textContent =
+        title;
+
+
+      fatalText.textContent =
+        message;
+
+
+      retryButton.hidden =
+        !canRetry;
+
+    }
+
+
+    /* ========================================
+       TOAST
+    ======================================== */
+
+    function showToast(
+      message,
+      isError = false
+    ) {
+
+      clearTimeout(
+        toastTimeout
+      );
+
+
+      toast.textContent =
+        message;
+
+
+      toast.classList.toggle(
+        "error",
+        isError
+      );
+
+
+      toast.classList.add(
+        "show"
+      );
+
+
+      toastTimeout =
+        setTimeout(() => {
+
+          toast.classList.remove(
+            "show"
+          );
+
+        }, 2400);
+
+    }
+
+
+    /* ========================================
+       EVENT LISTENERS
+    ======================================== */
+
+    copyButton.addEventListener(
+      "click",
+      copyRoomLink
+    );
+
+
+    nextButton.addEventListener(
+      "click",
+      moveToNextStage
+    );
+
+
+    deleteButton.addEventListener(
+      "click",
+      openDeleteModal
+    );
+
+
+    cancelDeleteButton.addEventListener(
+      "click",
+      closeDeleteModal
+    );
+
+
+    confirmDeleteButton.addEventListener(
+      "click",
+      deleteRoom
+    );
+
+
+    retryButton.addEventListener(
+      "click",
+      loadRoom
+    );
+
+
+    deleteModal.addEventListener(
+      "click",
+      event => {
+
+        if (
+          event.target ===
+          deleteModal
+        ) {
+
+          closeDeleteModal();
+
+        }
+
+      }
+    );
+
+
+    /* ========================================
+       INITIALIZE
+    ======================================== */
+
+    loadRoom();
+
+  </script>
+
+</body>
+</html>

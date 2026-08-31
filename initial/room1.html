@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Askee — Your room is ready!</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    :root {
+      --background: #f7f5ff;
+
+      --text: #17152b;
+      --muted: #747084;
+
+      --purple: #6d4aff;
+      --purple-dark: #5738e6;
+
+      --pink: #ff62ad;
+      --yellow: #ffd75c;
+
+      --white-glass: rgba(255, 255, 255, 0.72);
+
+      --border: rgba(35, 27, 75, 0.08);
+
+      --shadow:
+        0 25px 70px rgba(73, 50, 150, 0.15);
+    }
+
+
+    /* ========================================
+       RESET
+    ======================================== */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    /* ========================================
+       BODY
+    ======================================== */
+
+    body {
+
+      min-height: 100vh;
+
+      overflow-x: hidden;
+
+      font-family: "DM Sans", sans-serif;
+
+      color: var(--text);
+
+      background:
+
+        radial-gradient(
+          circle at 12% 8%,
+          rgba(255, 174, 216, 0.48),
+          transparent 28rem
+        ),
+
+        radial-gradient(
+          circle at 90% 10%,
+          rgba(177, 160, 255, 0.48),
+          transparent 30rem
+        ),
+
+        radial-gradient(
+          circle at 50% 100%,
+          rgba(255, 220, 120, 0.25),
+          transparent 34rem
+        ),
+
+        var(--background);
+
+    }
+
+
+    /* ========================================
+       SUBTLE BACKGROUND GRID
+    ======================================== */
+
+    body::before {
+
+      content: "";
+
+      position: fixed;
+
+      inset: 0;
+
+      pointer-events: none;
+
+      opacity: 0.22;
+
+      background-image:
+
+        linear-gradient(
+          rgba(255,255,255,0.5) 1px,
+          transparent 1px
+        ),
+
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,0.5) 1px,
+          transparent 1px
+        );
+
+      background-size: 42px 42px;
+
+      mask-image:
+        linear-gradient(
+          to bottom,
+          black,
+          transparent 75%
+        );
+
+    }
+
+
+    /* ========================================
+       PAGE
+    ======================================== */
+
+    .page {
+
+      width:
+        min(
+          1120px,
+          calc(100% - 40px)
+        );
+
+      min-height: 100vh;
+
+      margin: 0 auto;
+
+      display: flex;
+
+      flex-direction: column;
+
+      position: relative;
+
+    }
+
+
+    /* ========================================
+       NAV
+    ======================================== */
+
+    nav {
+
+      height: 88px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+    }
+
+
+    .logo {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size: 1.35rem;
+
+      font-weight: 800;
+
+      letter-spacing: -0.06em;
+
+    }
+
+
+    .logo-mark {
+
+      width: 36px;
+      height: 36px;
+
+      display: grid;
+
+      place-items: center;
+
+      color: white;
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size: 16px;
+
+      font-weight: 800;
+
+      border-radius:
+        12px
+        12px
+        12px
+        4px;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          #9b70ff
+        );
+
+      box-shadow:
+        0 9px 23px
+        rgba(109, 74, 255, 0.28);
+
+    }
+
+
+    .nav-note {
+
+      color: var(--muted);
+
+      font-size: 0.84rem;
+
+      font-weight: 600;
+
+    }
+
+
+    /* ========================================
+       MAIN
+    ======================================== */
+
+    main {
+
+      flex: 1;
+
+      display: grid;
+
+      place-items: center;
+
+      padding:
+        40px
+        0
+        70px;
+
+    }
+
+
+    .content {
+
+      width: 100%;
+
+      max-width: 620px;
+
+      text-align: center;
+
+      position: relative;
+
+    }
+
+
+    /* ========================================
+       CELEBRATION ICON
+    ======================================== */
+
+    .celebration {
+
+      width: 72px;
+      height: 72px;
+
+      margin:
+        0 auto
+        25px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 24px;
+
+      color: white;
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size: 28px;
+
+      font-weight: 800;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          #9a70ff
+        );
+
+      box-shadow:
+        0 18px 38px
+        rgba(109, 74, 255, 0.25);
+
+      animation:
+        popIn 0.6s
+        cubic-bezier(.2,.8,.2,1)
+        both;
+
+    }
+
+
+    /* ========================================
+       HEADLINE
+    ======================================== */
+
+    h1 {
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size:
+        clamp(
+          2.7rem,
+          6vw,
+          4.5rem
+        );
+
+      line-height: 1;
+
+      letter-spacing: -0.075em;
+
+    }
+
+
+    h1 .accent {
+
+      position: relative;
+
+      color: var(--purple);
+
+    }
+
+
+    h1 .accent::after {
+
+      content: "";
+
+      position: absolute;
+
+      left: 2%;
+
+      right: -2%;
+
+      bottom: -8px;
+
+      height: 9px;
+
+      border-radius: 50%;
+
+      background: var(--yellow);
+
+      transform: rotate(-2deg);
+
+      z-index: -1;
+
+    }
+
+
+    .subtitle {
+
+      max-width: 460px;
+
+      margin:
+        20px auto
+        32px;
+
+      color: var(--muted);
+
+      font-size: 1rem;
+
+      line-height: 1.65;
+
+    }
+
+
+    /* ========================================
+       LINK CARD
+    ======================================== */
+
+    .link-card {
+
+      width: 100%;
+
+      padding: 9px;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.9);
+
+      border-radius: 19px;
+
+      background:
+        var(--white-glass);
+
+      backdrop-filter: blur(18px);
+
+      -webkit-backdrop-filter: blur(18px);
+
+      box-shadow:
+        var(--shadow);
+
+      animation:
+        slideUp 0.7s
+        0.1s
+        cubic-bezier(.2,.8,.2,1)
+        both;
+
+    }
+
+
+    .link-icon {
+
+      flex: 0 0 auto;
+
+      width: 46px;
+      height: 46px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 13px;
+
+      color: var(--purple);
+
+      background:
+        rgba(109,74,255,0.08);
+
+      font-size: 19px;
+
+    }
+
+
+    .link-text {
+
+      min-width: 0;
+
+      flex: 1;
+
+      padding: 0 5px;
+
+      text-align: left;
+
+      overflow: hidden;
+
+    }
+
+
+    .link-label {
+
+      margin-bottom: 3px;
+
+      color: #9a96a9;
+
+      font-size: 0.65rem;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.08em;
+
+    }
+
+
+    .room-link {
+
+      display: block;
+
+      overflow: hidden;
+
+      white-space: nowrap;
+
+      text-overflow: ellipsis;
+
+      color: #38334f;
+
+      font-size: 0.89rem;
+
+      font-weight: 600;
+
+    }
+
+
+    /* ========================================
+       COPY BUTTON
+    ======================================== */
+
+    .copy-button {
+
+      flex: 0 0 auto;
+
+      min-width: 92px;
+
+      height: 46px;
+
+      padding: 0 16px;
+
+      border: none;
+
+      border-radius: 13px;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          #805eff
+        );
+
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      font-size: 0.84rem;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      box-shadow:
+        0 9px 20px
+        rgba(109,74,255,0.2);
+
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+
+    }
+
+
+    .copy-button:hover {
+
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 12px 25px
+        rgba(109,74,255,0.27);
+
+    }
+
+
+    .copy-button.copied {
+
+      background:
+        linear-gradient(
+          135deg,
+          #43b889,
+          #52c99b
+        );
+
+    }
+
+
+    /* ========================================
+       SHARE
+    ======================================== */
+
+    .share-section {
+
+      margin-top: 29px;
+
+    }
+
+
+    .share-title {
+
+      margin-bottom: 13px;
+
+      color: #9793a5;
+
+      font-size: 0.74rem;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.09em;
+
+    }
+
+
+    .share-buttons {
+
+      display: flex;
+
+      justify-content: center;
+
+      gap: 10px;
+
+    }
+
+
+    .share-button {
+
+      height: 43px;
+
+      padding: 0 16px;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 8px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius: 13px;
+
+      color: #5f5a71;
+
+      background:
+        rgba(255,255,255,0.58);
+
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      font-size: 0.82rem;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition:
+        transform .2s ease,
+        background .2s ease;
+
+    }
+
+
+    .share-button:hover {
+
+      transform: translateY(-2px);
+
+      background:
+        rgba(255,255,255,0.9);
+
+    }
+
+
+    .whatsapp-icon {
+
+      width: 18px;
+      height: 18px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 50%;
+
+      color: white;
+
+      background: #25d366;
+
+      font-size: 10px;
+
+      font-weight: 800;
+
+    }
+
+
+    /* ========================================
+       INFO
+    ======================================== */
+
+    .info {
+
+      margin-top: 22px;
+
+      color: #aaa6b6;
+
+      font-size: 0.76rem;
+
+    }
+
+
+    /* ========================================
+       ENTER ROOM
+    ======================================== */
+
+    .enter-room {
+
+      margin-top: 29px;
+
+      padding:
+        14px
+        21px;
+
+      border: none;
+
+      border-radius: 14px;
+
+      color: white;
+
+      background:
+        rgba(23,21,43,0.9);
+
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      font-size: 0.9rem;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition:
+        transform .2s ease,
+        background .2s ease;
+
+    }
+
+
+    .enter-room:hover {
+
+      transform: translateY(-2px);
+
+      background:
+        var(--text);
+
+    }
+
+
+    /* ========================================
+       DECORATIVE ELEMENTS
+    ======================================== */
+
+    .spark {
+
+      position: absolute;
+
+      pointer-events: none;
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-weight: 800;
+
+      opacity: 0.65;
+
+    }
+
+
+    .spark.one {
+
+      top: -10px;
+
+      left: 10%;
+
+      color: var(--pink);
+
+      font-size: 22px;
+
+      transform: rotate(-15deg);
+
+      animation:
+        floatOne 4s
+        ease-in-out
+        infinite;
+
+    }
+
+
+    .spark.two {
+
+      top: 35px;
+
+      right: 7%;
+
+      color: var(--purple);
+
+      font-size: 29px;
+
+      transform: rotate(15deg);
+
+      animation:
+        floatTwo 5s
+        ease-in-out
+        infinite;
+
+    }
+
+
+    .spark.three {
+
+      bottom: 30px;
+
+      left: 2%;
+
+      color: var(--yellow);
+
+      font-size: 19px;
+
+      animation:
+        floatThree 4.5s
+        ease-in-out
+        infinite;
+
+    }
+
+
+    /* ========================================
+       FOOTER
+    ======================================== */
+
+    footer {
+
+      padding:
+        20px
+        0
+        28px;
+
+      display: flex;
+
+      justify-content: center;
+
+      color: #aaa6b6;
+
+      font-size: 0.75rem;
+
+    }
+
+
+    /* ========================================
+       ANIMATIONS
+    ======================================== */
+
+    @keyframes popIn {
+
+      from {
+
+        opacity: 0;
+
+        transform:
+          scale(.75)
+          rotate(-8deg);
+
+      }
+
+      to {
+
+        opacity: 1;
+
+        transform:
+          scale(1)
+          rotate(0);
+
+      }
+
+    }
+
+
+    @keyframes slideUp {
+
+      from {
+
+        opacity: 0;
+
+        transform:
+          translateY(18px);
+
+      }
+
+      to {
+
+        opacity: 1;
+
+        transform:
+          translateY(0);
+
+      }
+
+    }
+
+
+    @keyframes floatOne {
+
+      0%, 100% {
+
+        transform:
+          translateY(0)
+          rotate(-15deg);
+
+      }
+
+      50% {
+
+        transform:
+          translateY(-8px)
+          rotate(-9deg);
+
+      }
+
+    }
+
+
+    @keyframes floatTwo {
+
+      0%, 100% {
+
+        transform:
+          translateY(0)
+          rotate(15deg);
+
+      }
+
+      50% {
+
+        transform:
+          translateY(-10px)
+          rotate(21deg);
+
+      }
+
+    }
+
+
+    @keyframes floatThree {
+
+      0%, 100% {
+
+        transform:
+          translateY(0);
+
+      }
+
+      50% {
+
+        transform:
+          translateY(-7px);
+
+      }
+
+    }
+
+
+    /* ========================================
+       MOBILE
+    ======================================== */
+
+    @media (max-width: 600px) {
+
+      .page {
+
+        width:
+          calc(100% - 28px);
+
+      }
+
+
+      nav {
+
+        height: 74px;
+
+      }
+
+
+      .nav-note {
+
+        display: none;
+
+      }
+
+
+      main {
+
+        padding:
+          35px
+          0
+          45px;
+
+      }
+
+
+      .celebration {
+
+        width: 64px;
+        height: 64px;
+
+        margin-bottom: 22px;
+
+        border-radius: 21px;
+
+        font-size: 24px;
+
+      }
+
+
+      h1 {
+
+        font-size:
+          clamp(
+            2.65rem,
+            13vw,
+            4rem
+          );
+
+      }
+
+
+      .subtitle {
+
+        font-size: 0.94rem;
+
+        margin:
+          19px auto
+          27px;
+
+      }
+
+
+      .link-card {
+
+        padding: 8px;
+
+      }
+
+
+      .link-icon {
+
+        width: 42px;
+        height: 42px;
+
+        border-radius: 12px;
+
+      }
+
+
+      .room-link {
+
+        font-size: 0.78rem;
+
+      }
+
+
+      .copy-button {
+
+        min-width: 74px;
+
+        padding:
+          0
+          12px;
+
+        font-size: 0.77rem;
+
+      }
+
+
+      .share-buttons {
+
+        flex-wrap: wrap;
+
+      }
+
+
+      .share-button {
+
+        flex: 1;
+
+        min-width: 120px;
+
+      }
+
+
+      .spark.one {
+
+        left: 0;
+
+      }
+
+
+      .spark.two {
+
+        right: 0;
+
+      }
+
+    }
+
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+
+        animation: none !important;
+
+        transition: none !important;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="page">
+
+
+    <!-- ====================================
+         NAVIGATION
+    ===================================== -->
+
+    <nav>
+
+      <div class="logo">
+
+        <div class="logo-mark">
+          ?
+        </div>
+
+        <span>
+          askee
+        </span>
+
+      </div>
+
+
+      <div class="nav-note">
+        A little game of curiosity.
+      </div>
+
+    </nav>
+
+
+
+    <!-- ====================================
+         MAIN CONTENT
+    ===================================== -->
+
+    <main>
+
+      <section class="content">
+
+
+        <!-- Decorative elements -->
+
+        <div class="spark one">
+          ✦
+        </div>
+
+        <div class="spark two">
+          ✦
+        </div>
+
+        <div class="spark three">
+          •
+        </div>
+
+
+        <!-- Success icon -->
+
+        <div class="celebration">
+          ✓
+        </div>
+
+
+        <h1>
+
+          Your room is
+          <span class="accent">
+            ready!
+          </span>
+
+        </h1>
+
+
+        <p class="subtitle">
+
+          Now invite your friends to play.
+          Send them the link below and
+          let the questions begin.
+
+        </p>
+
+
+
+        <!-- ====================================
+             ROOM LINK
+        ===================================== -->
+
+        <div class="link-card">
+
+
+          <div class="link-icon">
+            🔗
+          </div>
+
+
+          <div class="link-text">
+
+            <div class="link-label">
+              Your room link
+            </div>
+
+            <span
+              class="room-link"
+              id="roomLink"
+            >
+              https://askee.app/r/7Kp4Qx
+            </span>
+
+          </div>
+
+
+          <button
+            class="copy-button"
+            id="copyButton"
+            onclick="copyRoomLink()"
+          >
+            Copy
+          </button>
+
+
+        </div>
+
+
+
+        <!-- ====================================
+             SHARE
+        ===================================== -->
+
+        <div class="share-section">
+
+          <div class="share-title">
+            Share with friends
+          </div>
+
+
+          <div class="share-buttons">
+
+
+            <button
+              class="share-button"
+              onclick="shareWhatsApp()"
+            >
+
+              <span class="whatsapp-icon">
+                ↗
+              </span>
+
+              WhatsApp
+
+            </button>
+
+
+            <button
+              class="share-button"
+              onclick="shareRoom()"
+            >
+
+              <span>
+                ↗
+              </span>
+
+              Share
+
+            </button>
+
+
+          </div>
+
+        </div>
+
+
+
+        <div class="info">
+
+          Anyone with the link can join your room.
+
+        </div>
+
+
+
+        <!-- ====================================
+             ENTER ROOM
+        ===================================== -->
+
+        <button
+          class="enter-room"
+          onclick="enterRoom()"
+        >
+
+          Enter Room →
+
+        </button>
+
+
+      </section>
+
+    </main>
+
+
+
+    <footer>
+
+      Made for questions worth asking.
+
+    </footer>
+
+  </div>
+
+
+
+  <script>
+
+    /*
+      ----------------------------------------
+      ROOM LINK
+      ----------------------------------------
+
+      Later, replace this with the URL
+      returned by your backend.
+
+      For example:
+
+      const roomLink = response.room_url;
+
+      Then:
+
+      document.getElementById("roomLink")
+        .textContent = roomLink;
+    */
+
+    const ROOM_LINK =
+      "https://askee.app/r/7Kp4Qx";
+
+
+    /*
+      ----------------------------------------
+      COPY ROOM LINK
+      ----------------------------------------
+    */
+
+    async function copyRoomLink() {
+
+      const button =
+        document.getElementById(
+          "copyButton"
+        );
+
+      try {
+
+        await navigator.clipboard.writeText(
+          ROOM_LINK
+        );
+
+        button.textContent =
+          "Copied ✓";
+
+        button.classList.add(
+          "copied"
+        );
+
+
+        setTimeout(() => {
+
+          button.textContent =
+            "Copy";
+
+          button.classList.remove(
+            "copied"
+          );
+
+        }, 2200);
+
+
+      } catch (error) {
+
+        /*
+          Fallback for browsers where
+          Clipboard API isn't available.
+        */
+
+        const temporary =
+          document.createElement("textarea");
+
+        temporary.value = ROOM_LINK;
+
+        document.body.appendChild(
+          temporary
+        );
+
+        temporary.select();
+
+        document.execCommand(
+          "copy"
+        );
+
+        temporary.remove();
+
+
+        button.textContent =
+          "Copied ✓";
+
+        button.classList.add(
+          "copied"
+        );
+
+
+        setTimeout(() => {
+
+          button.textContent =
+            "Copy";
+
+          button.classList.remove(
+            "copied"
+          );
+
+        }, 2200);
+
+      }
+
+    }
+
+
+    /*
+      ----------------------------------------
+      NATIVE SHARE
+      ----------------------------------------
+    */
+
+    async function shareRoom() {
+
+      if (
+        navigator.share
+      ) {
+
+        try {
+
+          await navigator.share({
+
+            title:
+              "Join my Askee room",
+
+            text:
+              "Join my Askee room and play with me!",
+
+            url:
+              ROOM_LINK
+
+          });
+
+        } catch (error) {
+
+          /*
+            User cancelled the share sheet.
+            Nothing needs to happen.
+          */
+
+        }
+
+      } else {
+
+        await copyRoomLink();
+
+      }
+
+    }
+
+
+    /*
+      ----------------------------------------
+      WHATSAPP SHARE
+      ----------------------------------------
+    */
+
+    function shareWhatsApp() {
+
+      const message =
+        "Join my Askee room and play with me! 👀\n\n"
+        + ROOM_LINK;
+
+      const url =
+        "https://wa.me/?text="
+        + encodeURIComponent(
+            message
+          );
+
+      window.open(
+        url,
+        "_blank"
+      );
+
+    }
+
+
+    /*
+      ----------------------------------------
+      ENTER ROOM
+      ----------------------------------------
+
+      Replace this with the actual room URL
+      returned by your backend.
+
+    */
+
+    function enterRoom() {
+
+      window.location.href =
+        ROOM_LINK;
+
+    }
+
+  </script>
+
+</body>
+</html>
+```

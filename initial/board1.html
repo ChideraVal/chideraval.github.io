@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Askee — The Board</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    :root {
+      --background: #f7f5ff;
+      --text: #17152b;
+      --muted: #747084;
+      --light-muted: #9a96a9;
+
+      --purple: #6d4aff;
+      --purple-dark: #5738e6;
+
+      --pink: #ff62ad;
+      --yellow: #ffd75c;
+      --green: #43b889;
+
+      --white: rgba(255, 255, 255, 0.72);
+
+      --border: rgba(35, 27, 75, 0.08);
+
+      --shadow:
+        0 25px 70px rgba(73, 50, 150, 0.15);
+    }
+
+
+    /* ========================================
+       RESET
+    ======================================== */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    /* ========================================
+       BODY
+    ======================================== */
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+
+      font-family: "DM Sans", sans-serif;
+      color: var(--text);
+
+      background:
+        radial-gradient(
+          circle at 12% 8%,
+          rgba(255, 174, 216, 0.48),
+          transparent 28rem
+        ),
+
+        radial-gradient(
+          circle at 90% 10%,
+          rgba(177, 160, 255, 0.48),
+          transparent 30rem
+        ),
+
+        radial-gradient(
+          circle at 50% 100%,
+          rgba(255, 220, 120, 0.25),
+          transparent 34rem
+        ),
+
+        var(--background);
+    }
+
+
+    /* ========================================
+       BACKGROUND GRID
+    ======================================== */
+
+    body::before {
+      content: "";
+
+      position: fixed;
+      inset: 0;
+
+      pointer-events: none;
+
+      opacity: 0.22;
+
+      background-image:
+
+        linear-gradient(
+          rgba(255,255,255,0.5) 1px,
+          transparent 1px
+        ),
+
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,0.5) 1px,
+          transparent 1px
+        );
+
+      background-size: 42px 42px;
+
+      mask-image:
+        linear-gradient(
+          to bottom,
+          black,
+          transparent 75%
+        );
+    }
+
+
+    /* ========================================
+       PAGE
+    ======================================== */
+
+    .page {
+      width:
+        min(
+          1120px,
+          calc(100% - 40px)
+        );
+
+      min-height: 100vh;
+
+      margin: 0 auto;
+
+      display: flex;
+      flex-direction: column;
+
+      position: relative;
+    }
+
+
+    /* ========================================
+       NAVIGATION
+    ======================================== */
+
+    nav {
+      height: 88px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size: 1.35rem;
+      font-weight: 800;
+
+      letter-spacing: -0.06em;
+    }
+
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+
+      display: grid;
+      place-items: center;
+
+      color: white;
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size: 16px;
+      font-weight: 800;
+
+      border-radius:
+        12px
+        12px
+        12px
+        4px;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          #9b70ff
+        );
+
+      box-shadow:
+        0 9px 23px
+        rgba(109, 74, 255, 0.28);
+    }
+
+
+    .stage-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      padding:
+        8px
+        12px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius: 999px;
+
+      color: #716c82;
+
+      background:
+        rgba(255,255,255,0.56);
+
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+
+    .stage-dot {
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background:
+        var(--pink);
+
+      box-shadow:
+        0 0 0 4px
+        rgba(255,98,173,0.11);
+    }
+
+
+    /* ========================================
+       MAIN
+    ======================================== */
+
+    main {
+      flex: 1;
+
+      display: flex;
+      justify-content: center;
+
+      padding:
+        34px
+        0
+        65px;
+    }
+
+
+    .content {
+      width: 100%;
+      max-width: 700px;
+
+      position: relative;
+    }
+
+
+    /* ========================================
+       HEADING
+    ======================================== */
+
+    .heading {
+      text-align: center;
+
+      margin-bottom: 25px;
+    }
+
+
+    h1 {
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size:
+        clamp(
+          2.7rem,
+          5.5vw,
+          4.35rem
+        );
+
+      line-height: 1;
+
+      letter-spacing: -0.075em;
+    }
+
+
+    h1 .accent {
+      position: relative;
+      color: var(--purple);
+    }
+
+
+    h1 .accent::after {
+      content: "";
+
+      position: absolute;
+
+      left: 3%;
+      right: -2%;
+      bottom: -7px;
+
+      height: 9px;
+
+      border-radius: 50%;
+
+      background:
+        var(--yellow);
+
+      transform:
+        rotate(-2deg);
+
+      z-index: -1;
+    }
+
+
+    .heading-text {
+      margin-top: 15px;
+
+      color: var(--muted);
+
+      font-size: 0.94rem;
+    }
+
+
+    /* ========================================
+       STATUS
+    ======================================== */
+
+    .status {
+      display: grid;
+
+      grid-template-columns:
+        1fr
+        1fr;
+
+      gap: 12px;
+
+      margin-bottom: 13px;
+    }
+
+
+    .status-card {
+      padding:
+        17px
+        20px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.9);
+
+      border-radius: 18px;
+
+      background:
+        var(--white);
+
+      backdrop-filter:
+        blur(18px);
+
+      -webkit-backdrop-filter:
+        blur(18px);
+
+      box-shadow:
+        0 13px 35px
+        rgba(73,50,150,0.08);
+
+      text-align: center;
+    }
+
+
+    .status-label {
+      color: #9893a6;
+
+      font-size: 0.66rem;
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.09em;
+    }
+
+
+    .status-value {
+      margin-top: 4px;
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size: 1.5rem;
+      font-weight: 800;
+
+      letter-spacing: -0.05em;
+    }
+
+
+    .timer-value {
+      color: var(--purple);
+    }
+
+
+    .timer-value.warning {
+      color: var(--pink);
+    }
+
+
+    /* ========================================
+       QUESTIONS HEADER
+    ======================================== */
+
+    .questions-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      margin:
+        28px
+        2px
+        12px;
+    }
+
+
+    .questions-title {
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size: 0.78rem;
+      font-weight: 800;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.08em;
+    }
+
+
+    .questions-hint {
+      color: #aaa6b6;
+
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+
+    /* ========================================
+       QUESTION LIST
+    ======================================== */
+
+    .questions {
+      display: flex;
+      flex-direction: column;
+
+      gap: 12px;
+    }
+
+
+    /* ========================================
+       QUESTION CARD
+    ======================================== */
+
+    .question-card {
+      padding: 21px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.9);
+
+      border-radius: 21px;
+
+      background:
+        var(--white);
+
+      backdrop-filter:
+        blur(18px);
+
+      -webkit-backdrop-filter:
+        blur(18px);
+
+      box-shadow:
+        0 13px 35px
+        rgba(73,50,150,0.08);
+    }
+
+
+    .question-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 10px;
+    }
+
+
+    /* ========================================
+       TYPE BADGES
+    ======================================== */
+
+    .type-badge {
+      display: inline-flex;
+      align-items: center;
+
+      padding:
+        6px
+        9px;
+
+      border-radius: 8px;
+
+      color: var(--purple);
+
+      background:
+        rgba(109,74,255,0.08);
+
+      font-size: 0.63rem;
+      font-weight: 800;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.07em;
+    }
+
+
+    .type-badge.everyone {
+      color: #c47b19;
+
+      background:
+        rgba(255,199,70,0.14);
+    }
+
+
+    .answer-count {
+      color: #9b97a8;
+
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+
+    /* ========================================
+       QUESTION
+    ======================================== */
+
+    .question-text {
+      margin-top: 13px;
+
+      color: #29253d;
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size: 1rem;
+      font-weight: 700;
+
+      line-height: 1.45;
+
+      letter-spacing: -0.025em;
+    }
+
+
+    /* ========================================
+       ANSWERS
+    ======================================== */
+
+    .answers {
+      display: flex;
+      flex-direction: column;
+
+      gap: 8px;
+
+      margin-top: 17px;
+    }
+
+
+    .answer {
+      padding:
+        13px
+        14px;
+
+      border:
+        1px solid
+        rgba(35,27,75,0.06);
+
+      border-radius: 13px;
+
+      color: #514d61;
+
+      background:
+        rgba(255,255,255,0.55);
+
+      font-size: 0.84rem;
+
+      line-height: 1.5;
+    }
+
+
+    .answer.empty {
+      color: #aaa6b6;
+
+      font-style: italic;
+
+      text-align: center;
+
+      background:
+        rgba(255,255,255,0.35);
+    }
+
+
+    /* ========================================
+       MORE ANSWERS
+    ======================================== */
+
+    .hidden-answer {
+      display: none;
+    }
+
+
+    .answers.expanded .hidden-answer {
+      display: block;
+
+      animation:
+        answerIn .22s
+        ease
+        both;
+    }
+
+
+    .view-all {
+      width: 100%;
+
+      margin-top: 4px;
+
+      padding:
+        7px
+        0;
+
+      border: none;
+
+      color: var(--purple);
+
+      background: transparent;
+
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      font-size: 0.72rem;
+      font-weight: 700;
+
+      cursor: pointer;
+    }
+
+
+    .view-all:hover {
+      text-decoration:
+        underline;
+    }
+
+
+    /* ========================================
+       NO ANSWERS
+    ======================================== */
+
+    .no-answer-message {
+      margin-top: 17px;
+
+      padding:
+        14px;
+
+      border:
+        1px dashed
+        rgba(35,27,75,0.1);
+
+      border-radius: 13px;
+
+      color: #aaa6b6;
+
+      background:
+        rgba(255,255,255,0.35);
+
+      font-size: 0.78rem;
+
+      text-align: center;
+    }
+
+
+    /* ========================================
+       PRIVACY NOTE
+    ======================================== */
+
+    .privacy-note {
+      margin-top: 18px;
+
+      text-align: center;
+
+      color: #aaa6b6;
+
+      font-size: 0.72rem;
+    }
+
+
+    /* ========================================
+       DECORATIVE SPARKS
+    ======================================== */
+
+    .spark {
+      position: absolute;
+
+      pointer-events: none;
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-weight: 800;
+
+      opacity: .55;
+    }
+
+
+    .spark.one {
+      top: -7px;
+      left: 3%;
+
+      color: var(--pink);
+
+      font-size: 21px;
+
+      transform:
+        rotate(-14deg);
+
+      animation:
+        floatOne 4s
+        ease-in-out
+        infinite;
+    }
+
+
+    .spark.two {
+      top: 25px;
+      right: 2%;
+
+      color: var(--purple);
+
+      font-size: 27px;
+
+      transform:
+        rotate(14deg);
+
+      animation:
+        floatTwo 5s
+        ease-in-out
+        infinite;
+    }
+
+
+    /* ========================================
+       FOOTER
+    ======================================== */
+
+    footer {
+      padding:
+        18px
+        0
+        27px;
+
+      display: flex;
+      justify-content: center;
+
+      color: #aaa6b6;
+
+      font-size: 0.74rem;
+    }
+
+
+    /* ========================================
+       ANIMATIONS
+    ======================================== */
+
+    @keyframes answerIn {
+      from {
+        opacity: 0;
+        transform:
+          translateY(-4px);
+      }
+
+      to {
+        opacity: 1;
+        transform:
+          translateY(0);
+      }
+    }
+
+
+    @keyframes floatOne {
+      0%, 100% {
+        transform:
+          translateY(0)
+          rotate(-14deg);
+      }
+
+      50% {
+        transform:
+          translateY(-7px)
+          rotate(-8deg);
+      }
+    }
+
+
+    @keyframes floatTwo {
+      0%, 100% {
+        transform:
+          translateY(0)
+          rotate(14deg);
+      }
+
+      50% {
+        transform:
+          translateY(-9px)
+          rotate(20deg);
+      }
+    }
+
+
+    /* ========================================
+       MOBILE
+    ======================================== */
+
+    @media (max-width: 700px) {
+
+      .page {
+        width:
+          calc(100% - 28px);
+      }
+
+
+      nav {
+        height: 74px;
+      }
+
+
+      .stage-badge {
+        font-size: 0.7rem;
+
+        padding:
+          7px
+          10px;
+      }
+
+
+      main {
+        padding:
+          28px
+          0
+          45px;
+      }
+
+
+      h1 {
+        font-size:
+          clamp(
+            2.7rem,
+            13vw,
+            4rem
+          );
+      }
+
+
+      .heading-text {
+        font-size: 0.87rem;
+      }
+
+
+      .status {
+        gap: 9px;
+      }
+
+
+      .status-card {
+        padding:
+          14px
+          10px;
+      }
+
+
+      .status-value {
+        font-size: 1.35rem;
+      }
+
+
+      .questions-header {
+        margin-top:
+          23px;
+      }
+
+
+      .question-card {
+        padding:
+          18px;
+
+        border-radius:
+          19px;
+      }
+
+
+      .question-text {
+        font-size:
+          0.91rem;
+      }
+
+
+      .answer {
+        font-size:
+          0.82rem;
+      }
+
+
+      .spark.one {
+        left: -3px;
+      }
+
+
+      .spark.two {
+        right: -2px;
+      }
+
+    }
+
+
+    @media (max-width: 430px) {
+
+      .stage-badge {
+        display: none;
+      }
+
+
+      .question-top {
+        align-items:
+          flex-start;
+      }
+
+
+      .answer-count {
+        font-size:
+          0.64rem;
+      }
+
+    }
+
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation:
+          none !important;
+
+        transition:
+          none !important;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <div class="page">
+
+
+    <!-- ====================================
+         NAVIGATION
+    ===================================== -->
+
+    <nav>
+
+      <div class="logo">
+
+        <div class="logo-mark">
+          ?
+        </div>
+
+        <span>
+          askee
+        </span>
+
+      </div>
+
+
+      <div class="stage-badge">
+
+        <span class="stage-dot"></span>
+
+        The board
+
+      </div>
+
+    </nav>
+
+
+
+    <!-- ====================================
+         MAIN
+    ===================================== -->
+
+    <main>
+
+      <section class="content">
+
+
+        <div class="spark one">
+          ✦
+        </div>
+
+        <div class="spark two">
+          ✦
+        </div>
+
+
+
+        <!-- ====================================
+             HEADING
+        ===================================== -->
+
+        <div class="heading">
+
+          <h1>
+
+            The
+            <span class="accent">
+              board.
+            </span>
+
+          </h1>
+
+
+          <p class="heading-text">
+
+            See what everyone had to say.
+
+          </p>
+
+        </div>
+
+
+
+        <!-- ====================================
+             STATUS
+        ===================================== -->
+
+        <div class="status">
+
+
+          <div class="status-card">
+
+            <div class="status-label">
+              Questions asked
+            </div>
+
+            <div
+              class="status-value"
+              id="questionCount"
+            >
+              12/50
+            </div>
+
+          </div>
+
+
+          <div class="status-card">
+
+            <div class="status-label">
+              Time left
+            </div>
+
+            <div
+              class="status-value timer-value"
+              id="timer"
+            >
+              03:45
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- ====================================
+             QUESTIONS HEADER
+        ==================================== -->
+
+        <div class="questions-header">
+
+          <div class="questions-title">
+            Questions
+          </div>
+
+          <div class="questions-hint">
+            Anonymous answers
+          </div>
+
+        </div>
+
+
+
+        <!-- ====================================
+             QUESTION LIST
+        ==================================== -->
+
+        <div
+          class="questions"
+          id="questions"
+        >
+
+
+          <!-- ==================================
+               EVERYONE QUESTION
+          =================================== -->
+
+          <article
+            class="question-card"
+            data-question-id="1"
+          >
+
+            <div class="question-top">
+
+              <span class="type-badge everyone">
+                Everyone
+              </span>
+
+              <span class="answer-count">
+                4 answers
+              </span>
+
+            </div>
+
+
+            <div class="question-text">
+
+              What's something you've never told
+              anyone here?
+
+            </div>
+
+
+            <div
+              class="answers"
+              id="answers-1"
+            >
+
+              <div class="answer">
+
+                "I've always wanted to travel
+                around the world alone."
+
+              </div>
+
+
+              <div class="answer">
+
+                "Nobody knows that I actually
+                hate chocolate."
+
+              </div>
+
+
+              <div class="answer">
+
+                "I once pretended to be sick
+                just to skip school."
+
+              </div>
+
+
+              <!-- Hidden answer -->
+
+              <div class="answer hidden-answer">
+
+                "Honestly, I've always wanted
+                to learn how to play piano."
+
+              </div>
+
+
+              <button
+                class="view-all"
+                onclick="toggleAnswers(this)"
+              >
+
+                View all 4 answers ↓
+
+              </button>
+
+            </div>
+
+          </article>
+
+
+
+          <!-- ==================================
+               ONE ANSWER QUESTION
+          =================================== -->
+
+          <article
+            class="question-card"
+            data-question-id="2"
+          >
+
+            <div class="question-top">
+
+              <span class="type-badge">
+                One Answer
+              </span>
+
+              <span class="answer-count">
+                1 answer
+              </span>
+
+            </div>
+
+
+            <div class="question-text">
+
+              Who do you think is most likely
+              to become famous?
+
+            </div>
+
+
+            <div class="answers">
+
+              <div class="answer">
+
+                "Definitely Alex 😂"
+
+              </div>
+
+            </div>
+
+          </article>
+
+
+
+          <!-- ==================================
+               EVERYONE QUESTION
+          =================================== -->
+
+          <article
+            class="question-card"
+            data-question-id="3"
+          >
+
+            <div class="question-top">
+
+              <span class="type-badge everyone">
+                Everyone
+              </span>
+
+              <span class="answer-count">
+                0 answers
+              </span>
+
+            </div>
+
+
+            <div class="question-text">
+
+              What's your biggest guilty pleasure?
+
+            </div>
+
+
+            <div class="no-answer-message">
+
+              No answers yet.
+
+            </div>
+
+          </article>
+
+
+
+          <!-- ==================================
+               EVERYONE QUESTION WITH MANY ANSWERS
+          =================================== -->
+
+          <article
+            class="question-card"
+            data-question-id="4"
+          >
+
+            <div class="question-top">
+
+              <span class="type-badge everyone">
+                Everyone
+              </span>
+
+              <span class="answer-count">
+                7 answers
+              </span>
+
+            </div>
+
+
+            <div class="question-text">
+
+              What's the funniest thing that
+              happened to you recently?
+
+            </div>
+
+
+            <div
+              class="answers"
+              id="answers-4"
+            >
+
+              <div class="answer">
+
+                "I waved back at someone who
+                wasn't waving at me."
+
+              </div>
+
+
+              <div class="answer">
+
+                "I called my lecturer 'mum'
+                without realizing it."
+
+              </div>
+
+
+              <div class="answer">
+
+                "I walked into the wrong classroom
+                and stayed there for five minutes."
+
+              </div>
+
+
+              <div class="answer hidden-answer">
+
+                "I laughed at a joke I didn't hear
+                because everyone else laughed."
+
+              </div>
+
+
+              <div class="answer hidden-answer">
+
+                "I sent a voice note to the wrong
+                person and couldn't unsend it."
+
+              </div>
+
+
+              <div class="answer hidden-answer">
+
+                "I tried to open a door that said
+                PUSH for almost a minute."
+
+              </div>
+
+
+              <div class="answer hidden-answer">
+
+                "I forgot my own phone number
+                when someone asked me for it."
+
+              </div>
+
+
+              <button
+                class="view-all"
+                onclick="toggleAnswers(this)"
+              >
+
+                View all 7 answers ↓
+
+              </button>
+
+            </div>
+
+          </article>
+
+
+        </div>
+
+
+
+        <div class="privacy-note">
+
+          Everything here is anonymous.
+
+        </div>
+
+
+      </section>
+
+    </main>
+
+
+
+    <footer>
+
+      Made for questions worth remembering.
+
+    </footer>
+
+
+  </div>
+
+
+
+  <script>
+
+    /*
+      ========================================
+      GAME STATE
+      ========================================
+    */
+
+    let secondsRemaining = 225;
+
+
+    /*
+      ========================================
+      EXPAND ANSWERS
+      ========================================
+    */
+
+    function toggleAnswers(button) {
+
+      const answers =
+        button.closest(
+          ".answers"
+        );
+
+
+      const expanded =
+        answers.classList.contains(
+          "expanded"
+        );
+
+
+      if (expanded) {
+
+        answers.classList.remove(
+          "expanded"
+        );
+
+        /*
+          Work out the original number
+          from the button text.
+        */
+
+        const match =
+          button.textContent.match(
+            /\d+/
+          );
+
+        const total =
+          match
+            ? match[0]
+            : "";
+
+
+        button.textContent =
+          "View all "
+          + total
+          + " answers ↓";
+
+      }
+
+      else {
+
+        answers.classList.add(
+          "expanded"
+        );
+
+
+        const match =
+          button.textContent.match(
+            /\d+/
+          );
+
+        const total =
+          match
+            ? match[0]
+            : "";
+
+
+        button.textContent =
+          "Show fewer answers ↑";
+
+      }
+
+    }
+
+
+
+    /*
+      ========================================
+      TIMER
+      ========================================
+    */
+
+    function updateTimer() {
+
+      const timer =
+        document.getElementById(
+          "timer"
+        );
+
+
+      const minutes =
+        Math.floor(
+          secondsRemaining / 60
+        );
+
+
+      const seconds =
+        secondsRemaining % 60;
+
+
+      timer.textContent =
+        String(minutes)
+          .padStart(2, "0")
+        + ":"
+        + String(seconds)
+          .padStart(2, "0");
+
+
+      /*
+        Highlight the final 30 seconds.
+      */
+
+      if (
+        secondsRemaining <= 30
+      ) {
+
+        timer.classList.add(
+          "warning"
+        );
+
+      }
+
+
+      /*
+        In the real application,
+        the backend should be the
+        authoritative source for the
+        stage state and remaining time.
+      */
+
+      if (
+        secondsRemaining <= 0
+      ) {
+
+        clearInterval(
+          timerInterval
+        );
+
+        timer.textContent =
+          "00:00";
+
+        return;
+
+      }
+
+
+      secondsRemaining--;
+
+    }
+
+
+    const timerInterval =
+      setInterval(
+        updateTimer,
+        1000
+      );
+
+
+  </script>
+
+</body>
+</html>
+```

@@ -1,0 +1,2326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Askee — Your room is ready!</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    :root {
+      --background: #f7f5ff;
+
+      --text: #17152b;
+      --muted: #747084;
+
+      --purple: #6d4aff;
+      --purple-dark: #5738e6;
+
+      --pink: #ff62ad;
+      --yellow: #ffd75c;
+
+      --green: #43b889;
+
+      --white-glass: rgba(255, 255, 255, 0.72);
+
+      --border: rgba(35, 27, 75, 0.08);
+
+      --shadow:
+        0 25px 70px rgba(73, 50, 150, 0.15);
+    }
+
+
+    /* ========================================
+       RESET
+    ======================================== */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    /* ========================================
+       BODY
+    ======================================== */
+
+    body {
+      min-height: 100vh;
+
+      overflow-x: hidden;
+
+      font-family: "DM Sans", sans-serif;
+
+      color: var(--text);
+
+      background:
+        radial-gradient(
+          circle at 12% 8%,
+          rgba(255, 174, 216, 0.48),
+          transparent 28rem
+        ),
+
+        radial-gradient(
+          circle at 90% 10%,
+          rgba(177, 160, 255, 0.48),
+          transparent 30rem
+        ),
+
+        radial-gradient(
+          circle at 50% 100%,
+          rgba(255, 220, 120, 0.25),
+          transparent 34rem
+        ),
+
+        var(--background);
+    }
+
+
+    /* ========================================
+       SUBTLE BACKGROUND GRID
+    ======================================== */
+
+    body::before {
+      content: "";
+
+      position: fixed;
+
+      inset: 0;
+
+      pointer-events: none;
+
+      opacity: 0.22;
+
+      background-image:
+
+        linear-gradient(
+          rgba(255,255,255,0.5) 1px,
+          transparent 1px
+        ),
+
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,0.5) 1px,
+          transparent 1px
+        );
+
+      background-size: 42px 42px;
+
+      mask-image:
+        linear-gradient(
+          to bottom,
+          black,
+          transparent 75%
+        );
+    }
+
+
+    /* ========================================
+       PAGE
+    ======================================== */
+
+    .page {
+      width:
+        min(
+          1120px,
+          calc(100% - 40px)
+        );
+
+      min-height: 100vh;
+
+      margin: 0 auto;
+
+      display: flex;
+
+      flex-direction: column;
+
+      position: relative;
+    }
+
+
+    /* ========================================
+       NAV
+    ======================================== */
+
+    nav {
+      height: 88px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+    }
+
+
+    .logo {
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size: 1.35rem;
+
+      font-weight: 800;
+
+      letter-spacing: -0.06em;
+    }
+
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+
+      display: grid;
+
+      place-items: center;
+
+      color: white;
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size: 16px;
+
+      font-weight: 800;
+
+      border-radius:
+        12px
+        12px
+        12px
+        4px;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          #9b70ff
+        );
+
+      box-shadow:
+        0 9px 23px
+        rgba(109, 74, 255, 0.28);
+    }
+
+
+    .nav-note {
+      color: var(--muted);
+
+      font-size: 0.84rem;
+
+      font-weight: 600;
+    }
+
+
+    /* ========================================
+       MAIN
+    ======================================== */
+
+    main {
+      flex: 1;
+
+      display: grid;
+
+      place-items: center;
+
+      padding:
+        40px
+        0
+        70px;
+    }
+
+
+    .content {
+      width: 100%;
+
+      max-width: 620px;
+
+      text-align: center;
+
+      position: relative;
+    }
+
+
+    /* ========================================
+       CELEBRATION ICON
+    ======================================== */
+
+    .celebration {
+      width: 72px;
+      height: 72px;
+
+      margin:
+        0 auto
+        25px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 24px;
+
+      color: white;
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size: 28px;
+
+      font-weight: 800;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          #9a70ff
+        );
+
+      box-shadow:
+        0 18px 38px
+        rgba(109, 74, 255, 0.25);
+
+      animation:
+        popIn 0.6s
+        cubic-bezier(.2,.8,.2,1)
+        both;
+    }
+
+
+    /* ========================================
+       LOADING SPINNER
+    ======================================== */
+
+    .celebration.loading {
+      animation: none;
+    }
+
+
+    .spinner {
+      width: 25px;
+      height: 25px;
+
+      border:
+        3px solid
+        rgba(255,255,255,0.35);
+
+      border-top-color: white;
+
+      border-radius: 50%;
+
+      animation:
+        spin 0.75s linear infinite;
+    }
+
+
+    /* ========================================
+       HEADLINE
+    ======================================== */
+
+    h1 {
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size:
+        clamp(
+          2.7rem,
+          6vw,
+          4.5rem
+        );
+
+      line-height: 1;
+
+      letter-spacing: -0.075em;
+    }
+
+
+    h1 .accent {
+      position: relative;
+
+      color: var(--purple);
+    }
+
+
+    h1 .accent::after {
+      content: "";
+
+      position: absolute;
+
+      left: 2%;
+      right: -2%;
+
+      bottom: -8px;
+
+      height: 9px;
+
+      border-radius: 50%;
+
+      background: var(--yellow);
+
+      transform: rotate(-2deg);
+
+      z-index: -1;
+    }
+
+
+    .subtitle {
+      max-width: 460px;
+
+      margin:
+        20px auto
+        32px;
+
+      color: var(--muted);
+
+      font-size: 1rem;
+
+      line-height: 1.65;
+    }
+
+
+    /* ========================================
+       LINK CARD
+    ======================================== */
+
+    .link-card {
+      width: 100%;
+
+      padding: 9px;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.9);
+
+      border-radius: 19px;
+
+      background:
+        var(--white-glass);
+
+      backdrop-filter: blur(18px);
+
+      -webkit-backdrop-filter: blur(18px);
+
+      box-shadow:
+        var(--shadow);
+
+      animation:
+        slideUp 0.7s
+        0.1s
+        cubic-bezier(.2,.8,.2,1)
+        both;
+    }
+
+
+    .link-icon {
+      flex: 0 0 auto;
+
+      width: 46px;
+      height: 46px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 13px;
+
+      color: var(--purple);
+
+      background:
+        rgba(109,74,255,0.08);
+
+      font-size: 19px;
+    }
+
+
+    .link-text {
+      min-width: 0;
+
+      flex: 1;
+
+      padding:
+        0
+        5px;
+
+      text-align: left;
+
+      overflow: hidden;
+    }
+
+
+    .link-label {
+      margin-bottom: 3px;
+
+      color: #9a96a9;
+
+      font-size: 0.65rem;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.08em;
+    }
+
+
+    .room-link {
+      display: block;
+
+      overflow: hidden;
+
+      white-space: nowrap;
+
+      text-overflow: ellipsis;
+
+      color: #38334f;
+
+      font-size: 0.89rem;
+
+      font-weight: 600;
+    }
+
+
+    /* ========================================
+       COPY BUTTON
+    ======================================== */
+
+    .copy-button {
+      flex: 0 0 auto;
+
+      min-width: 92px;
+
+      height: 46px;
+
+      padding:
+        0
+        16px;
+
+      border: none;
+
+      border-radius: 13px;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          #805eff
+        );
+
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      font-size: 0.84rem;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      box-shadow:
+        0 9px 20px
+        rgba(109,74,255,0.2);
+
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+    }
+
+
+    .copy-button:hover {
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 12px 25px
+        rgba(109,74,255,0.27);
+    }
+
+
+    .copy-button.copied {
+      background:
+        linear-gradient(
+          135deg,
+          #43b889,
+          #52c99b
+        );
+    }
+
+
+    /* ========================================
+       MANAGEMENT SECTION
+    ======================================== */
+
+    .management-section {
+      margin-top: 27px;
+
+      text-align: left;
+    }
+
+
+    .management-heading {
+      margin:
+        0
+        0
+        10px
+        4px;
+
+      color: #8f8a9e;
+
+      font-size: 0.7rem;
+
+      font-weight: 800;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.09em;
+    }
+
+
+    .management-card {
+      width: 100%;
+
+      padding: 9px;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.85);
+
+      border-radius: 19px;
+
+      background:
+        rgba(255,255,255,0.52);
+
+      backdrop-filter: blur(18px);
+
+      -webkit-backdrop-filter: blur(18px);
+
+      box-shadow:
+        0 15px 40px
+        rgba(73, 50, 150, 0.08);
+    }
+
+
+    .management-icon {
+      flex: 0 0 auto;
+
+      width: 46px;
+      height: 46px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 13px;
+
+      color: #625d73;
+
+      background:
+        rgba(23,21,43,0.055);
+
+      font-size: 18px;
+    }
+
+
+    .management-text {
+      min-width: 0;
+
+      flex: 1;
+
+      padding:
+        0
+        5px;
+
+      overflow: hidden;
+    }
+
+
+    .management-label {
+      margin-bottom: 3px;
+
+      color: #aaa6b6;
+
+      font-size: 0.65rem;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.08em;
+    }
+
+
+    .management-link {
+      display: block;
+
+      overflow: hidden;
+
+      white-space: nowrap;
+
+      text-overflow: ellipsis;
+
+      color: #5c586a;
+
+      font-size: 0.82rem;
+
+      font-weight: 600;
+    }
+
+
+    .management-copy {
+      flex: 0 0 auto;
+
+      min-width: 92px;
+
+      height: 46px;
+
+      padding:
+        0
+        16px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius: 13px;
+
+      color: #5f5a71;
+
+      background:
+        rgba(255,255,255,0.7);
+
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      font-size: 0.84rem;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition:
+        transform .2s ease,
+        background .2s ease;
+    }
+
+
+    .management-copy:hover {
+      transform: translateY(-2px);
+
+      background:
+        rgba(255,255,255,0.95);
+    }
+
+
+    .management-copy.copied {
+      color: white;
+
+      border-color: transparent;
+
+      background:
+        linear-gradient(
+          135deg,
+          #43b889,
+          #52c99b
+        );
+    }
+
+
+    .management-warning {
+      margin:
+        9px
+        4px
+        0;
+
+      color: #aaa6b6;
+
+      font-size: 0.72rem;
+
+      line-height: 1.5;
+    }
+
+
+    /* ========================================
+       SHARE
+    ======================================== */
+
+    .share-section {
+      margin-top: 29px;
+    }
+
+
+    .share-title {
+      margin-bottom: 13px;
+
+      color: #9793a5;
+
+      font-size: 0.74rem;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.09em;
+    }
+
+
+    .share-buttons {
+      display: flex;
+
+      justify-content: center;
+
+      gap: 10px;
+    }
+
+
+    .share-button {
+      height: 43px;
+
+      padding:
+        0
+        16px;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 8px;
+
+      border:
+        1px solid
+        var(--border);
+
+      border-radius: 13px;
+
+      color: #5f5a71;
+
+      background:
+        rgba(255,255,255,0.58);
+
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      font-size: 0.82rem;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition:
+        transform .2s ease,
+        background .2s ease;
+    }
+
+
+    .share-button:hover {
+      transform: translateY(-2px);
+
+      background:
+        rgba(255,255,255,0.9);
+    }
+
+
+    .whatsapp-icon {
+      width: 18px;
+      height: 18px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 50%;
+
+      color: white;
+
+      background: #25d366;
+
+      font-size: 10px;
+
+      font-weight: 800;
+    }
+
+
+    /* ========================================
+       INFO
+    ======================================== */
+
+    .info {
+      margin-top: 22px;
+
+      color: #aaa6b6;
+
+      font-size: 0.76rem;
+    }
+
+
+    /* ========================================
+       ENTER ROOM
+    ======================================== */
+
+    .enter-room {
+      margin-top: 29px;
+
+      padding:
+        14px
+        21px;
+
+      border: none;
+
+      border-radius: 14px;
+
+      color: white;
+
+      background:
+        rgba(23,21,43,0.9);
+
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      font-size: 0.9rem;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition:
+        transform .2s ease,
+        background .2s ease;
+    }
+
+
+    .enter-room:hover {
+      transform: translateY(-2px);
+
+      background:
+        var(--text);
+    }
+
+
+    /* ========================================
+       ERROR STATE
+    ======================================== */
+
+    .error-message {
+      max-width: 430px;
+
+      margin:
+        0
+        auto;
+
+      color: var(--muted);
+
+      font-size: 0.94rem;
+
+      line-height: 1.6;
+    }
+
+
+    .retry-button {
+      margin-top: 27px;
+
+      padding:
+        14px
+        21px;
+
+      border: none;
+
+      border-radius: 14px;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          #805eff
+        );
+
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      font-size: 0.9rem;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      box-shadow:
+        0 10px 24px
+        rgba(109,74,255,0.2);
+
+      transition:
+        transform .2s ease;
+    }
+
+
+    .retry-button:hover {
+      transform:
+        translateY(-2px);
+    }
+
+
+    /* ========================================
+       DECORATIVE ELEMENTS
+    ======================================== */
+
+    .spark {
+      position: absolute;
+
+      pointer-events: none;
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-weight: 800;
+
+      opacity: 0.65;
+    }
+
+
+    .spark.one {
+      top: -10px;
+
+      left: 10%;
+
+      color: var(--pink);
+
+      font-size: 22px;
+
+      transform:
+        rotate(-15deg);
+
+      animation:
+        floatOne 4s
+        ease-in-out
+        infinite;
+    }
+
+
+    .spark.two {
+      top: 35px;
+
+      right: 7%;
+
+      color: var(--purple);
+
+      font-size: 29px;
+
+      transform:
+        rotate(15deg);
+
+      animation:
+        floatTwo 5s
+        ease-in-out
+        infinite;
+    }
+
+
+    .spark.three {
+      bottom: 30px;
+
+      left: 2%;
+
+      color: var(--yellow);
+
+      font-size: 19px;
+
+      animation:
+        floatThree 4.5s
+        ease-in-out
+        infinite;
+    }
+
+
+    /* ========================================
+       FOOTER
+    ======================================== */
+
+    footer {
+      padding:
+        20px
+        0
+        28px;
+
+      display: flex;
+
+      justify-content: center;
+
+      color: #aaa6b6;
+
+      font-size: 0.75rem;
+    }
+
+
+    /* ========================================
+       ANIMATIONS
+    ======================================== */
+
+    @keyframes popIn {
+
+      from {
+        opacity: 0;
+
+        transform:
+          scale(.75)
+          rotate(-8deg);
+      }
+
+      to {
+        opacity: 1;
+
+        transform:
+          scale(1)
+          rotate(0);
+      }
+
+    }
+
+
+    @keyframes slideUp {
+
+      from {
+        opacity: 0;
+
+        transform:
+          translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+
+        transform:
+          translateY(0);
+      }
+
+    }
+
+
+    @keyframes spin {
+
+      to {
+        transform:
+          rotate(360deg);
+      }
+
+    }
+
+
+    @keyframes floatOne {
+
+      0%, 100% {
+        transform:
+          translateY(0)
+          rotate(-15deg);
+      }
+
+      50% {
+        transform:
+          translateY(-8px)
+          rotate(-9deg);
+      }
+
+    }
+
+
+    @keyframes floatTwo {
+
+      0%, 100% {
+        transform:
+          translateY(0)
+          rotate(15deg);
+      }
+
+      50% {
+        transform:
+          translateY(-10px)
+          rotate(21deg);
+      }
+
+    }
+
+
+    @keyframes floatThree {
+
+      0%, 100% {
+        transform:
+          translateY(0);
+      }
+
+      50% {
+        transform:
+          translateY(-7px);
+      }
+
+    }
+
+
+    /* ========================================
+       MOBILE
+    ======================================== */
+
+    @media (max-width: 600px) {
+
+      .page {
+        width:
+          calc(100% - 28px);
+      }
+
+
+      nav {
+        height: 74px;
+      }
+
+
+      .nav-note {
+        display: none;
+      }
+
+
+      main {
+        padding:
+          35px
+          0
+          45px;
+      }
+
+
+      .celebration {
+        width: 64px;
+        height: 64px;
+
+        margin-bottom: 22px;
+
+        border-radius: 21px;
+
+        font-size: 24px;
+      }
+
+
+      h1 {
+        font-size:
+          clamp(
+            2.65rem,
+            13vw,
+            4rem
+          );
+      }
+
+
+      .subtitle {
+        font-size: 0.94rem;
+
+        margin:
+          19px
+          auto
+          27px;
+      }
+
+
+      .link-card,
+      .management-card {
+        padding: 8px;
+      }
+
+
+      .link-icon,
+      .management-icon {
+        width: 42px;
+        height: 42px;
+
+        border-radius: 12px;
+      }
+
+
+      .room-link {
+        font-size: 0.78rem;
+      }
+
+
+      .management-link {
+        font-size: 0.73rem;
+      }
+
+
+      .copy-button,
+      .management-copy {
+        min-width: 74px;
+
+        padding:
+          0
+          12px;
+
+        font-size: 0.77rem;
+      }
+
+
+      .share-buttons {
+        flex-wrap: wrap;
+      }
+
+
+      .share-button {
+        flex: 1;
+
+        min-width: 120px;
+      }
+
+
+      .spark.one {
+        left: 0;
+      }
+
+
+      .spark.two {
+        right: 0;
+      }
+
+    }
+
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation:
+          none !important;
+
+        transition:
+          none !important;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <div class="page">
+
+
+    <!-- ====================================
+         NAVIGATION
+    ===================================== -->
+
+    <nav>
+
+      <div class="logo">
+
+        <div class="logo-mark">
+          ?
+        </div>
+
+        <span>
+          askee
+        </span>
+
+      </div>
+
+
+      <div class="nav-note">
+        A little game of curiosity.
+      </div>
+
+    </nav>
+
+
+
+    <!-- ====================================
+         MAIN CONTENT
+    ===================================== -->
+
+    <main>
+
+      <section class="content">
+
+        <!-- Decorative elements -->
+
+        <div class="spark one">
+          ✦
+        </div>
+
+        <div class="spark two">
+          ✦
+        </div>
+
+        <div class="spark three">
+          •
+        </div>
+
+
+
+        <!-- ==================================
+             CELEBRATION / LOADING ICON
+        =================================== -->
+
+        <div
+          class="celebration loading"
+          id="celebration"
+        >
+
+          <div
+            class="spinner"
+            id="spinner"
+          ></div>
+
+
+          <span
+            id="successIcon"
+            style="display:none;"
+          >
+            ✓
+          </span>
+
+
+          <span
+            id="errorIcon"
+            style="display:none;"
+          >
+            !
+          </span>
+
+        </div>
+
+
+
+        <!-- ==================================
+             HEADLINE
+        =================================== -->
+
+        <h1 id="headline">
+
+          Creating your
+
+          <span class="accent">
+            room...
+          </span>
+
+        </h1>
+
+
+        <p
+          class="subtitle"
+          id="subtitle"
+        >
+          Just a moment while we
+          prepare everything for you.
+        </p>
+
+
+
+        <!-- ==================================
+             ROOM CONTENT
+        =================================== -->
+
+        <div
+          id="roomContent"
+          style="display:none;"
+        >
+
+
+          <!-- ==================================
+               ROOM LINK
+          =================================== -->
+
+          <div class="link-card">
+
+            <div class="link-icon">
+              🔗
+            </div>
+
+
+            <div class="link-text">
+
+              <div class="link-label">
+                Your room link
+              </div>
+
+
+              <span
+                class="room-link"
+                id="roomLink"
+              ></span>
+
+            </div>
+
+
+            <button
+              class="copy-button"
+              id="copyRoomButton"
+              type="button"
+            >
+              Copy
+            </button>
+
+          </div>
+
+
+
+          <!-- ==================================
+               MANAGEMENT LINK
+          =================================== -->
+
+          <div class="management-section">
+
+            <div class="management-heading">
+              Management link
+            </div>
+
+
+            <div class="management-card">
+
+              <div class="management-icon">
+                ⚙
+              </div>
+
+
+              <div class="management-text">
+
+                <div class="management-label">
+                  Host access
+                </div>
+
+
+                <span
+                  class="management-link"
+                  id="managementLink"
+                ></span>
+
+              </div>
+
+
+              <button
+                class="management-copy"
+                id="copyManagementButton"
+                type="button"
+              >
+                Copy
+              </button>
+
+            </div>
+
+
+            <div class="management-warning">
+              Keep this link private. Anyone with it can manage the room.
+            </div>
+
+          </div>
+
+
+
+          <!-- ==================================
+               SHARE
+          =================================== -->
+
+          <div class="share-section">
+
+            <div class="share-title">
+              Share with friends
+            </div>
+
+
+            <div class="share-buttons">
+
+              <button
+                class="share-button"
+                id="whatsappButton"
+                type="button"
+              >
+
+                <span class="whatsapp-icon">
+                  ↗
+                </span>
+
+                WhatsApp
+
+              </button>
+
+
+              <button
+                class="share-button"
+                id="shareButton"
+                type="button"
+              >
+
+                <span>
+                  ↗
+                </span>
+
+                Share
+
+              </button>
+
+            </div>
+
+          </div>
+
+
+
+          <div class="info">
+            Anyone with the room link can join your room.
+          </div>
+
+
+
+          <!-- ==================================
+               ENTER ROOM
+          =================================== -->
+
+          <button
+            class="enter-room"
+            id="enterRoomButton"
+            type="button"
+          >
+            Enter Room →
+          </button>
+
+
+        </div>
+
+
+
+        <!-- ==================================
+             ERROR CONTENT
+        =================================== -->
+
+        <div
+          id="errorContent"
+          style="display:none;"
+        >
+
+          <p class="error-message">
+            We couldn't create your room.
+            Something went wrong while preparing
+            your game.
+          </p>
+
+
+          <button
+            class="retry-button"
+            id="retryButton"
+            type="button"
+          >
+            Try again
+          </button>
+
+        </div>
+
+
+      </section>
+
+    </main>
+
+
+
+    <footer>
+      Made for questions worth asking.
+    </footer>
+
+
+  </div>
+
+
+
+  <script>
+
+    /* ========================================
+       CONFIGURATION
+    ======================================== */
+
+    /*
+      Change this to the actual API base URL
+      when the backend is deployed.
+
+      If the HTML page and API are served from
+      the same domain, this can remain:
+
+      "/api"
+    */
+
+    const API_BASE_URL = "http://127.0.0.1:8000/api";
+
+
+    /*
+      Expected backend response:
+
+      {
+        "room_id": "123",
+        "host_id": "456"
+      }
+    */
+
+
+
+    /* ========================================
+       STATE
+    ======================================== */
+
+    let roomId = null;
+
+    let hostId = null;
+
+    let roomLink = null;
+
+    let managementLink = null;
+
+
+
+    /* ========================================
+       DOM ELEMENTS
+    ======================================== */
+
+    const celebration =
+      document.getElementById(
+        "celebration"
+      );
+
+
+    const spinner =
+      document.getElementById(
+        "spinner"
+      );
+
+
+    const successIcon =
+      document.getElementById(
+        "successIcon"
+      );
+
+
+    const errorIcon =
+      document.getElementById(
+        "errorIcon"
+      );
+
+
+    const headline =
+      document.getElementById(
+        "headline"
+      );
+
+
+    const subtitle =
+      document.getElementById(
+        "subtitle"
+      );
+
+
+    const roomContent =
+      document.getElementById(
+        "roomContent"
+      );
+
+
+    const errorContent =
+      document.getElementById(
+        "errorContent"
+      );
+
+
+    const roomLinkElement =
+      document.getElementById(
+        "roomLink"
+      );
+
+
+    const managementLinkElement =
+      document.getElementById(
+        "managementLink"
+      );
+
+
+    const copyRoomButton =
+      document.getElementById(
+        "copyRoomButton"
+      );
+
+
+    const copyManagementButton =
+      document.getElementById(
+        "copyManagementButton"
+      );
+
+
+    const shareButton =
+      document.getElementById(
+        "shareButton"
+      );
+
+
+    const whatsappButton =
+      document.getElementById(
+        "whatsappButton"
+      );
+
+
+    const enterRoomButton =
+      document.getElementById(
+        "enterRoomButton"
+      );
+
+
+    const retryButton =
+      document.getElementById(
+        "retryButton"
+      );
+
+
+
+    /* ========================================
+       CREATE ROOM
+    ======================================== */
+
+    async function createRoom() {
+
+      showLoading();
+
+
+      try {
+
+        const response =
+          await fetch(
+            `${API_BASE_URL}/rooms/`,
+            {
+              method: "POST",
+            }
+          );
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            `Room creation failed: ${response.status}`
+          );
+
+        }
+
+
+        const data =
+          await response.json();
+
+
+        if (
+          !data.room_id ||
+          !data.host_id
+        ) {
+
+          throw new Error(
+            "Invalid room creation response"
+          );
+
+        }
+
+
+        roomId =
+          String(data.room_id);
+
+        hostId =
+          String(data.host_id);
+
+
+        roomLink =
+          `${window.location.origin}/ask.html?room=${roomId}`;
+
+
+        managementLink =
+          `${window.location.origin}/manage.html?room=${hostId}`;
+
+
+        renderRoom();
+
+
+      } catch (error) {
+
+        console.error(
+          "Failed to create room:",
+          error
+        );
+
+        showError();
+
+      }
+
+    }
+
+
+
+    /* ========================================
+       LOADING STATE
+    ======================================== */
+
+    function showLoading() {
+
+      celebration.classList.add(
+        "loading"
+      );
+
+
+      spinner.style.display =
+        "block";
+
+
+      successIcon.style.display =
+        "none";
+
+
+      errorIcon.style.display =
+        "none";
+
+
+      headline.innerHTML = `
+        Creating your
+        <span class="accent">
+          room...
+        </span>
+      `;
+
+
+      subtitle.textContent =
+        "Just a moment while we prepare everything for you.";
+
+
+      roomContent.style.display =
+        "none";
+
+
+      errorContent.style.display =
+        "none";
+
+    }
+
+
+
+    /* ========================================
+       SUCCESS STATE
+    ======================================== */
+
+    function renderRoom() {
+
+      celebration.classList.remove(
+        "loading"
+      );
+
+
+      spinner.style.display =
+        "none";
+
+
+      successIcon.style.display =
+        "block";
+
+
+      errorIcon.style.display =
+        "none";
+
+
+      headline.innerHTML = `
+        Your room is
+        <span class="accent">
+          ready!
+        </span>
+      `;
+
+
+      subtitle.innerHTML = `
+        Now invite your friends to play.
+        Send them the link below and
+        let the questions begin.
+      `;
+
+
+      roomLinkElement.textContent =
+        roomLink;
+
+
+      managementLinkElement.textContent =
+        managementLink;
+
+
+      roomContent.style.display =
+        "block";
+
+
+      errorContent.style.display =
+        "none";
+
+    }
+
+
+
+    /* ========================================
+       ERROR STATE
+    ======================================== */
+
+    function showError() {
+
+      celebration.classList.remove(
+        "loading"
+      );
+
+
+      spinner.style.display =
+        "none";
+
+
+      successIcon.style.display =
+        "none";
+
+
+      errorIcon.style.display =
+        "block";
+
+
+      headline.innerHTML = `
+        We couldn't create
+        <span class="accent">
+          your room.
+        </span>
+      `;
+
+
+      subtitle.textContent =
+        "Something went wrong while preparing your game.";
+
+
+      roomContent.style.display =
+        "none";
+
+
+      errorContent.style.display =
+        "block";
+
+    }
+
+
+
+    /* ========================================
+       COPY HELPER
+    ======================================== */
+
+    async function copyText(
+      text,
+      button,
+      defaultText
+    ) {
+
+      try {
+
+        if (
+          navigator.clipboard &&
+          window.isSecureContext
+        ) {
+
+          await navigator.clipboard.writeText(
+            text
+          );
+
+        } else {
+
+          const temporary =
+            document.createElement(
+              "textarea"
+            );
+
+
+          temporary.value =
+            text;
+
+
+          temporary.style.position =
+            "fixed";
+
+
+          temporary.style.opacity =
+            "0";
+
+
+          document.body.appendChild(
+            temporary
+          );
+
+
+          temporary.select();
+
+
+          document.execCommand(
+            "copy"
+          );
+
+
+          temporary.remove();
+
+        }
+
+
+        button.textContent =
+          "Copied ✓";
+
+
+        button.classList.add(
+          "copied"
+        );
+
+
+        setTimeout(() => {
+
+          button.textContent =
+            defaultText;
+
+
+          button.classList.remove(
+            "copied"
+          );
+
+        }, 2200);
+
+
+      } catch (error) {
+
+        console.error(
+          "Copy failed:",
+          error
+        );
+
+
+        button.textContent =
+          "Copy failed";
+
+
+        setTimeout(() => {
+
+          button.textContent =
+            defaultText;
+
+        }, 2200);
+
+      }
+
+    }
+
+
+
+    /* ========================================
+       COPY ROOM LINK
+    ======================================== */
+
+    function copyRoomLink() {
+
+      if (!roomLink) return;
+
+
+      copyText(
+        roomLink,
+        copyRoomButton,
+        "Copy"
+      );
+
+    }
+
+
+
+    /* ========================================
+       COPY MANAGEMENT LINK
+    ======================================== */
+
+    function copyManagementLink() {
+
+      if (!managementLink) return;
+
+
+      copyText(
+        managementLink,
+        copyManagementButton,
+        "Copy"
+      );
+
+    }
+
+
+
+    /* ========================================
+       NATIVE SHARE
+    ======================================== */
+
+    async function shareRoom() {
+
+      if (!roomLink) return;
+
+
+      if (navigator.share) {
+
+        try {
+
+          await navigator.share({
+
+            title:
+              "Join my Askee room",
+
+            text:
+              "Join my Askee room and play with me!",
+
+            url:
+              roomLink
+
+          });
+
+        } catch (error) {
+
+          /*
+            The user may have cancelled
+            the native share sheet.
+
+            No feedback is necessary.
+          */
+
+        }
+
+      } else {
+
+        copyRoomLink();
+
+      }
+
+    }
+
+
+
+    /* ========================================
+       WHATSAPP SHARE
+    ======================================== */
+
+    function shareWhatsApp() {
+
+      if (!roomLink) return;
+
+
+      const message =
+        "Join my Askee room and play with me! 👀\n\n"
+        + roomLink;
+
+
+      const url =
+        "https://wa.me/?text="
+        + encodeURIComponent(
+            message
+          );
+
+
+      window.open(
+        url,
+        "_blank"
+      );
+
+    }
+
+
+
+    /* ========================================
+       ENTER ROOM
+    ======================================== */
+
+    function enterRoom() {
+
+      if (!roomLink) return;
+
+
+      window.location.href =
+        roomLink;
+
+    }
+
+
+
+    /* ========================================
+       EVENT LISTENERS
+    ======================================== */
+
+    copyRoomButton.addEventListener(
+      "click",
+      copyRoomLink
+    );
+
+
+    copyManagementButton.addEventListener(
+      "click",
+      copyManagementLink
+    );
+
+
+    shareButton.addEventListener(
+      "click",
+      shareRoom
+    );
+
+
+    whatsappButton.addEventListener(
+      "click",
+      shareWhatsApp
+    );
+
+
+    enterRoomButton.addEventListener(
+      "click",
+      enterRoom
+    );
+
+
+    retryButton.addEventListener(
+      "click",
+      createRoom
+    );
+
+
+
+    /* ========================================
+       CREATE ROOM ON PAGE LOAD
+    ======================================== */
+
+    createRoom();
+
+  </script>
+
+</body>
+</html>

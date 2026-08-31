@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Askee — Ask freely. Answer honestly.</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --background: #f7f5ff;
+      --text: #17152b;
+      --muted: #747084;
+
+      --purple: #6d4aff;
+      --purple-dark: #5738e6;
+      --pink: #ff62ad;
+      --yellow: #ffd75c;
+
+      --white-glass: rgba(255, 255, 255, 0.72);
+      --border: rgba(35, 27, 75, 0.08);
+
+      --shadow: 0 25px 70px rgba(73, 50, 150, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+
+      font-family: "DM Sans", sans-serif;
+      color: var(--text);
+
+      background:
+        radial-gradient(
+          circle at 12% 8%,
+          rgba(255, 174, 216, 0.48),
+          transparent 28rem
+        ),
+        radial-gradient(
+          circle at 90% 10%,
+          rgba(177, 160, 255, 0.48),
+          transparent 30rem
+        ),
+        radial-gradient(
+          circle at 50% 100%,
+          rgba(255, 220, 120, 0.25),
+          transparent 34rem
+        ),
+        var(--background);
+    }
+
+    /* Subtle background grid */
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+
+      opacity: 0.22;
+
+      background-image:
+        linear-gradient(
+          rgba(255,255,255,0.5) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,0.5) 1px,
+          transparent 1px
+        );
+
+      background-size: 42px 42px;
+
+      mask-image: linear-gradient(
+        to bottom,
+        black,
+        transparent 75%
+      );
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 40px));
+      min-height: 100vh;
+
+      margin: 0 auto;
+
+      display: flex;
+      flex-direction: column;
+
+      position: relative;
+    }
+
+    /* --------------------------------
+       NAVIGATION
+    -------------------------------- */
+
+    nav {
+      height: 88px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+
+      letter-spacing: -0.06em;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+
+      display: grid;
+      place-items: center;
+
+      color: white;
+
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+
+      border-radius: 12px 12px 12px 4px;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          #9b70ff
+        );
+
+      box-shadow:
+        0 9px 23px rgba(109, 74, 255, 0.28);
+    }
+
+    .nav-note {
+      color: var(--muted);
+
+      font-size: 0.84rem;
+      font-weight: 600;
+    }
+
+    /* --------------------------------
+       MAIN HERO
+    -------------------------------- */
+
+    main {
+      flex: 1;
+
+      display: grid;
+      place-items: center;
+
+      padding: 45px 0 70px;
+    }
+
+    .hero {
+      width: 100%;
+
+      display: grid;
+
+      grid-template-columns:
+        1.05fr
+        0.95fr;
+
+      align-items: center;
+
+      gap: 75px;
+    }
+
+    /* --------------------------------
+       LEFT SIDE
+    -------------------------------- */
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+
+      margin-bottom: 21px;
+
+      padding: 7px 12px 7px 9px;
+
+      border: 1px solid var(--border);
+      border-radius: 999px;
+
+      background: rgba(255,255,255,0.62);
+
+      color: #625e75;
+
+      font-size: 0.76rem;
+      font-weight: 700;
+
+      box-shadow:
+        0 8px 25px rgba(68,47,145,0.06);
+    }
+
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+
+      border-radius: 50%;
+
+      background: var(--pink);
+
+      box-shadow:
+        0 0 0 4px rgba(255,98,173,0.12);
+    }
+
+    h1 {
+      max-width: 650px;
+
+      font-family: "Plus Jakarta Sans", sans-serif;
+
+      font-size: clamp(
+        3.3rem,
+        6.4vw,
+        5.7rem
+      );
+
+      line-height: 0.98;
+
+      letter-spacing: -0.075em;
+    }
+
+    h1 .accent {
+      position: relative;
+
+      color: var(--purple);
+
+      white-space: nowrap;
+    }
+
+    /*
+      Yellow handwritten-looking underline
+    */
+
+    h1 .accent::after {
+      content: "";
+
+      position: absolute;
+
+      left: 2%;
+      right: 0;
+
+      bottom: -7px;
+
+      height: 10px;
+
+      border-radius: 50%;
+
+      background: var(--yellow);
+
+      transform: rotate(-2deg);
+
+      opacity: 0.9;
+
+      z-index: -1;
+    }
+
+    .description {
+      max-width: 525px;
+
+      margin: 26px 0 30px;
+
+      color: var(--muted);
+
+      font-size: 1.07rem;
+      line-height: 1.7;
+    }
+
+    /* --------------------------------
+       CREATE ROOM BUTTON
+    -------------------------------- */
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+
+      padding: 16px 21px;
+
+      border: none;
+      border-radius: 15px;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          #805eff
+        );
+
+      font-family: "DM Sans", sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+
+      cursor: pointer;
+
+      box-shadow:
+        0 15px 32px rgba(109,74,255,0.28);
+
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+      
+      text-decoration: none;
+    }
+
+    .cta:hover {
+      transform: translateY(-3px);
+
+      box-shadow:
+        0 19px 38px rgba(109,74,255,0.34);
+    }
+
+    .cta:active {
+      transform: translateY(-1px);
+    }
+
+    .cta-arrow {
+      width: 27px;
+      height: 27px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 8px;
+
+      background: rgba(255,255,255,0.17);
+
+      font-size: 15px;
+    }
+
+    .small-note {
+      margin-top: 13px;
+
+      color: #9995a9;
+
+      font-size: 0.78rem;
+    }
+
+    /* --------------------------------
+       RIGHT SIDE
+    -------------------------------- */
+
+    .visual {
+      min-height: 500px;
+
+      position: relative;
+
+      display: grid;
+      place-items: center;
+    }
+
+    .glow {
+      position: absolute;
+
+      width: 350px;
+      height: 350px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(124,91,255,0.23),
+          rgba(255,255,255,0)
+        );
+
+      filter: blur(5px);
+    }
+
+    /* --------------------------------
+       QUESTION CARDS
+    -------------------------------- */
+
+    .card {
+      position: absolute;
+
+      width: min(360px, 78%);
+
+      padding: 20px;
+
+      border: 1px solid rgba(255,255,255,0.9);
+
+      border-radius: 22px;
+
+      background: var(--white-glass);
+
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      box-shadow: var(--shadow);
+    }
+
+    .card.one {
+      transform:
+        rotate(-7deg)
+        translate(-10px, -35px);
+
+      animation:
+        floatOne 5s ease-in-out infinite;
+    }
+
+    .card.two {
+      transform:
+        rotate(6deg)
+        translate(24px, 100px);
+
+      animation:
+        floatTwo 6s ease-in-out infinite;
+    }
+
+    .card.three {
+      width: 205px;
+
+      padding: 15px;
+
+      transform:
+        rotate(-3deg)
+        translate(110px, -175px);
+
+      animation:
+        floatThree 5.5s ease-in-out infinite;
+    }
+
+    .question-meta {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+
+      margin-bottom: 13px;
+
+      color: #8d899d;
+
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .avatar {
+      width: 30px;
+      height: 30px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 10px;
+
+      color: white;
+
+      font-size: 12px;
+      font-weight: 800;
+
+      background:
+        linear-gradient(
+          135deg,
+          #ff75b8,
+          #8c68ff
+        );
+    }
+
+    .question {
+      font-family: "Plus Jakarta Sans", sans-serif;
+
+      font-size: 1.08rem;
+
+      line-height: 1.45;
+
+      letter-spacing: -0.025em;
+
+      font-weight: 700;
+    }
+
+    .answer-pill {
+      margin-top: 16px;
+
+      padding: 10px 12px;
+
+      border-radius: 12px;
+
+      color: #655f79;
+
+      background:
+        rgba(109,74,255,0.07);
+
+      font-size: 0.77rem;
+
+      line-height: 1.4;
+    }
+
+    .mini-label {
+      color: #8c879c;
+
+      font-size: 0.67rem;
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.08em;
+    }
+
+    .mini-question {
+      margin-top: 7px;
+
+      font-family: "Plus Jakarta Sans", sans-serif;
+
+      font-size: 0.91rem;
+
+      line-height: 1.35;
+
+      font-weight: 700;
+    }
+
+    /* --------------------------------
+       DECORATIVE SPARKS
+    -------------------------------- */
+
+    .spark {
+      position: absolute;
+
+      color: var(--purple);
+
+      font-family: "Plus Jakarta Sans", sans-serif;
+
+      font-weight: 800;
+
+      opacity: 0.6;
+    }
+
+    .spark.one {
+      top: 55px;
+      right: 45px;
+
+      font-size: 28px;
+
+      transform: rotate(15deg);
+    }
+
+    .spark.two {
+      bottom: 75px;
+      left: 35px;
+
+      font-size: 22px;
+
+      transform: rotate(-15deg);
+    }
+
+    .spark.three {
+      top: 205px;
+      left: 20px;
+
+      color: var(--pink);
+
+      font-size: 18px;
+    }
+
+    /* --------------------------------
+       FOOTER
+    -------------------------------- */
+
+    footer {
+      padding: 20px 0 28px;
+
+      display: flex;
+      justify-content: center;
+
+      color: #aaa6b6;
+
+      font-size: 0.75rem;
+    }
+
+    /* --------------------------------
+       ANIMATIONS
+    -------------------------------- */
+
+    @keyframes floatOne {
+      0%, 100% {
+        transform:
+          rotate(-7deg)
+          translate(-10px, -35px);
+      }
+
+      50% {
+        transform:
+          rotate(-5deg)
+          translate(-10px, -45px);
+      }
+    }
+
+    @keyframes floatTwo {
+      0%, 100% {
+        transform:
+          rotate(6deg)
+          translate(24px, 100px);
+      }
+
+      50% {
+        transform:
+          rotate(4deg)
+          translate(24px, 90px);
+      }
+    }
+
+    @keyframes floatThree {
+      0%, 100% {
+        transform:
+          rotate(-3deg)
+          translate(110px, -175px);
+      }
+
+      50% {
+        transform:
+          rotate(1deg)
+          translate(110px, -185px);
+      }
+    }
+
+    /* --------------------------------
+       MOBILE
+    -------------------------------- */
+
+    @media (max-width: 800px) {
+
+      .page {
+        width: min(
+          100% - 28px,
+          600px
+        );
+      }
+
+      nav {
+        height: 74px;
+      }
+
+      .nav-note {
+        display: none;
+      }
+
+      main {
+        display: block;
+
+        padding:
+          30px 0
+          30px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+      }
+
+      .hero-copy {
+        text-align: center;
+      }
+
+      .eyebrow {
+        margin-bottom: 17px;
+      }
+
+      h1 {
+        font-size:
+          clamp(
+            3rem,
+            15vw,
+            4.7rem
+          );
+      }
+
+      .description {
+        margin:
+          22px auto
+          27px;
+
+        font-size: 1rem;
+      }
+
+      .visual {
+        min-height: 390px;
+
+        margin-top: 5px;
+      }
+
+      .card {
+        width:
+          min(
+            330px,
+            78%
+          );
+      }
+
+      .card.three {
+        width: 190px;
+
+        transform:
+          rotate(-3deg)
+          translate(90px, -135px);
+      }
+
+      .spark.one {
+        right: 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+
+    <!-- ================================
+         NAVIGATION
+    ================================= -->
+
+    <nav>
+
+      <div class="logo">
+
+        <div class="logo-mark">
+          ?
+        </div>
+
+        <span>askee</span>
+
+      </div>
+
+      <div class="nav-note">
+        A little game of curiosity.
+      </div>
+
+    </nav>
+
+
+    <!-- ================================
+         HERO
+    ================================= -->
+
+    <main>
+
+      <section class="hero">
+
+        <!-- LEFT -->
+
+        <div class="hero-copy">
+
+          <div class="eyebrow">
+
+            <span class="eyebrow-dot"></span>
+
+            Anonymous Q&amp;A for your people
+
+          </div>
+
+
+          <h1>
+
+            Ask freely.<br>
+
+            Answer
+            <span class="accent">
+              honestly.
+            </span>
+
+          </h1>
+
+
+          <p class="description">
+
+            Askee is a social game where you ask
+            questions anonymously and discover what
+            your friends really think.
+
+            Create a room, share the link,
+            and let the questions begin.
+
+          </p>
+
+
+          <a
+            class="cta"
+            href="room.html"
+          >
+
+            Create a Room
+
+            <span class="cta-arrow">
+              →
+            </span>
+
+          </a>
+
+
+          <div class="small-note">
+            No account required.
+          </div>
+
+        </div>
+
+
+        <!-- RIGHT -->
+
+        <div
+          class="visual"
+          aria-hidden="true"
+        >
+
+          <div class="glow"></div>
+
+
+          <div class="spark one">
+            ✦
+          </div>
+
+          <div class="spark two">
+            ✦
+          </div>
+
+          <div class="spark three">
+            •
+          </div>
+
+
+          <!-- QUESTION CARD 1 -->
+
+          <div class="card one">
+
+            <div class="question-meta">
+
+              <div class="avatar">
+                ?
+              </div>
+
+              <span>
+                Anonymous asked
+              </span>
+
+            </div>
+
+
+            <div class="question">
+
+              Who here would you trust
+              with your biggest secret?
+
+            </div>
+
+
+            <div class="answer-pill">
+
+              Nobody needs to know
+              who asked.
+
+            </div>
+
+          </div>
+
+
+          <!-- QUESTION CARD 2 -->
+
+          <div class="card two">
+
+            <div class="question-meta">
+
+              <div class="avatar">
+                ?
+              </div>
+
+              <span>
+                Anonymous asked
+              </span>
+
+            </div>
+
+
+            <div class="question">
+
+              What's something you've
+              never told the group?
+
+            </div>
+
+          </div>
+
+
+          <!-- SMALL CARD -->
+
+          <div class="card three">
+
+            <div class="mini-label">
+              Your turn
+            </div>
+
+            <div class="mini-question">
+              Be honest. 👀
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+
+    <!-- ================================
+         FOOTER
+    ================================= -->
+
+    <footer>
+
+      Made for questions worth asking.
+
+    </footer>
+
+  </div>
+
+
+  <script>
+
+    function createRoom() {
+
+      /*
+        Later, replace this with the real
+        backend room creation request.
+
+        Example:
+
+        fetch("/api/rooms/", {
+          method: "POST"
+        })
+        .then(response => response.json())
+        .then(room => {
+          window.location.href =
+            "/room/" + room.id;
+        });
+      */
+
+      alert(
+        "Room creation will connect to your backend here."
+      );
+
+    }
+
+  </script>
+
+</body>
+</html>
+```

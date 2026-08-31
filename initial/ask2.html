@@ -1,0 +1,2913 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Askee — Ask away</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --background: #f7f5ff;
+
+      --text: #17152b;
+      --muted: #747084;
+      --light-muted: #9a96a9;
+
+      --purple: #6d4aff;
+      --purple-dark: #5738e6;
+
+      --pink: #ff62ad;
+      --yellow: #ffd75c;
+
+      --green: #43b889;
+      --red: #e05b78;
+
+      --white: rgba(255, 255, 255, 0.72);
+      --white-solid: #ffffff;
+
+      --border: rgba(35, 27, 75, 0.08);
+
+      --shadow:
+        0 25px 70px rgba(73, 50, 150, 0.15);
+    }
+
+
+    /* ========================================
+       RESET
+    ======================================== */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    /* ========================================
+       BODY
+    ======================================== */
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+
+      font-family: "DM Sans", sans-serif;
+      color: var(--text);
+
+      background:
+        radial-gradient(circle at 12% 8%,
+          rgba(255, 174, 216, 0.48),
+          transparent 28rem),
+
+        radial-gradient(circle at 90% 10%,
+          rgba(177, 160, 255, 0.48),
+          transparent 30rem),
+
+        radial-gradient(circle at 50% 100%,
+          rgba(255, 220, 120, 0.25),
+          transparent 34rem),
+
+        var(--background);
+    }
+
+
+    /* ========================================
+       BACKGROUND GRID
+    ======================================== */
+
+    body::before {
+      content: "";
+
+      position: fixed;
+      inset: 0;
+
+      pointer-events: none;
+
+      opacity: 0.22;
+
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.5) 1px,
+          transparent 1px),
+
+        linear-gradient(90deg,
+          rgba(255, 255, 255, 0.5) 1px,
+          transparent 1px);
+
+      background-size: 42px 42px;
+
+      mask-image:
+        linear-gradient(to bottom,
+          black,
+          transparent 75%);
+    }
+
+
+    /* ========================================
+       PAGE
+    ======================================== */
+
+    .page {
+      width:
+        min(1120px,
+          calc(100% - 40px));
+
+      min-height: 100vh;
+
+      margin: 0 auto;
+
+      display: flex;
+      flex-direction: column;
+
+      position: relative;
+    }
+
+
+    /* ========================================
+       NAV
+    ======================================== */
+
+    nav {
+      min-height: 88px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 20px;
+    }
+
+
+    .logo {
+      display: flex;
+      align-items: center;
+
+      gap: 10px;
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size: 1.35rem;
+      font-weight: 800;
+
+      letter-spacing: -0.06em;
+    }
+
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+
+      display: grid;
+      place-items: center;
+
+      color: white;
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size: 16px;
+      font-weight: 800;
+
+      border-radius:
+        12px 12px 12px 4px;
+
+      background:
+        linear-gradient(135deg,
+          var(--purple),
+          #9b70ff);
+
+      box-shadow:
+        0 9px 23px rgba(109, 74, 255, 0.28);
+    }
+
+
+    /* ========================================
+       NAV LINKS
+    ======================================== */
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+
+      gap: 6px;
+
+      padding: 5px;
+
+      border:
+        1px solid rgba(255, 255, 255, 0.9);
+
+      border-radius: 14px;
+
+      background:
+        rgba(255, 255, 255, 0.56);
+
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+
+    .nav-link {
+      min-height: 34px;
+
+      padding:
+        0 12px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      border: none;
+      border-radius: 10px;
+
+      color: #807b90;
+
+      background: transparent;
+
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      font-size: 0.76rem;
+      font-weight: 700;
+
+      text-decoration: none;
+
+      transition:
+        background .2s ease,
+        color .2s ease,
+        transform .2s ease;
+    }
+
+
+    .nav-link:hover {
+      color: var(--text);
+
+      background:
+        rgba(255, 255, 255, 0.78);
+    }
+
+
+    .nav-link.active {
+      color: var(--purple);
+
+      background:
+        rgba(109, 74, 255, 0.09);
+
+      box-shadow:
+        inset 0 0 0 1px rgba(109, 74, 255, 0.06);
+    }
+
+
+    /* ========================================
+       MAIN
+    ======================================== */
+
+    main {
+      flex: 1;
+
+      display: flex;
+      justify-content: center;
+
+      padding:
+        34px 0 65px;
+    }
+
+
+    .content {
+      width: 100%;
+      max-width: 700px;
+
+      position: relative;
+    }
+
+
+    /* ========================================
+       HEADING
+    ======================================== */
+
+    .heading {
+      text-align: center;
+
+      margin-bottom: 26px;
+    }
+
+
+    h1 {
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size:
+        clamp(2.7rem,
+          5.5vw,
+          4.35rem);
+
+      line-height: 1;
+
+      letter-spacing: -0.075em;
+    }
+
+
+    h1 .accent {
+      position: relative;
+
+      color: var(--purple);
+    }
+
+
+    h1 .accent::after {
+      content: "";
+
+      position: absolute;
+
+      left: 3%;
+      right: -2%;
+
+      bottom: -7px;
+
+      height: 9px;
+
+      border-radius: 50%;
+
+      background:
+        var(--yellow);
+
+      transform:
+        rotate(-2deg);
+
+      z-index: -1;
+    }
+
+
+    .heading-text {
+      margin-top: 15px;
+
+      color: var(--muted);
+
+      font-size: 0.94rem;
+    }
+
+
+    /* ========================================
+       GAME STATUS
+    ======================================== */
+
+    .status {
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 12px;
+
+      margin-bottom: 20px;
+    }
+
+
+    .status-card {
+      padding:
+        17px 20px;
+
+      border:
+        1px solid rgba(255, 255, 255, 0.9);
+
+      border-radius: 18px;
+
+      background:
+        var(--white);
+
+      backdrop-filter:
+        blur(18px);
+
+      -webkit-backdrop-filter:
+        blur(18px);
+
+      box-shadow:
+        0 13px 35px rgba(73, 50, 150, 0.08);
+
+      text-align: center;
+    }
+
+
+    .status-label {
+      color: #9893a6;
+
+      font-size: 0.66rem;
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.09em;
+    }
+
+
+    .status-value {
+      margin-top: 4px;
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size: 1.5rem;
+      font-weight: 800;
+
+      letter-spacing: -0.05em;
+    }
+
+
+    .timer-value {
+      color: var(--purple);
+    }
+
+
+    .timer-value.warning {
+      color: var(--pink);
+    }
+
+
+    /* ========================================
+       PROGRESS
+    ======================================== */
+
+    .progress {
+      height: 7px;
+
+      margin:
+        0 2px 22px;
+
+      overflow: hidden;
+
+      border-radius: 999px;
+
+      background:
+        rgba(109, 74, 255, 0.09);
+    }
+
+
+    .progress-bar {
+      width: 0%;
+
+      height: 100%;
+
+      border-radius: inherit;
+
+      background:
+        linear-gradient(90deg,
+          var(--purple),
+          #9b70ff);
+
+      transition:
+        width .4s ease;
+    }
+
+
+    /* ========================================
+       COMPOSER CARD
+    ======================================== */
+
+    .composer {
+      position: relative;
+
+      padding: 25px;
+
+      border:
+        1px solid rgba(255, 255, 255, 0.9);
+
+      border-radius: 25px;
+
+      background:
+        var(--white);
+
+      backdrop-filter:
+        blur(20px);
+
+      -webkit-backdrop-filter:
+        blur(20px);
+
+      box-shadow:
+        var(--shadow);
+    }
+
+
+    .field-label {
+      margin-bottom: 11px;
+
+      color: #686278;
+
+      font-size: 0.72rem;
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.08em;
+    }
+
+
+    /* ========================================
+       QUESTION TYPES
+    ======================================== */
+
+    .type-options {
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 11px;
+
+      margin-bottom: 24px;
+    }
+
+
+    .type-option {
+      min-height: 106px;
+
+      padding:
+        15px;
+
+      border:
+        1px solid rgba(35, 27, 75, 0.08);
+
+      border-radius: 16px;
+
+      background:
+        rgba(255, 255, 255, 0.5);
+
+      color: #716c80;
+
+      text-align: left;
+
+      cursor: pointer;
+
+      transition:
+        transform .2s ease,
+        border-color .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
+    }
+
+
+    .type-option:hover {
+      transform:
+        translateY(-2px);
+
+      background:
+        rgba(255, 255, 255, 0.82);
+    }
+
+
+    .type-option.selected {
+      border-color:
+        rgba(109, 74, 255, 0.32);
+
+      background:
+        rgba(109, 74, 255, 0.075);
+
+      box-shadow:
+        inset 0 0 0 1px rgba(109, 74, 255, 0.08);
+    }
+
+
+    .type-icon {
+      width: 31px;
+      height: 31px;
+
+      display: grid;
+      place-items: center;
+
+      margin-bottom: 9px;
+
+      border-radius: 10px;
+
+      color: var(--purple);
+
+      background:
+        rgba(109, 74, 255, 0.09);
+
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+
+    .type-option.selected .type-icon {
+      color: white;
+
+      background:
+        linear-gradient(135deg,
+          var(--purple),
+          #8c69ff);
+    }
+
+
+    .type-name {
+      color: var(--text);
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size: 0.84rem;
+      font-weight: 800;
+
+      letter-spacing: -0.025em;
+    }
+
+
+    .type-description {
+      margin-top: 4px;
+
+      color: #8b8799;
+
+      font-size: 0.7rem;
+
+      line-height: 1.4;
+    }
+
+
+    /* ========================================
+       QUESTION INPUT
+    ======================================== */
+
+    .question-wrapper {
+      position: relative;
+    }
+
+
+    textarea {
+      width: 100%;
+
+      min-height: 155px;
+
+      display: block;
+
+      resize: vertical;
+
+      padding:
+        16px;
+
+      border:
+        1px solid rgba(35, 27, 75, 0.09);
+
+      border-radius: 16px;
+
+      outline: none;
+
+      color: var(--text);
+
+      background:
+        rgba(255, 255, 255, 0.62);
+
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      font-size: 0.98rem;
+
+      line-height: 1.55;
+
+      transition:
+        border-color .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+    }
+
+
+    textarea::placeholder {
+      color:
+        #aaa6b5;
+    }
+
+
+    textarea:focus {
+      border-color:
+        rgba(109, 74, 255, 0.35);
+
+      background:
+        rgba(255, 255, 255, 0.86);
+
+      box-shadow:
+        0 0 0 4px rgba(109, 74, 255, 0.07);
+    }
+
+
+    .character-count {
+      position: absolute;
+
+      right: 13px;
+      bottom: 11px;
+
+      color: #aaa6b5;
+
+      font-size: 0.68rem;
+      font-weight: 600;
+    }
+
+
+    /* ========================================
+       SUBMIT
+    ======================================== */
+
+    .submit-row {
+      margin-top: 17px;
+
+      display: flex;
+
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+
+    .submit-button {
+      min-height: 48px;
+
+      padding:
+        0 19px;
+
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 10px;
+
+      border: none;
+
+      border-radius: 14px;
+
+      color: white;
+
+      background:
+        linear-gradient(135deg,
+          var(--purple),
+          #805eff);
+
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      font-size: 0.88rem;
+      font-weight: 700;
+
+      cursor: pointer;
+
+      box-shadow:
+        0 11px 24px rgba(109, 74, 255, 0.23);
+
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        opacity .2s ease;
+    }
+
+
+    .submit-button:hover:not(:disabled) {
+      transform:
+        translateY(-2px);
+
+      box-shadow:
+        0 14px 29px rgba(109, 74, 255, 0.29);
+    }
+
+
+    .submit-button:disabled {
+      opacity: 0.45;
+
+      cursor: not-allowed;
+
+      box-shadow: none;
+    }
+
+
+    .submit-arrow {
+      width: 24px;
+      height: 24px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 7px;
+
+      background:
+        rgba(255, 255, 255, 0.16);
+    }
+
+
+    /* ========================================
+       LOADING SPINNER
+    ======================================== */
+
+    .spinner {
+      width: 17px;
+      height: 17px;
+
+      border:
+        2px solid rgba(255, 255, 255, 0.35);
+
+      border-top-color:
+        white;
+
+      border-radius: 50%;
+
+      animation:
+        spin .7s linear infinite;
+    }
+
+
+    @keyframes spin {
+      to {
+        transform:
+          rotate(360deg);
+      }
+    }
+
+
+    /* ========================================
+       STAGE MESSAGE
+    ======================================== */
+
+    .stage-message {
+      padding:
+        42px 25px;
+
+      text-align: center;
+
+      border:
+        1px solid rgba(255, 255, 255, 0.9);
+
+      border-radius: 25px;
+
+      background:
+        var(--white);
+
+      backdrop-filter:
+        blur(20px);
+
+      -webkit-backdrop-filter:
+        blur(20px);
+
+      box-shadow:
+        var(--shadow);
+    }
+
+
+    .stage-message-icon {
+      width: 58px;
+      height: 58px;
+
+      display: grid;
+      place-items: center;
+
+      margin:
+        0 auto 18px;
+
+      border-radius: 19px;
+
+      color: var(--purple);
+
+      background:
+        rgba(109, 74, 255, 0.09);
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size: 23px;
+      font-weight: 800;
+    }
+
+
+    .stage-message h2 {
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size: 1.25rem;
+
+      letter-spacing: -0.04em;
+    }
+
+
+    .stage-message p {
+      max-width: 430px;
+
+      margin:
+        10px auto 0;
+
+      color: var(--muted);
+
+      font-size: 0.88rem;
+
+      line-height: 1.6;
+    }
+
+
+    /* ========================================
+       INITIAL LOADING
+    ======================================== */
+
+    .page-loading {
+      padding:
+        60px 20px;
+
+      display: flex;
+
+      justify-content: center;
+      align-items: center;
+    }
+
+
+    .page-loading-spinner {
+      width: 32px;
+      height: 32px;
+
+      border:
+        3px solid rgba(109, 74, 255, 0.14);
+
+      border-top-color:
+        var(--purple);
+
+      border-radius: 50%;
+
+      animation:
+        spin .75s linear infinite;
+    }
+
+
+    /* ========================================
+       SENT FEEDBACK
+    ======================================== */
+
+    .feedback {
+      position: fixed;
+
+      left: 50%;
+      bottom: 27px;
+
+      z-index: 20;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 9px;
+
+      max-width:
+        calc(100% - 28px);
+
+      padding:
+        11px 16px;
+
+      border:
+        1px solid rgba(255, 255, 255, 0.9);
+
+      border-radius: 13px;
+
+      color: #3e725e;
+
+      background:
+        rgba(255, 255, 255, 0.9);
+
+      backdrop-filter:
+        blur(18px);
+
+      -webkit-backdrop-filter:
+        blur(18px);
+
+      box-shadow:
+        0 15px 40px rgba(50, 35, 100, 0.14);
+
+      font-size: 0.82rem;
+      font-weight: 700;
+
+      pointer-events: none;
+
+      opacity: 0;
+
+      transform:
+        translate(-50%, 15px);
+
+      transition:
+        opacity .25s ease,
+        transform .25s ease;
+    }
+
+
+    .feedback.show {
+      opacity: 1;
+
+      transform:
+        translate(-50%, 0);
+    }
+
+
+    .feedback.error {
+      color: #9b465c;
+    }
+
+
+    .feedback-icon {
+      width: 23px;
+      height: 23px;
+
+      flex: 0 0 auto;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 7px;
+
+      color: white;
+
+      background:
+        var(--green);
+
+      font-size: 12px;
+    }
+
+
+    .feedback.error .feedback-icon {
+      background:
+        var(--red);
+    }
+
+
+    /* ========================================
+       FOOTER NOTE
+    ======================================== */
+
+    .privacy-note {
+      margin-top: 17px;
+
+      text-align: center;
+
+      color: #aaa6b6;
+
+      font-size: 0.72rem;
+    }
+
+
+    /* ========================================
+       DECORATIVE SPARKS
+    ======================================== */
+
+    .spark {
+      position: absolute;
+
+      pointer-events: none;
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-weight: 800;
+
+      opacity: .55;
+    }
+
+
+    .spark.one {
+      top: -7px;
+      left: 3%;
+
+      color: var(--pink);
+
+      font-size: 21px;
+
+      transform:
+        rotate(-14deg);
+
+      animation:
+        floatOne 4s ease-in-out infinite;
+    }
+
+
+    .spark.two {
+      top: 25px;
+      right: 2%;
+
+      color: var(--purple);
+
+      font-size: 27px;
+
+      transform:
+        rotate(14deg);
+
+      animation:
+        floatTwo 5s ease-in-out infinite;
+    }
+
+
+    /* ========================================
+       FOOTER
+    ======================================== */
+
+    footer {
+      padding:
+        18px 0 27px;
+
+      display: flex;
+
+      justify-content: center;
+
+      color: #aaa6b6;
+
+      font-size: 0.74rem;
+    }
+
+
+    /* ========================================
+       ANIMATIONS
+    ======================================== */
+
+    @keyframes floatOne {
+
+      0%,
+      100% {
+        transform:
+          translateY(0) rotate(-14deg);
+      }
+
+      50% {
+        transform:
+          translateY(-7px) rotate(-8deg);
+      }
+    }
+
+
+    @keyframes floatTwo {
+
+      0%,
+      100% {
+        transform:
+          translateY(0) rotate(14deg);
+      }
+
+      50% {
+        transform:
+          translateY(-9px) rotate(20deg);
+      }
+    }
+
+
+    /* ========================================
+       MOBILE
+    ======================================== */
+
+    @media (max-width: 700px) {
+
+      .page {
+        width:
+          calc(100% - 28px);
+      }
+
+
+      nav {
+        min-height: 74px;
+      }
+
+
+      .nav-links {
+        gap: 2px;
+      }
+
+
+      .nav-link {
+        padding:
+          0 9px;
+
+        font-size: 0.7rem;
+      }
+
+
+      main {
+        padding:
+          28px 0 45px;
+      }
+
+
+      .heading {
+        margin-bottom: 21px;
+      }
+
+
+      h1 {
+        font-size:
+          clamp(2.7rem,
+            13vw,
+            4rem);
+      }
+
+
+      .heading-text {
+        font-size: 0.87rem;
+      }
+
+
+      .status {
+        gap: 9px;
+      }
+
+
+      .status-card {
+        padding:
+          14px 10px;
+      }
+
+
+      .status-value {
+        font-size: 1.35rem;
+      }
+
+
+      .composer {
+        padding:
+          19px;
+
+        border-radius:
+          21px;
+      }
+
+
+      .type-options {
+        gap: 8px;
+      }
+
+
+      .type-option {
+        min-height:
+          116px;
+
+        padding:
+          13px;
+      }
+
+
+      .type-description {
+        font-size:
+          0.67rem;
+      }
+
+
+      textarea {
+        min-height:
+          145px;
+      }
+
+
+      .submit-button {
+        width: 100%;
+      }
+
+
+      .submit-row {
+        display: block;
+      }
+
+
+      .stage-message {
+        padding:
+          35px 19px;
+      }
+
+
+      .spark.one {
+        left: -3px;
+      }
+
+
+      .spark.two {
+        right: -2px;
+      }
+    }
+
+
+    @media (max-width: 430px) {
+
+      .nav-link {
+        padding:
+          0 7px;
+
+        font-size:
+          0.65rem;
+      }
+
+
+      .status-value {
+        font-size:
+          1.25rem;
+      }
+
+
+      .composer {
+        padding:
+          16px;
+      }
+
+
+      .type-name {
+        font-size:
+          0.77rem;
+      }
+
+
+      .type-description {
+        font-size:
+          0.64rem;
+      }
+    }
+
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+
+  <div class="page">
+
+    <!-- ====================================
+         NAVIGATION
+    ===================================== -->
+
+    <nav>
+
+      <div class="logo">
+
+        <div class="logo-mark">
+          ?
+        </div>
+
+        <span>
+          askee
+        </span>
+
+      </div>
+
+
+      <div class="nav-links">
+
+        <a class="nav-link active" id="askNav" href="#">
+          Ask
+        </a>
+
+        <a class="nav-link" id="answerNav" href="#">
+          Answer
+        </a>
+
+        <a class="nav-link" id="boardNav" href="#">
+          Board
+        </a>
+
+      </div>
+
+    </nav>
+
+
+    <!-- ====================================
+         MAIN
+    ===================================== -->
+
+    <main>
+
+      <section class="content">
+
+        <!-- Decorative elements -->
+
+        <div class="spark one">
+          ✦
+        </div>
+
+        <div class="spark two">
+          ✦
+        </div>
+
+
+        <!-- ====================================
+             HEADING
+        ===================================== -->
+
+        <div class="heading">
+
+          <h1>
+            Ask
+            <span class="accent">
+              away.
+            </span>
+          </h1>
+
+          <p class="heading-text">
+            Questions are anonymous.
+            Make them count.
+          </p>
+
+        </div>
+
+
+        <!-- ====================================
+             INITIAL LOADING
+        ===================================== -->
+
+        <div class="page-loading" id="pageLoading">
+
+          <div class="page-loading-spinner"></div>
+
+        </div>
+
+
+        <!-- ====================================
+             ROOM CONTENT
+        ===================================== -->
+
+        <div id="roomContent" hidden>
+
+          <!-- ====================================
+               STATUS
+          ===================================== -->
+
+          <div class="status">
+
+            <div class="status-card">
+
+              <div class="status-label">
+                Questions asked
+              </div>
+
+              <div class="status-value" id="questionCount">
+                0 / 0
+              </div>
+
+            </div>
+
+
+            <div class="status-card">
+
+              <div class="status-label">
+                Time left
+              </div>
+
+              <div class="status-value timer-value" id="timer">
+                00:00
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- ====================================
+               PROGRESS
+          ===================================== -->
+
+          <div class="progress">
+
+            <div class="progress-bar" id="progressBar"></div>
+
+          </div>
+
+
+          <!-- ====================================
+               ASKING CONTENT
+          ==================================== -->
+
+          <div id="askingContent">
+
+            <div class="composer">
+
+              <!-- QUESTION TYPE -->
+
+              <div class="field-label">
+                What kind of question?
+              </div>
+
+
+              <div class="type-options">
+
+                <button type="button" class="type-option selected" data-type="one" onclick="selectType(this)">
+
+                  <div class="type-icon">
+                    1
+                  </div>
+
+                  <div class="type-name">
+                    One Answer
+                  </div>
+
+                  <div class="type-description">
+                    Only one player can answer.
+                  </div>
+
+                </button>
+
+
+                <button type="button" class="type-option" data-type="everyone" onclick="selectType(this)">
+
+                  <div class="type-icon">
+                    ∞
+                  </div>
+
+                  <div class="type-name">
+                    Everyone
+                  </div>
+
+                  <div class="type-description">
+                    Everyone can answer.
+                  </div>
+
+                </button>
+
+              </div>
+
+
+              <!-- QUESTION -->
+
+              <div class="field-label">
+                Your question
+              </div>
+
+
+              <div class="question-wrapper">
+
+                <textarea id="questionInput" maxlength="300" placeholder="Ask anything..."
+                  oninput="updateCharacterCount()"></textarea>
+
+
+                <div class="character-count" id="characterCount">
+                  0 / 300
+                </div>
+
+              </div>
+
+
+              <!-- SUBMIT -->
+
+              <div class="submit-row">
+
+                <button class="submit-button" id="submitButton" onclick="submitQuestion()">
+
+                  Ask Question
+
+                  <span class="submit-arrow">
+                    →
+                  </span>
+
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <div class="privacy-note">
+              Your question won't reveal who asked it.
+            </div>
+
+          </div>
+
+
+          <!-- ====================================
+               STAGE INACTIVE CONTENT
+          ==================================== -->
+
+          <div class="stage-message" id="stageMessage" hidden>
+
+            <div class="stage-message-icon">
+              ✦
+            </div>
+
+            <h2 id="stageMessageTitle">
+              The room isn't accepting questions.
+            </h2>
+
+            <p id="stageMessageText">
+              This room is currently in another stage.
+              Check back later.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+
+    <!-- ====================================
+         FOOTER
+    ===================================== -->
+
+    <footer>
+      Made for questions worth asking.
+    </footer>
+
+  </div>
+
+
+  <!-- ====================================
+       FEEDBACK
+  ===================================== -->
+
+  <div class="feedback" id="feedback">
+
+    <span class="feedback-icon" id="feedbackIcon">
+      ✓
+    </span>
+
+    <span id="feedbackText">
+      Question sent
+    </span>
+
+  </div>
+
+
+  <script>
+
+    /* ========================================
+       API CONFIGURATION
+    ========================================
+
+       Replace these URLs with your actual
+       API endpoints.
+
+       The room ID is taken from:
+
+       ?room=<room_id>
+
+       Example:
+
+       https://askee.app/ask.html?room=123
+
+    ======================================== */
+
+
+    const API_BASE_URL = "http://127.0.0.1:8000/api";
+
+
+    /* ========================================
+       GAME STATE
+    ======================================== */
+
+    let roomId = null;
+
+    let currentStage = null;
+
+    let selectedType = "one";
+
+    let questionCount = 0;
+
+    let questionLimit = 0;
+
+    let secondsRemaining = 0;
+
+    let timerInterval = null;
+
+    let feedbackTimeout = null;
+
+    let submittingQuestion = false;
+
+
+    /* ========================================
+       GET ROOM ID FROM URL
+    ======================================== */
+
+    function getRoomIdFromUrl() {
+
+      const params =
+        new URLSearchParams(
+          window.location.search
+        );
+
+      return params.get("room");
+
+    }
+
+
+    /* ========================================
+       BUILD ROOM URL
+    ======================================== */
+
+    function buildPageUrl(page) {
+
+      return (
+        page
+        + "?room="
+        + encodeURIComponent(roomId)
+      );
+
+    }
+
+
+    /* ========================================
+       SETUP NAVIGATION
+    ======================================== */
+
+    function setupNavigation() {
+
+      document.getElementById(
+        "askNav"
+      ).href =
+        buildPageUrl("ask.html");
+
+
+      document.getElementById(
+        "answerNav"
+      ).href =
+        buildPageUrl("answer.html");
+
+
+      document.getElementById(
+        "boardNav"
+      ).href =
+        buildPageUrl("board.html");
+
+    }
+
+
+    /* ========================================
+       SELECT QUESTION TYPE
+    ======================================== */
+
+    function selectType(element) {
+
+      if (submittingQuestion) {
+        return;
+      }
+
+
+      const options =
+        document.querySelectorAll(
+          ".type-option"
+        );
+
+
+      options.forEach(option => {
+
+        option.classList.remove(
+          "selected"
+        );
+
+      });
+
+
+      element.classList.add(
+        "selected"
+      );
+
+
+      selectedType =
+        element.dataset.type;
+
+    }
+
+
+    /* ========================================
+       CHARACTER COUNT
+    ======================================== */
+
+    function updateCharacterCount() {
+
+      const input =
+        document.getElementById(
+          "questionInput"
+        );
+
+
+      const counter =
+        document.getElementById(
+          "characterCount"
+        );
+
+
+      counter.textContent =
+        input.value.length
+        + " / 300";
+
+    }
+
+
+    /* ========================================
+       UPDATE QUESTION COUNT
+    ======================================== */
+
+    function updateQuestionCount() {
+
+      const count =
+        document.getElementById(
+          "questionCount"
+        );
+
+
+      const progress =
+        document.getElementById(
+          "progressBar"
+        );
+
+
+      count.textContent =
+        questionCount
+        + " / "
+        + questionLimit;
+
+
+      const percentage =
+        questionLimit > 0
+          ? (
+            questionCount
+            / questionLimit
+          ) * 100
+          : 0;
+
+
+      progress.style.width =
+        Math.min(
+          percentage,
+          100
+        )
+        + "%";
+
+    }
+
+
+    /* ========================================
+       UPDATE TIMER DISPLAY
+    ======================================== */
+
+    function updateTimerDisplay() {
+
+      const timer =
+        document.getElementById(
+          "timer"
+        );
+
+
+      const safeSeconds =
+        Math.max(
+          0,
+          Math.floor(
+            secondsRemaining
+          )
+        );
+
+
+      const hours =
+        Math.floor(
+          safeSeconds / 3600
+        );
+
+
+      const minutes =
+        Math.floor(
+          (safeSeconds % 3600) / 60
+        );
+
+
+      const seconds =
+        safeSeconds % 60;
+
+
+      if (hours > 0) {
+
+        timer.textContent =
+          String(hours)
+            .padStart(2, "0")
+          + ":"
+          + String(minutes)
+            .padStart(2, "0")
+          + ":"
+          + String(seconds)
+            .padStart(2, "0");
+
+      } else {
+
+        timer.textContent =
+          String(minutes)
+            .padStart(2, "0")
+          + ":"
+          + String(seconds)
+            .padStart(2, "0");
+
+      }
+
+
+      if (safeSeconds <= 60) {
+
+        timer.classList.add(
+          "warning"
+        );
+
+      } else {
+
+        timer.classList.remove(
+          "warning"
+        );
+
+      }
+
+    }
+
+
+    /* ========================================
+       START EXPIRY TIMER
+    ======================================== */
+
+    function startExpiryTimer() {
+
+      clearInterval(
+        timerInterval
+      );
+
+
+      updateTimerDisplay();
+
+
+      timerInterval =
+        setInterval(() => {
+
+          if (
+            secondsRemaining <= 0
+          ) {
+
+            secondsRemaining = 0;
+
+            updateTimerDisplay();
+
+            clearInterval(
+              timerInterval
+            );
+
+            return;
+
+          }
+
+
+          secondsRemaining--;
+
+          updateTimerDisplay();
+
+        }, 1000);
+
+    }
+
+
+    /* ========================================
+       APPLY SERVER ROOM STATE
+    ======================================== */
+
+    function applyRoomState(data) {
+
+      /*
+        The server is authoritative.
+
+        Every response containing room state
+        should pass through this function.
+      */
+
+
+      if (
+        data.stage !== undefined
+      ) {
+
+        currentStage =
+          data.stage;
+
+      }
+
+
+      if (
+        data.question_count !== undefined
+      ) {
+
+        questionCount =
+          data.question_count;
+
+      }
+
+
+      if (
+        data.question_limit !== undefined
+      ) {
+
+        questionLimit =
+          data.question_limit;
+
+      }
+
+
+      if (
+        data.seconds_remaining !== undefined
+      ) {
+
+        secondsRemaining =
+          data.seconds_remaining;
+
+      }
+
+
+      updateQuestionCount();
+
+      updateTimerDisplay();
+
+      updateStageUI();
+
+    }
+
+
+    /* ========================================
+       UPDATE STAGE UI
+    ======================================== */
+
+    function updateStageUI() {
+
+      const askingContent =
+        document.getElementById(
+          "askingContent"
+        );
+
+
+      const stageMessage =
+        document.getElementById(
+          "stageMessage"
+        );
+
+
+      const stageTitle =
+        document.getElementById(
+          "stageMessageTitle"
+        );
+
+
+      const stageText =
+        document.getElementById(
+          "stageMessageText"
+        );
+
+
+      /*
+        The asking composer is available
+        ONLY when the server says the room
+        is in the asking stage.
+      */
+
+      if (
+        currentStage === "asking"
+      ) {
+
+        askingContent.hidden = false;
+
+        stageMessage.hidden = true;
+
+        return;
+
+      }
+
+
+      askingContent.hidden = true;
+
+      stageMessage.hidden = false;
+
+
+      if (
+        currentStage === "answering"
+      ) {
+
+        stageTitle.textContent =
+          "The room is answering questions.";
+
+        stageText.textContent =
+          "Questions are no longer being accepted. "
+          + "Check back later when the room moves "
+          + "to another stage.";
+
+      }
+
+      else if (
+        currentStage === "board"
+      ) {
+
+        stageTitle.textContent =
+          "The room is on the board.";
+
+        stageText.textContent =
+          "The asking stage is over. "
+          + "You can view the room from the Board.";
+
+      }
+
+      else if (
+        currentStage === "expired"
+      ) {
+
+        stageTitle.textContent =
+          "This room has expired.";
+
+        stageText.textContent =
+          "The room is no longer active.";
+
+      }
+
+      else {
+
+        stageTitle.textContent =
+          "The room isn't accepting questions.";
+
+        stageText.textContent =
+          "This room is currently in another stage. "
+          + "Check back later.";
+
+      }
+
+    }
+
+
+    /* ========================================
+       LOAD ROOM
+    ======================================== */
+
+    async function loadRoom() {
+
+      roomId =
+        getRoomIdFromUrl();
+
+
+      if (!roomId) {
+
+        showFatalRoomError(
+          "No room was specified.",
+          "The room link is missing a room ID."
+        );
+
+        return;
+
+      }
+
+
+      setupNavigation();
+
+
+      try {
+
+        const response =
+          await fetch(
+            API_BASE_URL
+            + `/rooms/${roomId}/ask/`
+            // + encodeURIComponent(roomId)
+            // + "/"
+          );
+
+
+        let data = null;
+
+        try {
+
+          data =
+            await response.json();
+
+        } catch (error) {
+
+          data = null;
+
+        }
+
+
+        if (!response.ok) {
+
+          handleRoomLoadError(
+            response,
+            data
+          );
+
+          return;
+
+        }
+
+
+        applyRoomState(data);
+
+
+        document.getElementById(
+          "pageLoading"
+        ).hidden = true;
+
+
+        document.getElementById(
+          "roomContent"
+        ).hidden = false;
+
+
+        startExpiryTimer();
+
+      }
+
+      catch (error) {
+
+        showFatalRoomError(
+          "Couldn't load this room.",
+          "Please check your connection and try again."
+        );
+
+      }
+
+    }
+
+
+    /* ========================================
+       ROOM LOAD ERROR
+    ======================================== */
+
+    function handleRoomLoadError(
+      response,
+      data
+    ) {
+
+      if (
+        response.status === 404
+      ) {
+
+        showFatalRoomError(
+          "Room not found.",
+          "This room doesn't exist or is no longer available."
+        );
+
+        return;
+
+      }
+
+
+      if (
+        response.status >= 400
+        && response.status < 500
+      ) {
+
+        showFatalRoomError(
+          "We couldn't open this room.",
+          data?.detail
+          || "The room link may be invalid."
+        );
+
+        return;
+
+      }
+
+
+      showFatalRoomError(
+        "Something went wrong.",
+        "We couldn't load the room. Please try again."
+      );
+
+    }
+
+
+    /* ========================================
+       FATAL ROOM ERROR
+    ======================================== */
+
+    function showFatalRoomError(
+      title,
+      message
+    ) {
+
+      document.getElementById(
+        "pageLoading"
+      ).hidden = true;
+
+
+      const roomContent =
+        document.getElementById(
+          "roomContent"
+        );
+
+
+      roomContent.hidden = false;
+
+
+      roomContent.innerHTML = `
+
+        <div class="stage-message">
+
+          <div class="stage-message-icon">
+            !
+          </div>
+
+          <h2>
+            ${escapeHtml(title)}
+          </h2>
+
+          <p>
+            ${escapeHtml(message)}
+          </p>
+
+        </div>
+
+      `;
+
+    }
+
+
+    /* ========================================
+       SUBMIT QUESTION
+    ======================================== */
+
+    async function submitQuestion() {
+
+      if (submittingQuestion) {
+        return;
+      }
+
+
+      const input =
+        document.getElementById(
+          "questionInput"
+        );
+
+
+      const question =
+        input.value.trim();
+
+
+      /*
+        These are purely client-side
+        validation checks.
+
+        We DO NOT check:
+          - currentStage
+          - questionCount
+          - questionLimit
+          - secondsRemaining
+
+        The server must decide whether
+        the question is allowed.
+      */
+
+
+      if (!question) {
+
+        input.focus();
+
+        showFeedback(
+          "Please enter a question.",
+          true
+        );
+
+        return;
+
+      }
+
+
+      setSubmittingState(
+        true
+      );
+
+
+      try {
+
+        const response =
+          await fetch(
+            API_BASE_URL
+            + `/rooms/${roomId}/ask/`,
+            // + encodeURIComponent(roomId)
+            // + "/questions/"
+            {
+              method: "POST",
+
+              headers: {
+                "Content-Type":
+                  "application/json"
+              },
+
+              body: JSON.stringify({
+                answer_type:
+                  selectedType,
+
+                text:
+                  question
+              })
+            }
+          );
+
+
+        let data = null;
+
+
+        try {
+
+          data =
+            await response.json();
+
+        } catch (error) {
+
+          data = null;
+
+        }
+
+
+        /*
+          If the server returned room state,
+          apply it regardless of whether the
+          request succeeded.
+
+          This is important because a rejected
+          request can tell us that the stage or
+          question count has changed.
+        */
+
+        if (data) {
+
+          applyRoomState(data);
+
+        }
+
+        /*
+        Prefer explicit server messages
+        when available.
+      */
+
+        if (
+          data?.detail
+        ) {
+
+          showFeedback(
+            data.detail,
+            true
+          );
+
+          return;
+
+        }
+
+
+        /*
+          Stage changed while the player
+          was submitting.
+        */
+
+        if (
+          currentStage !== "asking"
+        ) {
+
+          if (
+            currentStage === "answering"
+          ) {
+
+            showFeedback(
+              "The asking stage has ended.",
+              true
+            );
+
+          }
+
+          else if (
+            currentStage === "board"
+          ) {
+
+            showFeedback(
+              "The asking stage has ended.",
+              true
+            );
+
+          }
+
+          else if (
+            currentStage === "expired"
+          ) {
+
+            showFeedback(
+              "This room has expired.",
+              true
+            );
+
+          }
+
+          else {
+
+            showFeedback(
+              "Questions aren't being accepted right now.",
+              true
+            );
+
+          }
+
+          return;
+
+        }
+
+
+        /*
+          Question limit reached.
+        */
+
+        if (
+          questionLimit > 0
+          && questionCount >= questionLimit
+        ) {
+
+          showFeedback(
+            "Question limit reached.",
+            true
+          );
+
+          return;
+
+        }
+
+
+        if (
+          response.status >= 400
+          && response.status < 500
+        ) {
+
+          showFeedback(
+            "Your question couldn't be sent.",
+            true
+          );
+
+          return;
+
+        }
+
+
+        // showFeedback(
+        //   "Something went wrong. Please try again.",
+        //   true
+        // );
+
+
+
+        if (response.ok) {
+
+          input.value = "";
+
+          updateCharacterCount();
+
+
+          showFeedback(
+            "Question sent.",
+            false
+          );
+
+
+          input.focus();
+
+
+          return;
+
+        }
+
+
+        // handleQuestionSubmissionError(
+        //   response,
+        //   data
+        // );
+
+      }
+
+      catch (error) {
+
+        showFeedback(
+          "Couldn't send your question. Check your connection and try again.",
+          true
+        );
+
+      }
+
+      finally {
+
+        setSubmittingState(
+          false
+        );
+
+      }
+
+    }
+
+
+    /* ========================================
+       QUESTION SUBMISSION ERROR
+    ======================================== */
+
+    function handleQuestionSubmissionError(
+      response,
+      data
+    ) {
+
+      /*
+        Prefer explicit server messages
+        when available.
+      */
+
+      if (
+        data?.detail
+      ) {
+
+        showFeedback(
+          data.detail,
+          true
+        );
+
+        return;
+
+      }
+
+
+      /*
+        Stage changed while the player
+        was submitting.
+      */
+
+      if (
+        currentStage !== "asking"
+      ) {
+
+        if (
+          currentStage === "answering"
+        ) {
+
+          showFeedback(
+            "The asking stage has ended.",
+            true
+          );
+
+        }
+
+        else if (
+          currentStage === "board"
+        ) {
+
+          showFeedback(
+            "The asking stage has ended.",
+            true
+          );
+
+        }
+
+        else if (
+          currentStage === "expired"
+        ) {
+
+          showFeedback(
+            "This room has expired.",
+            true
+          );
+
+        }
+
+        else {
+
+          showFeedback(
+            "Questions aren't being accepted right now.",
+            true
+          );
+
+        }
+
+        return;
+
+      }
+
+
+      /*
+        Question limit reached.
+      */
+
+      if (
+        questionLimit > 0
+        && questionCount >= questionLimit
+      ) {
+
+        showFeedback(
+          "Question limit reached.",
+          true
+        );
+
+        return;
+
+      }
+
+
+      if (
+        response.status >= 400
+        && response.status < 500
+      ) {
+
+        showFeedback(
+          "Your question couldn't be sent.",
+          true
+        );
+
+        return;
+
+      }
+
+
+      showFeedback(
+        "Something went wrong. Please try again.",
+        true
+      );
+
+    }
+
+
+    /* ========================================
+       SUBMITTING STATE
+    ======================================== */
+
+    function setSubmittingState(
+      isSubmitting
+    ) {
+
+      submittingQuestion =
+        isSubmitting;
+
+
+      const button =
+        document.getElementById(
+          "submitButton"
+        );
+
+
+      const input =
+        document.getElementById(
+          "questionInput"
+        );
+
+
+      const options =
+        document.querySelectorAll(
+          ".type-option"
+        );
+
+
+      button.disabled =
+        isSubmitting;
+
+
+      input.disabled =
+        isSubmitting;
+
+
+      options.forEach(option => {
+
+        option.disabled =
+          isSubmitting;
+
+      });
+
+
+      if (isSubmitting) {
+
+        button.innerHTML = `
+
+          Sending
+
+          <span class="spinner"></span>
+
+        `;
+
+      }
+
+      else {
+
+        button.innerHTML = `
+
+          Ask Question
+
+          <span class="submit-arrow">
+            →
+          </span>
+
+        `;
+
+      }
+
+    }
+
+
+    /* ========================================
+       FEEDBACK
+    ======================================== */
+
+    function showFeedback(
+      message,
+      isError = false
+    ) {
+
+      const feedback =
+        document.getElementById(
+          "feedback"
+        );
+
+
+      const icon =
+        document.getElementById(
+          "feedbackIcon"
+        );
+
+
+      const text =
+        document.getElementById(
+          "feedbackText"
+        );
+
+
+      clearTimeout(
+        feedbackTimeout
+      );
+
+
+      text.textContent =
+        message;
+
+
+      if (isError) {
+
+        feedback.classList.add(
+          "error"
+        );
+
+        icon.textContent =
+          "!";
+
+      }
+
+      else {
+
+        feedback.classList.remove(
+          "error"
+        );
+
+        icon.textContent =
+          "✓";
+
+      }
+
+
+      feedback.classList.add(
+        "show"
+      );
+
+
+      feedbackTimeout =
+        setTimeout(() => {
+
+          feedback.classList.remove(
+            "show"
+          );
+
+        }, 2400);
+
+    }
+
+
+    /* ========================================
+       ESCAPE HTML
+    ======================================== */
+
+    function escapeHtml(value) {
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+
+      div.textContent =
+        String(value);
+
+
+      return div.innerHTML;
+
+    }
+
+
+    /* ========================================
+       INITIALIZE
+    ======================================== */
+
+    updateCharacterCount();
+
+    loadRoom();
+
+  </script>
+
+</body>
+
+</html>

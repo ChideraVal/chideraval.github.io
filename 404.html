@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Askee — Page Not Found</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+
+  <style>
+
+    :root {
+      --background: #f7f5ff;
+
+      --text: #17152b;
+      --muted: #747084;
+
+      --purple: #6d4aff;
+      --pink: #ff62ad;
+      --yellow: #ffd75c;
+
+      --white: rgba(255, 255, 255, 0.72);
+
+      --border: rgba(35, 27, 75, 0.08);
+    }
+
+
+    /* ========================================
+       RESET
+    ======================================== */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    /* ========================================
+       BODY
+    ======================================== */
+
+    body {
+      min-height: 100vh;
+
+      display: flex;
+      flex-direction: column;
+
+      overflow: hidden;
+
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      color: var(--text);
+
+      background:
+
+        radial-gradient(
+          circle at 10% 8%,
+          rgba(255, 174, 216, 0.48),
+          transparent 28rem
+        ),
+
+        radial-gradient(
+          circle at 90% 10%,
+          rgba(177, 160, 255, 0.48),
+          transparent 30rem
+        ),
+
+        radial-gradient(
+          circle at 50% 100%,
+          rgba(255, 220, 120, 0.25),
+          transparent 34rem
+        ),
+
+        var(--background);
+    }
+
+
+    /* ========================================
+       BACKGROUND GRID
+    ======================================== */
+
+    body::before {
+      content: "";
+
+      position: fixed;
+      inset: 0;
+
+      pointer-events: none;
+
+      opacity: 0.22;
+
+      background-image:
+
+        linear-gradient(
+          rgba(255,255,255,0.5) 1px,
+          transparent 1px
+        ),
+
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,0.5) 1px,
+          transparent 1px
+        );
+
+      background-size: 42px 42px;
+
+      mask-image:
+        linear-gradient(
+          to bottom,
+          black,
+          transparent 75%
+        );
+    }
+
+
+    /* ========================================
+       PAGE
+    ======================================== */
+
+    .page {
+
+      width:
+        min(
+          1120px,
+          calc(100% - 40px)
+        );
+
+      min-height: 100vh;
+
+      margin: 0 auto;
+
+      display: flex;
+      flex-direction: column;
+
+      position: relative;
+
+    }
+
+
+    /* ========================================
+       NAV
+    ======================================== */
+
+    nav {
+
+      height: 88px;
+
+      display: flex;
+      align-items: center;
+
+    }
+
+
+    .logo {
+
+      display: flex;
+      align-items: center;
+
+      gap: 10px;
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size: 1.35rem;
+
+      font-weight: 800;
+
+      letter-spacing: -0.06em;
+
+    }
+
+
+    .logo-mark {
+
+      width: 36px;
+      height: 36px;
+
+      display: grid;
+      place-items: center;
+
+      color: white;
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size: 16px;
+
+      font-weight: 800;
+
+      border-radius:
+        12px
+        12px
+        12px
+        4px;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          #9b70ff
+        );
+
+      box-shadow:
+        0 9px 23px
+        rgba(109, 74, 255, 0.28);
+
+    }
+
+
+    /* ========================================
+       MAIN
+    ======================================== */
+
+    main {
+
+      flex: 1;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding:
+        20px
+        0
+        70px;
+
+    }
+
+
+    .content {
+
+      width: 100%;
+
+      max-width: 650px;
+
+      position: relative;
+
+      text-align: center;
+
+    }
+
+
+    /* ========================================
+       DECORATIVE QUESTION MARK
+    ======================================== */
+
+    .question-decoration {
+
+      position: absolute;
+
+      top: -55px;
+      left: 50%;
+
+      width: 160px;
+      height: 160px;
+
+      transform:
+        translateX(-50%)
+        rotate(-10deg);
+
+      border-radius: 50%;
+
+      background:
+        rgba(255,255,255,0.45);
+
+      filter:
+        blur(1px);
+
+      z-index: -1;
+
+    }
+
+
+    .question-decoration::after {
+
+      content: "?";
+
+      position: absolute;
+
+      inset: 0;
+
+      display: grid;
+      place-items: center;
+
+      color:
+        rgba(109,74,255,0.08);
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size: 8rem;
+
+      font-weight: 800;
+
+    }
+
+
+    /* ========================================
+       404
+    ======================================== */
+
+    .error-code {
+
+      position: relative;
+
+      display: inline-block;
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size:
+        clamp(
+          7rem,
+          22vw,
+          12rem
+        );
+
+      font-weight: 800;
+
+      line-height: 0.82;
+
+      letter-spacing:
+        -0.11em;
+
+      color:
+        var(--purple);
+
+      text-shadow:
+        8px 8px 0
+        rgba(255,98,173,0.13);
+
+    }
+
+
+    .error-code::after {
+
+      content: "";
+
+      position: absolute;
+
+      left: 14%;
+      right: 4%;
+
+      bottom: -4px;
+
+      height: 13px;
+
+      border-radius: 50%;
+
+      background:
+        var(--yellow);
+
+      transform:
+        rotate(-2deg);
+
+      z-index: -1;
+
+    }
+
+
+    /* ========================================
+       HEADING
+    ======================================== */
+
+    h1 {
+
+      margin-top: 28px;
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size:
+        clamp(
+          1.55rem,
+          4vw,
+          2.25rem
+        );
+
+      line-height: 1.15;
+
+      letter-spacing:
+        -0.055em;
+
+    }
+
+
+    .description {
+
+      max-width: 430px;
+
+      margin:
+        13px
+        auto
+        0;
+
+      color:
+        var(--muted);
+
+      font-size:
+        0.94rem;
+
+      line-height:
+        1.6;
+
+    }
+
+
+    /* ========================================
+       BUTTON
+    ======================================== */
+
+    .home-button {
+
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 9px;
+
+      min-width: 165px;
+
+      margin-top: 27px;
+
+      padding:
+        14px
+        21px;
+
+      border:
+        none;
+
+      border-radius:
+        15px;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          #8a67ff
+        );
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-size:
+        0.8rem;
+
+      font-weight:
+        800;
+
+      text-decoration:
+        none;
+
+      box-shadow:
+        0 13px 28px
+        rgba(109,74,255,0.23);
+
+      transition:
+        transform .18s ease,
+        box-shadow .18s ease;
+
+    }
+
+
+    .home-button:hover {
+
+      transform:
+        translateY(-2px);
+
+      box-shadow:
+        0 17px 33px
+        rgba(109,74,255,0.29);
+
+    }
+
+
+    .home-button:active {
+
+      transform:
+        translateY(0);
+
+    }
+
+
+    .arrow {
+
+      font-size:
+        1rem;
+
+      transition:
+        transform .18s ease;
+
+    }
+
+
+    .home-button:hover .arrow {
+
+      transform:
+        translateX(3px);
+
+    }
+
+
+    /* ========================================
+       DECORATIVE SPARKS
+    ======================================== */
+
+    .spark {
+
+      position: absolute;
+
+      pointer-events: none;
+
+      font-family:
+        "Plus Jakarta Sans",
+        sans-serif;
+
+      font-weight:
+        800;
+
+    }
+
+
+    .spark.one {
+
+      top: 8%;
+
+      left: 5%;
+
+      color:
+        var(--pink);
+
+      font-size:
+        27px;
+
+      transform:
+        rotate(-15deg);
+
+      animation:
+        floatOne 4s
+        ease-in-out
+        infinite;
+
+    }
+
+
+    .spark.two {
+
+      top: 20%;
+
+      right: 5%;
+
+      color:
+        var(--purple);
+
+      font-size:
+        32px;
+
+      transform:
+        rotate(15deg);
+
+      animation:
+        floatTwo 5s
+        ease-in-out
+        infinite;
+
+    }
+
+
+    .spark.three {
+
+      bottom: 18%;
+
+      left: 15%;
+
+      color:
+        var(--yellow);
+
+      font-size:
+        22px;
+
+      transform:
+        rotate(20deg);
+
+      animation:
+        floatThree 4.5s
+        ease-in-out
+        infinite;
+
+    }
+
+
+    .spark.four {
+
+      bottom: 22%;
+
+      right: 14%;
+
+      color:
+        var(--pink);
+
+      font-size:
+        19px;
+
+      transform:
+        rotate(-18deg);
+
+      animation:
+        floatFour 5s
+        ease-in-out
+        infinite;
+
+    }
+
+
+    /* ========================================
+       FOOTER
+    ======================================== */
+
+    footer {
+
+      display: flex;
+
+      justify-content: center;
+
+      padding:
+        18px
+        0
+        27px;
+
+      color:
+        #aaa6b6;
+
+      font-size:
+        0.74rem;
+
+    }
+
+
+    /* ========================================
+       ANIMATIONS
+    ======================================== */
+
+    @keyframes floatOne {
+
+      0%, 100% {
+        transform:
+          translateY(0)
+          rotate(-15deg);
+      }
+
+      50% {
+        transform:
+          translateY(-8px)
+          rotate(-9deg);
+      }
+
+    }
+
+
+    @keyframes floatTwo {
+
+      0%, 100% {
+        transform:
+          translateY(0)
+          rotate(15deg);
+      }
+
+      50% {
+        transform:
+          translateY(-10px)
+          rotate(21deg);
+      }
+
+    }
+
+
+    @keyframes floatThree {
+
+      0%, 100% {
+        transform:
+          translateY(0)
+          rotate(20deg);
+      }
+
+      50% {
+        transform:
+          translateY(-7px)
+          rotate(27deg);
+      }
+
+    }
+
+
+    @keyframes floatFour {
+
+      0%, 100% {
+        transform:
+          translateY(0)
+          rotate(-18deg);
+      }
+
+      50% {
+        transform:
+          translateY(-8px)
+          rotate(-11deg);
+      }
+
+    }
+
+
+    /* ========================================
+       MOBILE
+    ======================================== */
+
+    @media (max-width: 700px) {
+
+      .page {
+
+        width:
+          calc(100% - 28px);
+
+      }
+
+
+      nav {
+
+        height:
+          74px;
+
+      }
+
+
+      main {
+
+        padding:
+          20px
+          0
+          45px;
+
+      }
+
+
+      .question-decoration {
+
+        top:
+          -35px;
+
+        width:
+          130px;
+
+        height:
+          130px;
+
+      }
+
+
+      .question-decoration::after {
+
+        font-size:
+          6.5rem;
+
+      }
+
+
+      h1 {
+
+        margin-top:
+          23px;
+
+      }
+
+
+      .description {
+
+        font-size:
+          0.87rem;
+
+      }
+
+
+      .spark.one {
+
+        left:
+          -2px;
+
+      }
+
+
+      .spark.two {
+
+        right:
+          -2px;
+
+      }
+
+
+      .spark.three {
+
+        left:
+          3%;
+
+      }
+
+
+      .spark.four {
+
+        right:
+          4%;
+
+      }
+
+    }
+
+
+    @media (max-width: 430px) {
+
+      .error-code {
+
+        font-size:
+          7.4rem;
+
+      }
+
+
+      .description {
+
+        max-width:
+          310px;
+
+      }
+
+
+      .spark {
+
+        opacity:
+          0.65;
+
+      }
+
+    }
+
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+
+        animation:
+          none !important;
+
+        transition:
+          none !important;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <div class="page">
+
+
+    <!-- ====================================
+         NAVIGATION
+    ===================================== -->
+
+    <nav>
+
+      <div class="logo">
+
+        <div class="logo-mark">
+          ?
+        </div>
+
+        <span>
+          askee
+        </span>
+
+      </div>
+
+    </nav>
+
+
+
+    <!-- ====================================
+         DECORATIVE ELEMENTS
+    ===================================== -->
+
+    <div class="spark one">
+      ✦
+    </div>
+
+    <div class="spark two">
+      ✦
+    </div>
+
+    <div class="spark three">
+      ✦
+    </div>
+
+    <div class="spark four">
+      ✦
+    </div>
+
+
+
+    <!-- ====================================
+         MAIN
+    ===================================== -->
+
+    <main>
+
+      <section class="content">
+
+
+        <div class="question-decoration"></div>
+
+
+        <div class="error-code">
+          404
+        </div>
+
+
+        <h1>
+          Hmm... awkward.
+        </h1>
+
+
+        <p class="description">
+
+          This page doesn't exist.
+          Maybe the room link is wrong,
+          expired, or no longer exists.
+
+        </p>
+
+
+        <a
+          class="home-button"
+          href="/"
+        >
+
+          Back to Askee
+
+          <span class="arrow">
+            →
+          </span>
+
+        </a>
+
+
+      </section>
+
+    </main>
+
+
+
+    <footer>
+
+      Made for questions worth remembering.
+
+    </footer>
+
+
+  </div>
+
+</body>
+</html>
+
