@@ -148,6 +148,10 @@
       gap: 20px;
     }
 
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+    }
 
     .logo {
       display: flex;
@@ -1362,17 +1366,17 @@
 
     <nav>
 
-      <div class="logo">
-
-        <div class="logo-mark">
-          ?
+      <a href="/">
+        <div class="logo">
+          
+          <div class="logo-mark">
+            ?
+          </div>
+          
+          <span>askee</span>
+          
         </div>
-
-        <span>
-          askee
-        </span>
-
-      </div>
+      </a>
 
 
       <div class="nav-links">
@@ -1487,7 +1491,7 @@
               <div class="status-card">
 
                 <div class="status-label">
-                  Time left
+                  Expires in
                 </div>
 
 
@@ -1889,7 +1893,7 @@
 
             showFatalError(
               "Room not found.",
-              "This room doesn't exist or is no longer available.",
+              "This room doesn't exist or has expired.",
               false
             );
 
@@ -1916,7 +1920,7 @@
 
           showFatalError(
             "Room not found.",
-            "This room doesn't exist or is no longer available.",
+            "This room doesn't exist or has expired.",
             false
           );
 
@@ -2236,13 +2240,11 @@
 
 
         stageMessageTitle.textContent =
-          "The room is in the asking stage.";
+          "The board isn't ready yet.";
 
 
         stageMessageText.textContent =
-          "The board isn't available yet. "
-          + "Check back when the host moves "
-          + "the room to the board.";
+          "The room is currently in the asking stage.";
 
       }
 
@@ -2256,12 +2258,11 @@
 
 
         stageMessageTitle.textContent =
-          "The room is answering questions.";
+          "The board isn't ready yet.";
 
 
         stageMessageText.textContent =
-          "The board will be available once "
-          + "the answering stage is complete.";
+          "The room is currently in the answering stage.";
 
       }
 

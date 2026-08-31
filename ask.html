@@ -164,6 +164,10 @@
       gap: 20px;
     }
 
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+    }
 
     .logo {
       display: flex;
@@ -989,10 +993,10 @@
       border-radius: 19px;
 
       color:
-        var(--red);
+        var(--purple);
 
       background:
-        rgba(223, 102, 116, 0.09);
+        rgba(109, 74, 255, 0.09);
 
       font-family:
         "Plus Jakarta Sans",
@@ -1474,17 +1478,17 @@
 
     <nav>
 
-      <div class="logo">
-
-        <div class="logo-mark">
-          ?
+      <a href="/">
+        <div class="logo">
+          
+          <div class="logo-mark">
+            ?
+          </div>
+          
+          <span>askee</span>
+          
         </div>
-
-        <span>
-          askee
-        </span>
-
-      </div>
+      </a>
 
 
       <div class="nav-links">
@@ -1619,7 +1623,7 @@
             <div class="status-card">
 
               <div class="status-label">
-                Time left
+                Expires in
               </div>
 
 
@@ -1692,7 +1696,7 @@
 
 
                   <div class="type-description">
-                    Only one player can answer.
+                    Only one person can answer once.
                   </div>
 
                 </button>
@@ -1716,7 +1720,7 @@
 
 
                   <div class="type-description">
-                    Everyone can answer.
+                    Everyone can answer multiple times.
                   </div>
 
                 </button>
@@ -1774,12 +1778,12 @@
                   </span>
 
 
-                  <span
+                  <!-- <span
                     class="submit-arrow"
                     id="submitArrow"
                   >
                     →
-                  </span>
+                  </span> -->
 
                 </button>
 
@@ -1792,7 +1796,8 @@
 
             <div class="privacy-note">
 
-              Your question won't reveal who asked it.
+              <!-- Your question won't reveal who asked it. -->
+               Your questions are completely anonymous.
 
             </div>
 
@@ -1812,7 +1817,7 @@
           >
 
             <div class="stage-message-icon">
-              ✦
+              ✓
             </div>
 
 
@@ -2386,12 +2391,10 @@
       ) {
 
         stageMessageTitle.textContent =
-          "The room is answering questions.";
+          "The asking stage has ended.";
 
         stageMessageText.textContent =
-          "Questions are no longer being accepted. "
-          + "Check back later when the room moves "
-          + "to another stage.";
+          "The room is currently in the answering stage.";
 
       }
 
@@ -2400,11 +2403,10 @@
       ) {
 
         stageMessageTitle.textContent =
-          "The asking stage is over.";
+          "The asking stage has ended.";
 
         stageMessageText.textContent =
-          "The room is now on the board. "
-          + "You can continue from the navigation above.";
+          "The room is currently in the board stage.";
 
       }
 
@@ -2500,7 +2502,7 @@
 
             showRoomError(
               "Room not found.",
-              "This room doesn't exist or is no longer available."
+              "This room doesn't exist or has expired."
             );
 
           } else {
@@ -2530,7 +2532,7 @@
 
           showRoomError(
             "Room not found.",
-            "This room doesn't exist or is no longer available."
+            "This room doesn't exist or has expired."
           );
 
           return;

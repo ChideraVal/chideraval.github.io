@@ -8,7 +8,7 @@
     content="width=device-width, initial-scale=1.0"
   />
 
-  <title>Askee — Your room is ready!</title>
+  <title>Askee — Create a room</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -164,8 +164,16 @@
       align-items: center;
 
       justify-content: space-between;
+
+      position: sticky;
+
+      top: 0;
     }
 
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+    }
 
     .logo {
       display: flex;
@@ -858,18 +866,18 @@
 
 
     .whatsapp-icon {
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
 
       display: grid;
 
       place-items: center;
 
-      border-radius: 50%;
+      /* border-radius: 50%;
 
       color: white;
 
-      background: #25d366;
+      background: #25d366; */
 
       font-size: 10px;
 
@@ -1347,17 +1355,17 @@
 
     <nav>
 
-      <div class="logo">
-
-        <div class="logo-mark">
-          ?
+      <a href="/">
+        <div class="logo">
+          
+          <div class="logo-mark">
+            ?
+          </div>
+          
+          <span>askee</span>
+          
         </div>
-
-        <span>
-          askee
-        </span>
-
-      </div>
+      </a>
 
 
       <div class="nav-note">
@@ -1570,9 +1578,11 @@
                 type="button"
               >
 
-                <span class="whatsapp-icon">
+                <!-- <span class="whatsapp-icon">
                   ↗
-                </span>
+                </span> -->
+
+                <img src="images/whatsapp-icon.png" alt="whatsapp icon" class="whatsapp-icon">
 
                 WhatsApp
 
@@ -1585,9 +1595,11 @@
                 type="button"
               >
 
-                <span>
+                <!-- <span>
                   ↗
-                </span>
+                </span> -->
+
+                <img src="images/share-icon.png" alt="share icon" class="whatsapp-icon">
 
                 Share
 
@@ -1614,7 +1626,7 @@
             id="enterRoomButton"
             type="button"
           >
-            Enter Room →
+            Join Room
           </button>
 
 
@@ -1634,7 +1646,7 @@
           <p class="error-message">
             We couldn't create your room.
             Something went wrong while preparing
-            your game.
+            your room.
           </p>
 
 
@@ -1965,7 +1977,7 @@
 
 
       subtitle.innerHTML = `
-        Now invite your friends to play.
+        Now invite your friends to join.
         Send them the link below and
         let the questions begin.
       `;
@@ -2021,8 +2033,11 @@
       `;
 
 
+      // subtitle.textContent =
+      //   "Something went wrong while preparing your game.";
+
       subtitle.textContent =
-        "Something went wrong while preparing your game.";
+        "";
 
 
       roomContent.style.display =

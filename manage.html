@@ -9,7 +9,7 @@
     content="width=device-width, initial-scale=1.0"
   />
 
-  <title>Askee — Host Dashboard</title>
+  <title>Askee — Manage Room</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -208,6 +208,10 @@
 
     }
 
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+    }
 
     .logo {
 
@@ -2149,17 +2153,17 @@
 
     <nav>
 
-      <div class="logo">
-
-        <div class="logo-mark">
-          ?
+      <a href="/">
+        <div class="logo">
+          
+          <div class="logo-mark">
+            ?
+          </div>
+          
+          <span>askee</span>
+          
         </div>
-
-        <span>
-          askee
-        </span>
-
-      </div>
+      </a>
 
 
       <div
@@ -2173,7 +2177,7 @@
         ></span>
 
         <span id="stageBadgeText">
-          Host dashboard
+          Manage room
         </span>
 
       </div>
@@ -2208,7 +2212,7 @@
 
           <h1>
 
-            Your
+            Manage
 
             <span class="accent">
               room.
@@ -2339,7 +2343,7 @@
               <div class="info-item">
 
                 <div class="info-label">
-                  Room expires
+                  Expires in
                 </div>
 
 
@@ -3133,7 +3137,7 @@
 
 
       stageBadgeText.textContent =
-        "Host dashboard";
+        "Manage room";
 
     }
 

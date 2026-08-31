@@ -113,6 +113,11 @@
       justify-content: space-between;
     }
 
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+    }
+
     .logo {
       display: flex;
       align-items: center;
@@ -742,15 +747,17 @@
 
     <nav>
 
-      <div class="logo">
-
-        <div class="logo-mark">
-          ?
+      <a href="/">
+        <div class="logo">
+          
+          <div class="logo-mark">
+            ?
+          </div>
+          
+          <span>askee</span>
+          
         </div>
-
-        <span>askee</span>
-
-      </div>
+      </a>
 
       <div class="nav-note">
         A little game of curiosity.
@@ -775,7 +782,7 @@
 
             <span class="eyebrow-dot"></span>
 
-            Anonymous Q&amp;A for your people
+            Anonymous Q&amp;A with friends
 
           </div>
 
@@ -794,8 +801,8 @@
 
           <p class="description">
 
-            Askee is a social game where you ask
-            questions anonymously and discover what
+            Askee is a social game where you ask and answer
+            questions with friends anonymously, letting discover what
             your friends really think.
 
             Create a room, share the link,
@@ -811,9 +818,9 @@
 
             Create a Room
 
-            <span class="cta-arrow">
+            <!-- <span class="cta-arrow">
               →
-            </span>
+            </span> -->
 
           </a>
 
@@ -875,8 +882,7 @@
 
             <div class="answer-pill">
 
-              Nobody needs to know
-              who asked.
+              Definetly Jennifer.
 
             </div>
 
@@ -904,6 +910,18 @@
 
               What's something you've
               never told the group?
+
+            </div>
+
+            <div class="answer-pill">
+
+              I have a crush on my best friend.
+
+            </div>
+
+            <div class="answer-pill">
+
+              I'm currently in serious debt.
 
             </div>
 
@@ -943,35 +961,5 @@
 
   </div>
 
-
-  <script>
-
-    function createRoom() {
-
-      /*
-        Later, replace this with the real
-        backend room creation request.
-
-        Example:
-
-        fetch("/api/rooms/", {
-          method: "POST"
-        })
-        .then(response => response.json())
-        .then(room => {
-          window.location.href =
-            "/room/" + room.id;
-        });
-      */
-
-      alert(
-        "Room creation will connect to your backend here."
-      );
-
-    }
-
-  </script>
-
 </body>
 </html>
-```

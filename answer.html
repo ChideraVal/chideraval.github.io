@@ -150,6 +150,10 @@
       gap: 20px;
     }
 
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+    }
 
     .logo {
       display: flex;
@@ -1746,17 +1750,17 @@
 
     <nav>
 
-      <div class="logo">
-
-        <div class="logo-mark">
-          ?
+      <a href="/">
+        <div class="logo">
+          
+          <div class="logo-mark">
+            ?
+          </div>
+          
+          <span>askee</span>
+          
         </div>
-
-        <span>
-          askee
-        </span>
-
-      </div>
+      </a>
 
 
       <div class="nav-links">
@@ -1873,7 +1877,7 @@
               <div class="status-card">
 
                 <div class="status-label">
-                  Time left
+                  Expires in
                 </div>
 
 
@@ -1910,7 +1914,7 @@
 
 
                 <div class="questions-hint">
-                  Choose any question
+                  Answer any question
                 </div>
 
               </div>
@@ -1925,7 +1929,8 @@
 
               <div class="privacy-note">
 
-                Your answer won't reveal who wrote it.
+                <!-- Your answer won't reveal who wrote it. -->
+               Your answers are completely anonymous.
 
               </div>
 
@@ -2302,7 +2307,7 @@
 
             showFatalError(
               "Room not found.",
-              "This room doesn't exist or is no longer available.",
+              "This room doesn't exist or has expired.",
               false
             );
 
@@ -2329,7 +2334,7 @@
 
           showFatalError(
             "Room not found.",
-            "This room doesn't exist or is no longer available.",
+            "This room doesn't exist or has expired.",
             false
           );
 
@@ -2708,13 +2713,11 @@
 
 
         stageMessageTitle.textContent =
-          "The room is in the asking stage.";
+          "Answers aren't open yet.";
 
 
         stageMessageText.textContent =
-          "You can't answer questions right now. "
-          + "Check back later when the host opens "
-          + "the answering stage.";
+          "The room is currently in the asking stage.";
 
       }
 
@@ -2732,9 +2735,7 @@
 
 
         stageMessageText.textContent =
-          "The room is now on the board. "
-          + "You can view the questions and answers "
-          + "from the navigation above.";
+          "The room is currently in the board stage.";
 
       }
 
@@ -3089,7 +3090,7 @@
             class="answer-button"
             type="button"
           >
-            Answer →
+            Answer
 
           </button>
 
@@ -3122,7 +3123,7 @@
               type="button"
             >
 
-              Submit Answer →
+              Submit Answer
 
             </button>
 
