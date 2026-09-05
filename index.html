@@ -1,14 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Askee — Ask freely. Answer honestly.</title>
+<head>
+
+  <!-- =========================================================
+       BASIC SEO
+  ========================================================== -->
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    Askkee — Ask Freely. Answer Honestly. | Anonymous Q&A
+  </title>
+
+  <meta name="description"
+    content="Askkee is an anonymous Q&A game for friends. Create a room, share the link, and let your friends ask and answer questions anonymously.">
+
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+  <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+  <link rel="canonical" href="https://askkee.link/">
+
+  <meta name="theme-color" content="#6d4aff">
+
+
+  <!-- =========================================================
+       OPEN GRAPH
+  ========================================================== -->
+
+  <meta property="og:type" content="website">
+
+  <meta property="og:url" content="https://askkee.link/">
+
+  <meta property="og:title" content="Askkee — Ask Freely. Answer Honestly.">
+
+  <meta property="og:description"
+    content="An anonymous Q&A game for friends. Create a room, share the link, and discover what your friends really think.">
+
+  <meta property="og:site_name" content="Askkee">
+
+  <meta property="og:image" content="https://askkee.link/assets/preview-image.png">
+
+  <meta property="og:image:alt" content="Askkee — Anonymous Q&A with friends">
+
+
+  <!-- =========================================================
+       TWITTER / X
+  ========================================================== -->
+
+  <meta name="twitter:card" content="summary_large_image">
+
+  <meta name="twitter:title" content="Askkee — Ask Freely. Answer Honestly.">
+
+  <meta name="twitter:description"
+    content="Create an anonymous Q&A room, share it with your friends, and discover what they really think.">
+
+  <meta name="twitter:image" content="https://askkee.link/assets/preview-image.png">
+
+
+  <!-- =========================================================
+       STRUCTURED DATA
+  ========================================================== -->
+
+  <!-- Organization -->
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://askkee.link/#organization",
+    "name": "Askkee",
+    "url": "https://askkee.link/"
+  }
+  </script>
+
+
+  <!-- Website / Site name -->
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://askkee.link/#website",
+    "url": "https://askkee.link/",
+    "name": "Askkee",
+    "publisher": {
+      "@id": "https://askkee.link/#organization"
+    }
+  }
+  </script>
+
+
+  <!-- Web page -->
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://askkee.link/#webpage",
+    "url": "https://askkee.link/",
+    "name": "Askkee — Ask Freely. Answer Honestly. | Anonymous Q&A",
+    "description": "Askkee is an anonymous Q&A game for friends. Create a room, share the link, and let your friends ask and answer questions anonymously.",
+    "isPartOf": {
+      "@id": "https://askkee.link/#website"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": "Anonymous Q&A game for friends"
+    }
+  }
+  </script>
+
+
+  <!-- =========================================================
+       FAVICON
+  ========================================================== -->
+
+  <link rel="icon" href="/assets/fav.ico" type="image/x-icon">
+
+
+  <!-- =========================================================
+       FONTS
+  ========================================================== -->
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
+
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Your CSS continues below -->
 
   <style>
     :root {
@@ -45,21 +171,15 @@
       color: var(--text);
 
       background:
-        radial-gradient(
-          circle at 12% 8%,
+        radial-gradient(circle at 12% 8%,
           rgba(255, 174, 216, 0.48),
-          transparent 28rem
-        ),
-        radial-gradient(
-          circle at 90% 10%,
+          transparent 28rem),
+        radial-gradient(circle at 90% 10%,
           rgba(177, 160, 255, 0.48),
-          transparent 30rem
-        ),
-        radial-gradient(
-          circle at 50% 100%,
+          transparent 30rem),
+        radial-gradient(circle at 50% 100%,
           rgba(255, 220, 120, 0.25),
-          transparent 34rem
-        ),
+          transparent 34rem),
         var(--background);
     }
 
@@ -74,23 +194,17 @@
       opacity: 0.22;
 
       background-image:
-        linear-gradient(
-          rgba(255,255,255,0.5) 1px,
-          transparent 1px
-        ),
-        linear-gradient(
-          90deg,
-          rgba(255,255,255,0.5) 1px,
-          transparent 1px
-        );
+        linear-gradient(rgba(255, 255, 255, 0.5) 1px,
+          transparent 1px),
+        linear-gradient(90deg,
+          rgba(255, 255, 255, 0.5) 1px,
+          transparent 1px);
 
       background-size: 42px 42px;
 
-      mask-image: linear-gradient(
-        to bottom,
-        black,
-        transparent 75%
-      );
+      mask-image: linear-gradient(to bottom,
+          black,
+          transparent 75%);
     }
 
     .page {
@@ -150,11 +264,9 @@
       border-radius: 12px 12px 12px 4px;
 
       background:
-        linear-gradient(
-          135deg,
+        linear-gradient(135deg,
           var(--purple),
-          #9b70ff
-        );
+          #9b70ff);
 
       box-shadow:
         0 9px 23px rgba(109, 74, 255, 0.28);
@@ -186,8 +298,7 @@
       display: grid;
 
       grid-template-columns:
-        1.05fr
-        0.95fr;
+        1.05fr 0.95fr;
 
       align-items: center;
 
@@ -210,7 +321,7 @@
       border: 1px solid var(--border);
       border-radius: 999px;
 
-      background: rgba(255,255,255,0.62);
+      background: rgba(255, 255, 255, 0.62);
 
       color: #625e75;
 
@@ -218,7 +329,7 @@
       font-weight: 700;
 
       box-shadow:
-        0 8px 25px rgba(68,47,145,0.06);
+        0 8px 25px rgba(68, 47, 145, 0.06);
     }
 
     .eyebrow-dot {
@@ -230,7 +341,7 @@
       background: var(--pink);
 
       box-shadow:
-        0 0 0 4px rgba(255,98,173,0.12);
+        0 0 0 4px rgba(255, 98, 173, 0.12);
     }
 
     h1 {
@@ -238,11 +349,9 @@
 
       font-family: "Plus Jakarta Sans", sans-serif;
 
-      font-size: clamp(
-        3.3rem,
-        6.4vw,
-        5.7rem
-      );
+      font-size: clamp(3.3rem,
+          6.4vw,
+          5.7rem);
 
       line-height: 0.98;
 
@@ -312,11 +421,9 @@
       color: white;
 
       background:
-        linear-gradient(
-          135deg,
+        linear-gradient(135deg,
           var(--purple),
-          #805eff
-        );
+          #805eff);
 
       font-family: "DM Sans", sans-serif;
       font-size: 1rem;
@@ -325,12 +432,12 @@
       cursor: pointer;
 
       box-shadow:
-        0 15px 32px rgba(109,74,255,0.28);
+        0 15px 32px rgba(109, 74, 255, 0.28);
 
       transition:
         transform 0.2s ease,
         box-shadow 0.2s ease;
-      
+
       text-decoration: none;
     }
 
@@ -338,7 +445,7 @@
       transform: translateY(-3px);
 
       box-shadow:
-        0 19px 38px rgba(109,74,255,0.34);
+        0 19px 38px rgba(109, 74, 255, 0.34);
     }
 
     .cta:active {
@@ -354,7 +461,7 @@
 
       border-radius: 8px;
 
-      background: rgba(255,255,255,0.17);
+      background: rgba(255, 255, 255, 0.17);
 
       font-size: 15px;
     }
@@ -389,11 +496,9 @@
       border-radius: 50%;
 
       background:
-        radial-gradient(
-          circle,
-          rgba(124,91,255,0.23),
-          rgba(255,255,255,0)
-        );
+        radial-gradient(circle,
+          rgba(124, 91, 255, 0.23),
+          rgba(255, 255, 255, 0));
 
       filter: blur(5px);
     }
@@ -409,7 +514,7 @@
 
       padding: 20px;
 
-      border: 1px solid rgba(255,255,255,0.9);
+      border: 1px solid rgba(255, 255, 255, 0.9);
 
       border-radius: 22px;
 
@@ -423,8 +528,7 @@
 
     .card.one {
       transform:
-        rotate(-7deg)
-        translate(-10px, -35px);
+        rotate(-7deg) translate(-10px, -35px);
 
       animation:
         floatOne 5s ease-in-out infinite;
@@ -432,8 +536,7 @@
 
     .card.two {
       transform:
-        rotate(6deg)
-        translate(24px, 100px);
+        rotate(6deg) translate(24px, 100px);
 
       animation:
         floatTwo 6s ease-in-out infinite;
@@ -445,8 +548,7 @@
       padding: 15px;
 
       transform:
-        rotate(-3deg)
-        translate(110px, -175px);
+        rotate(-3deg) translate(110px, -175px);
 
       animation:
         floatThree 5.5s ease-in-out infinite;
@@ -480,11 +582,9 @@
       font-weight: 800;
 
       background:
-        linear-gradient(
-          135deg,
+        linear-gradient(135deg,
           #ff75b8,
-          #8c68ff
-        );
+          #8c68ff);
     }
 
     .question {
@@ -509,7 +609,7 @@
       color: #655f79;
 
       background:
-        rgba(109,74,255,0.07);
+        rgba(109, 74, 255, 0.07);
 
       font-size: 0.77rem;
 
@@ -602,44 +702,44 @@
     -------------------------------- */
 
     @keyframes floatOne {
-      0%, 100% {
+
+      0%,
+      100% {
         transform:
-          rotate(-7deg)
-          translate(-10px, -35px);
+          rotate(-7deg) translate(-10px, -35px);
       }
 
       50% {
         transform:
-          rotate(-5deg)
-          translate(-10px, -45px);
+          rotate(-5deg) translate(-10px, -45px);
       }
     }
 
     @keyframes floatTwo {
-      0%, 100% {
+
+      0%,
+      100% {
         transform:
-          rotate(6deg)
-          translate(24px, 100px);
+          rotate(6deg) translate(24px, 100px);
       }
 
       50% {
         transform:
-          rotate(4deg)
-          translate(24px, 90px);
+          rotate(4deg) translate(24px, 90px);
       }
     }
 
     @keyframes floatThree {
-      0%, 100% {
+
+      0%,
+      100% {
         transform:
-          rotate(-3deg)
-          translate(110px, -175px);
+          rotate(-3deg) translate(110px, -175px);
       }
 
       50% {
         transform:
-          rotate(1deg)
-          translate(110px, -185px);
+          rotate(1deg) translate(110px, -185px);
       }
     }
 
@@ -650,10 +750,8 @@
     @media (max-width: 800px) {
 
       .page {
-        width: min(
-          100% - 28px,
-          600px
-        );
+        width: min(100% - 28px,
+            600px);
       }
 
       nav {
@@ -668,8 +766,7 @@
         display: block;
 
         padding:
-          30px 0
-          30px;
+          30px 0 30px;
       }
 
       .hero {
@@ -688,17 +785,14 @@
 
       h1 {
         font-size:
-          clamp(
-            3rem,
+          clamp(3rem,
             15vw,
-            4.7rem
-          );
+            4.7rem);
       }
 
       .description {
         margin:
-          22px auto
-          27px;
+          22px auto 27px;
 
         font-size: 1rem;
       }
@@ -711,18 +805,15 @@
 
       .card {
         width:
-          min(
-            330px,
-            78%
-          );
+          min(330px,
+            78%);
       }
 
       .card.three {
         width: 190px;
 
         transform:
-          rotate(-3deg)
-          translate(90px, -135px);
+          rotate(-3deg) translate(90px, -135px);
       }
 
       .spark.one {
@@ -731,6 +822,7 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
+
       *,
       *::before,
       *::after {
@@ -753,13 +845,13 @@
 
       <a href="/">
         <div class="logo">
-          
+
           <div class="logo-mark">
             ?
           </div>
-          
-          <span>askee</span>
-          
+
+          <span>askkee</span>
+
         </div>
       </a>
 
@@ -805,7 +897,7 @@
 
           <p class="description">
 
-            Askee is a social game where you ask and answer
+            Askkee is a social game where you ask and answer
             questions with friends anonymously, letting you discover what
             your friends really think.
 
@@ -815,10 +907,7 @@
           </p>
 
 
-          <a
-            class="cta"
-            href="room.html"
-          >
+          <a class="cta" href="room.html">
 
             Create a Room
 
@@ -838,10 +927,7 @@
 
         <!-- RIGHT -->
 
-        <div
-          class="visual"
-          aria-hidden="true"
-        >
+        <div class="visual" aria-hidden="true">
 
           <div class="glow"></div>
 
@@ -966,4 +1052,5 @@
   </div>
 
 </body>
+
 </html>
