@@ -1415,7 +1415,7 @@
                MANAGEMENT LINK
           =================================== -->
 
-          <div class="management-section">
+          <!-- <div class="management-section">
 
             <div class="management-heading">
               Management link
@@ -1452,7 +1452,7 @@
               Keep this link private. Anyone with it can manage the room.
             </div>
 
-          </div>
+          </div> -->
 
 
 
@@ -1571,6 +1571,7 @@
     */
 
     const API_BASE_URL = "https://ask-backend-qtn6.onrender.com/api";
+    // const API_BASE_URL = "http://127.0.0.1:8000/api";
 
 
     /*
@@ -1594,7 +1595,7 @@
 
     let roomLink = null;
 
-    let managementLink = null;
+    // let managementLink = null;
 
 
 
@@ -1656,10 +1657,10 @@
       );
 
 
-    const managementLinkElement =
-      document.getElementById(
-        "managementLink"
-      );
+    // const managementLinkElement =
+    //   document.getElementById(
+    //     "managementLink"
+    //   );
 
 
     const copyRoomButton =
@@ -1668,10 +1669,10 @@
       );
 
 
-    const copyManagementButton =
-      document.getElementById(
-        "copyManagementButton"
-      );
+    // const copyManagementButton =
+    //   document.getElementById(
+    //     "copyManagementButton"
+    //   );
 
 
     const shareButton =
@@ -1755,8 +1756,8 @@
           `${window.location.origin}/ask.html?room=${roomId}`;
 
 
-        managementLink =
-          `${window.location.origin}/manage.html?room=${hostId}`;
+        // managementLink =
+        //   `${window.location.origin}/manage.html?room=${hostId}`;
 
 
         renderRoom();
@@ -1865,8 +1866,8 @@
         roomLink;
 
 
-      managementLinkElement.textContent =
-        managementLink;
+      // managementLinkElement.textContent =
+      //   managementLink;
 
 
       roomContent.style.display =
@@ -2058,18 +2059,18 @@
        COPY MANAGEMENT LINK
     ======================================== */
 
-    function copyManagementLink() {
+    // function copyManagementLink() {
 
-      if (!managementLink) return;
+    //   if (!managementLink) return;
 
 
-      copyText(
-        managementLink,
-        copyManagementButton,
-        "Copy"
-      );
+    //   copyText(
+    //     managementLink,
+    //     copyManagementButton,
+    //     "Copy"
+    //   );
 
-    }
+    // }
 
 
 
@@ -2176,10 +2177,10 @@
     );
 
 
-    copyManagementButton.addEventListener(
-      "click",
-      copyManagementLink
-    );
+    // copyManagementButton.addEventListener(
+    //   "click",
+    //   copyManagementLink
+    // );
 
 
     shareButton.addEventListener(
